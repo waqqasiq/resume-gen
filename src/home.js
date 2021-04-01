@@ -264,7 +264,7 @@ function Home (props) {
                     <Grid item xs={12} sm={2}>
                     </Grid> 
                 </Grid>
-\
+
                 <Grid container style={{display:'flex', marginBottom:'8px'}}>
                    <Grid item xs={12} sm={2}>
                     </Grid> 
