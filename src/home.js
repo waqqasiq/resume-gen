@@ -66,8 +66,8 @@ const dataObject =
 		],
         "honors_achievements": [
 			{
-				"achievements_title": "Performance Based Scholarship",
-				"achievements_desc": "Maintained a CGPA of 3.70 and above since summer 2016",
+				"achievement_title": "Performance Based Scholarship",
+				"achievement_desc": "Maintained a CGPA of 3.70 and above since summer 2016",
 				"duration": "2016 - 2018",
 				"redirect_url": "#"
 			}
@@ -84,7 +84,6 @@ const dataObject =
                 ]
             }
         ]
-
     }
 
 
@@ -192,18 +191,11 @@ const useStyles = makeStyles((theme) => ({
 
 function Home (props) {
   const classes = useStyles();
-  const [state, setState] = useState({ email: "", password: "", phone: ""});
+  const [state, setState] = useState({ dataEducations: dataObject.educations, dataSocials: dataObject.socials, dataSkills: dataObject.skills, dataAchievements: dataObject.honors_achievements, dataProjects: dataObject.projects});
   const history = useHistory()
-
   const [cartqty, setCartqty] = useState(0);
 
   const [file, setFile] = React.useState("");
-
-  const [dataEducations, setDataEducations] = useState(dataObject.educations);
-  const [dataSocials, setDataSocials] = useState(dataObject.socials)
-  const [dataSkills, setDataSkills] = useState(dataObject.skills)
-  const [dataAchievements, setDataAchievements] = useState(dataObject.honors_achievements);
-  const [dataProjects, setDataProjects] = useState(dataObject.projects)
 
 //   useEffect(() => {
 //     // Update the document title using the browser API
@@ -213,51 +205,22 @@ function Home (props) {
 
   // Handles file upload event and updates state
   const  handleUpload = (event) => {
-
     console.log("event.target.files ", event.target.files[0].name)
-
     setFile(event.target.files[0]);
-
     // Add code here to upload file to server
     // ...
   }
 
-  const handleAddMoreEducation = () => {
-      console.log('handleAddMoreEducation ' + Object.keys(dataEducations));
-      let newElem = dataEducations[0];
-      setDataEducations(oldArray => [...oldArray, newElem]);
-
+  const handleAddMore = (event_type) => {
+        console.log("state ", state[event_type]);
+        setState((prevState) => {
+            //DO WHATEVER WITH THE CURRENT STATE AND RETURN A NEW ONE
+                prevState[event_type].push(prevState[event_type][0]);
+                return ({...prevState})
+            }
+        )
+    //   setDataEducations(oldArray => [...oldArray, newElem]);
   }
-
-  const handleAddMoreSocial = () => {
-    console.log('handleAddMoreSocial ' + Object.keys(dataSocials));
-    let newElem = dataSocials[0];
-    setDataSocials(oldArray => [...oldArray, newElem]);
-
-  }
-
-  const handleAddMoreSkills = () => {
-    console.log('handleAddMoreSkills ' + Object.keys(dataSkills));
-    let newElem = dataSkills[0];
-    setDataSkills(oldArray => [...oldArray, newElem]);
-
-  }
-
-  const handleAddMoreAchievements = () => {
-    // console.log('handleAddMoreSkills ' + Object.keys(dataSkills));
-    let newElem = dataAchievements[0];
-    setDataAchievements(oldArray => [...oldArray, newElem]);
-
-  }
- 
-  const handleAddMoreProjects = () => {
-    // console.log('handleAddMoreSkills ' + Object.keys(dataSkills));
-    let newElem = dataProjects[0];
-    setDataProjects(oldArray => [...oldArray, newElem]);
-
-  }
-
-
 
   
   return (
@@ -301,16 +264,7 @@ function Home (props) {
                     <Grid item xs={12} sm={2}>
                     </Grid> 
                 </Grid>
-{/*                
-                <Grid container style={{display:'flex', marginBottom:'10px'}}>
-                   <Grid item xs={12} sm={2}>
-                    </Grid> 
-                    <Grid item xs={12} sm={8}>
-                            <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder="Email"/>
-                    </Grid> 
-                    <Grid item xs={12} sm={2}>
-                    </Grid> 
-                </Grid> */}
+\
                 <Grid container style={{display:'flex', marginBottom:'8px'}}>
                    <Grid item xs={12} sm={2}>
                     </Grid> 
@@ -346,11 +300,6 @@ function Home (props) {
                 </Grid>
                 <Divider light variant="middle" style={{margin:'20px'}}/>
 
-
-                
-
-                
-
                 {/* education */}
                 <Grid container style={{display:'flex', marginBottom:'8px', marginTop:'20px'}}>
                                 <Grid item xs={12} sm={2}>
@@ -364,56 +313,32 @@ function Home (props) {
 
 
                 {
-                        dataEducations.map((val, index) => (
+                        state.dataEducations.map((val, index) => (
                             <div key={index} style={{marginBottom:'20px'}}>
-                            <Grid container style={{display:'flex', marginBottom:'8px'}}>
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                                <Grid item xs={12} sm={8}>
-                                    <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={'School Name ' + `${index+1}`}/>
-                                </Grid> 
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                            </Grid>
-                            <Grid container style={{display:'flex', marginBottom:'8px'}}>
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                                <Grid item xs={12} sm={8}>
-                                        <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={"Major Subject " + `${index+1}`}/>
-                                </Grid> 
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                            </Grid>
-                            <Grid container style={{display:'flex', marginBottom:'8px'}}>
-                            <Grid item xs={12} sm={2}>
-                             </Grid> 
-                             <Grid item xs={12} sm={8}>
-                                     <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={"CGPA " + `${index+1}`}/>
-                             </Grid> 
-                             <Grid item xs={12} sm={2}>
-                             </Grid> 
-                         </Grid>
-                         <Grid container style={{display:'flex', marginBottom:'8px'}}>
-                            <Grid item xs={12} sm={2}>
-                             </Grid> 
-                             <Grid item xs={12} sm={8}>
-                                     <TextField fullWidth variant="outlined" InputProps={{ classes: { input: classes.resize }}} placeholder={"Duration " + `${index+1}`}/>
-                             </Grid> 
-                             <Grid item xs={12} sm={2}>
-                             </Grid> 
-                         </Grid>
+                              {
+                                    Object.keys(val).map((item, ind) => (
+                                        <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={8}>
+                                            <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        </Grid>
+                                    ))
+                                }
                          </div>
                         
                             )
                         )
                     }
 
-
                     <Grid container style={{display:'flex', marginBottom:'8px'}}>
                    <Grid item xs={12} sm={2}>
                     </Grid> 
                     <Grid item xs={12} sm={8} style={{display:'flex',alignItems:'center'}}>
-                            <Button onClick={handleAddMoreEducation}  variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px',textTransform:'capitalize'}} component="span">
+                            <Button onClick={()=>handleAddMore("dataEducations")}  variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px',textTransform:'capitalize'}} component="span">
                                 {'Add'+'\u00A0'+'More'+'\u00A0'+'Education'}
                             </Button>
                     </Grid> 
@@ -422,8 +347,6 @@ function Home (props) {
                     
                 </Grid>
                 <Divider light variant="middle" style={{margin:'20px'}}/>
-
-
 
                 {/* socials */}
                 <Grid container style={{display:'flex', marginBottom:'8px', marginTop:'20px'}}>
@@ -438,26 +361,21 @@ function Home (props) {
 
 
                 {
-                        dataSocials.map((val, index) => (
+                        state.dataSocials.map((val, index) => (
                             <div key={index} style={{marginBottom:'20px'}}>
-                            <Grid container style={{display:'flex', marginBottom:'8px'}}>
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                                <Grid item xs={12} sm={8}>
-                                    <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={'socail name ' + `${index+1}`}/>
-                                </Grid> 
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                            </Grid>
-                            <Grid container style={{display:'flex', marginBottom:'8px'}}>
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                                <Grid item xs={12} sm={8}>
-                                        <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={"socail link " + `${index+1}`}/>
-                                </Grid> 
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                            </Grid>
+                              {
+                                    Object.keys(val).map((item, ind) => (
+                                        <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={8}>
+                                            <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        </Grid>
+                                    ))
+                                }
                      
                          </div>
                         
@@ -469,7 +387,7 @@ function Home (props) {
                    <Grid item xs={12} sm={2}>
                     </Grid> 
                     <Grid item xs={12} sm={8} style={{display:'flex',alignItems:'center'}}>
-                            <Button onClick={handleAddMoreSocial}  variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px', textTransform:'capitalize'}} component="span">
+                            <Button onClick={()=>handleAddMore("dataSocials")}  variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px', textTransform:'capitalize'}} component="span">
                                 {'Add'+'\u00A0'+'More'+'\u00A0'+'Socials'}
                             </Button>
                     </Grid> 
@@ -493,7 +411,7 @@ function Home (props) {
                             </Grid>
 
                 {
-                        dataSkills.map((val, index) => (
+                        state.dataSkills.map((val, index) => (
                             <div key={index} style={{marginBottom:'20px'}}>
                             {
                                     Object.keys(val).map((item, ind) => (
@@ -519,7 +437,7 @@ function Home (props) {
                    <Grid item xs={12} sm={2}>
                     </Grid> 
                     <Grid item xs={12} sm={8} style={{display:'flex',alignItems:'center'}}>
-                            <Button onClick={handleAddMoreSkills}  variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px', textTransform:'capitalize'}} component="span">
+                            <Button onClick={()=>handleAddMore("dataSkills")}   variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px', textTransform:'capitalize'}} component="span">
                                 {'Add'+'\u00A0'+'More'+'\u00A0'+'Skills'}
                             </Button>
                     </Grid> 
@@ -536,15 +454,14 @@ function Home (props) {
                                 <Grid item xs={12} sm={2}>
                                 </Grid> 
                                 <Grid item xs={12} sm={8}>
-                                    <Typography variant="h6">Skills</Typography>
+                                    <Typography variant="h6">Projects</Typography>
                                 </Grid> 
                                 <Grid item xs={12} sm={2}>
                                 </Grid> 
                             </Grid>
                 {
-                        dataProjects.map((val, index) => (
+                        state.dataProjects.map((val, index) => (
                             <div key={index} style={{marginBottom:'20px'}}>
-                                {console.log(Object.values(dataProjects))}
                                 {
                                     Object.keys(val).map((item, ind) => (
                                         <Grid container style={{display:'flex', marginBottom:'8px'}}>
@@ -568,7 +485,7 @@ function Home (props) {
                    <Grid item xs={12} sm={2}>
                     </Grid> 
                     <Grid item xs={12} sm={8} style={{display:'flex',alignItems:'center'}}>
-                            <Button onClick={handleAddMoreProjects}  variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px', textTransform:'capitalize'}} component="span">
+                            <Button onClick={()=>handleAddMore("dataProjects")}   variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px', textTransform:'capitalize'}} component="span">
                                 {'Add'+'\u00A0'+'More'+'\u00A0'+'Projects'}
                             </Button>
                     </Grid> 
@@ -585,36 +502,29 @@ function Home (props) {
                                 <Grid item xs={12} sm={2}>
                                 </Grid> 
                                 <Grid item xs={12} sm={8}>
-                                    <Typography variant="h6">Skills</Typography>
+                                    <Typography variant="h6">Achievements</Typography>
                                 </Grid> 
                                 <Grid item xs={12} sm={2}>
                                 </Grid> 
                             </Grid>
 
                 {
-                        dataAchievements.map((val, index) => (
+                        state.dataAchievements.map((val, index) => (
                             <div key={index} style={{marginBottom:'20px'}}>
-                            <Grid container style={{display:'flex', marginBottom:'8px'}}>
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                                <Grid item xs={12} sm={8}>
-                                    <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={'skill title ' + `${index+1}`}/>
-                                </Grid> 
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                            </Grid>
-                            <Grid container style={{display:'flex', marginBottom:'8px'}}>
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                                <Grid item xs={12} sm={8}>
-                                        <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={"skill description " + `${index+1}`}/>
-                                </Grid> 
-                                <Grid item xs={12} sm={2}>
-                                </Grid> 
-                            </Grid>
-                     
-                         </div>
-                        
+                              {
+                                    Object.keys(val).map((item, ind) => (
+                                        <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={8}>
+                                            <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        </Grid>
+                                    ))
+                                }
+                            </div>
                             )
                         )
                     }
@@ -623,7 +533,7 @@ function Home (props) {
                    <Grid item xs={12} sm={2}>
                     </Grid> 
                     <Grid item xs={12} sm={8} style={{display:'flex',alignItems:'center'}}>
-                            <Button onClick={handleAddMoreAchievements}  variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px', textTransform:'capitalize'}} component="span">
+                            <Button onClick={()=>handleAddMore("dataAchievements")}   variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px', textTransform:'capitalize'}} component="span">
                                 {'Add'+'\u00A0'+'More'+'\u00A0'+'Achievements'}
                             </Button>
                     </Grid> 
@@ -633,21 +543,6 @@ function Home (props) {
                 </Grid>
 
                 <Divider light variant="middle" style={{margin:'20px'}}/>
-
-                 {/* <Grid item xs={12} sm={6}>
-                        <input
-                            accept="image/*"
-                            className={classes.input}
-                            id="contained-button-file"
-                            multiple={false}
-                            type="file"
-                        />
-                        <label htmlFor="contained-button-file">
-                            <Button fullWidth variant="contained" color="primary" component="span">
-                                Upload  
-                            </Button>
-                        </label>
-                    </Grid>  */}
 
               </Paper>
             </Grid>
