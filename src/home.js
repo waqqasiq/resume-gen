@@ -31,6 +31,23 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Snackbar from '@material-ui/core/Snackbar';
 import Divider from '@material-ui/core/Divider';
 
+// const dataObject = {
+//     "dataName": "Name",
+//     "dataEducations": [
+//         {
+//             "school_name": "School Name",
+//             "major": "Major",
+//             "cgpa": "CGPA",
+//             "duration":"Duration"
+//         },
+//         {
+//             "school_name": "School Name",
+//             "major": "Major",
+//             "cgpa": "CGPA",
+//             "duration":"Duration"
+//         }
+//     ]
+// }
 
 const dataObject = 
     {
@@ -39,37 +56,37 @@ const dataObject =
         "address": "Address",
         "educations": [
             {
-                "school_name": "School Name",
-                "major": "Major",
-                "cgpa": "CGPA",
-                "duration":"Duration"
+                "school_name": "",
+                "major": "",
+                "cgpa": "",
+                "duration":""
             }
         ],
         "socials": [
             {
-                "socail_name": "Social Name",
-                "social_url": "Socail URL"
+                "socail_name": "",
+                "social_url": ""
             }
         ],
         "skills": [
             {
-                "skill_title": "Languages",
-                "skill_desc": "Java, C++, Ruby, SQL"
+                "skill_title": "",
+                "skill_desc": ""
             }
         ],
         "projects": [
 			{
-				"project_title": "SpendWise",
-				"project_desc": "Track your income and expenses on the go anywhere on web. Tech stack used: ReactJS, NodeJS, Firebase RealtimeDB",
-				"redirect_url": "https://wi-spendwise.netlify.app/"
+				"project_title": "",
+				"project_desc": "",
+				"redirect_url": ""
 			}
 		],
         "honors_achievements": [
 			{
-				"achievement_title": "Performance Based Scholarship",
-				"achievement_desc": "Maintained a CGPA of 3.70 and above since summer 2016",
-				"duration": "2016 - 2018",
-				"redirect_url": "#"
+				"achievement_title": "",
+				"achievement_desc": "",
+				"duration": "",
+				"redirect_url": ""
 			}
 		],
         "experiences": [
@@ -85,7 +102,7 @@ const dataObject =
             }
         ]
     }
-
+    Object.freeze(dataObject)
 
 const GreenCheckbox = withStyles({
     root: {
@@ -191,10 +208,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Home (props) {
   const classes = useStyles();
-  const [state, setState] = useState({ dataEducations: dataObject.educations, dataSocials: dataObject.socials, dataSkills: dataObject.skills, dataAchievements: dataObject.honors_achievements, dataProjects: dataObject.projects});
+  const [state, setState] = useState({dataName: "", dataEmail: "", dataAddress: "", dataEducations: [...dataObject.educations], dataSocials: [...dataObject.socials], dataSkills: [...dataObject.skills], dataAchievements: [...dataObject.honors_achievements], dataProjects: [...dataObject.projects]});
   const history = useHistory()
   const [cartqty, setCartqty] = useState(0);
-
   const [file, setFile] = React.useState("");
 
 //   useEffect(() => {
@@ -212,19 +228,92 @@ function Home (props) {
   }
 
   const handleAddMore = (event_type) => {
-        console.log("state ", state[event_type]);
-        setState((prevState) => {
-            //DO WHATEVER WITH THE CURRENT STATE AND RETURN A NEW ONE
-                prevState[event_type].push(prevState[event_type][0]);
-                return ({...prevState})
+
+    const dataTemplate = {
+        "dataEducations": [
+            {
+                "school_name": "",
+                "major": "",
+                "cgpa": "",
+                "duration":""
             }
-        )
+        ],
+        "dataSocials": [
+            {
+                "socail_name": "",
+                "social_url": ""
+            }
+        ],
+        "dataSkills": [
+            {
+                "skill_title": "",
+                "skill_desc": ""
+            }
+        ],
+        "dataProjects": [
+			{
+				"project_title": "",
+				"project_desc": "",
+				"redirect_url": ""
+			}
+		],
+        "dataAchievements": [
+			{
+				"achievement_title": "",
+				"achievement_desc": "",
+				"duration": "",
+				"redirect_url": ""
+			}
+		]
+    }
+
+    console.log("state ", state[event_type]);
+
+    setState((prevState) => {
+        //DO WHATEVER WITH THE CURRENT STATE AND RETURN A NEW ONE
+            prevState[event_type].push(dataTemplate[event_type][0]);
+            return ({...prevState})
+        }
+    )
     //   setDataEducations(oldArray => [...oldArray, newElem]);
+  }
+  const handleChangeText = (e)=> {
+    console.log("handleChangeText ", e.target.value);
+    console.log("handleChangeText ", e.target.name);
+
+    setState((prevState) => {
+        prevState[e.target.name] = e.target.value;
+        return ({...prevState});
+    })
+    // console.log('state: ', state);
+  }
+
+  const handleChangeTextArray = (e, index) =>{
+    console.log("handleChangeText ", e.target.value);
+    console.log("handleChangeText ", e.target.name);
+    let temparray = e.target.name.split("_");
+
+    if (temparray.length === 3) {
+        temparray[1] = temparray[1]+"_"+temparray[2];
+        temparray.splice(2,1);
+    }
+ 
+    console.log('temparray ', temparray);
+
+    let arrayname = temparray[0] // dataEducation
+    let key_to_change = temparray[1]; // school_name
+
+    setState((prevState) => {
+        prevState[arrayname][index][key_to_change] = e.target.value;
+        return ({ ...prevState });
+    })
+
   }
 
   
   return (
         <div className={classes.root}>
+            {console.log('state ', state)}
             {/* <Snackbar anchorOrigin={{vertical, horizontal}} open={openalert} autoHideDuration={2000} onClose={handleCloseAlert}>
             <Alert onClose={handleCloseAlert} severity="success">
               Order placed successfully!
@@ -253,10 +342,10 @@ function Home (props) {
                         <Typography variant="h6">Basic</Typography>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
-                                <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder="Name"/>
+                                <TextField value={state.dataName} onChange={handleChangeText} name="dataName" fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder="Name"/>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder="Email"/>
+                                <TextField value={state.dataEmail} onChange={handleChangeText} name="dataEmail" fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder="Email"/>
                             </Grid>
                         </Grid>
 
@@ -269,7 +358,7 @@ function Home (props) {
                    <Grid item xs={12} sm={2}>
                     </Grid> 
                     <Grid item xs={12} sm={8}>
-                            <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder="Address"/>
+                            <TextField value={state.dataAddress} onChange={handleChangeText} name="dataAddress" fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder="Address"/>
                     </Grid> 
                     <Grid item xs={12} sm={2}>
                     </Grid> 
@@ -317,11 +406,11 @@ function Home (props) {
                             <div key={index} style={{marginBottom:'20px'}}>
                               {
                                     Object.keys(val).map((item, ind) => (
-                                        <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                                        <Grid key={ind} container style={{display:'flex', marginBottom:'8px'}}>
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
                                         <Grid item xs={12} sm={8}>
-                                            <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
+                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataEducations_"+item} fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
                                         </Grid> 
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
@@ -365,11 +454,11 @@ function Home (props) {
                             <div key={index} style={{marginBottom:'20px'}}>
                               {
                                     Object.keys(val).map((item, ind) => (
-                                        <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                                        <Grid key={ind}  container style={{display:'flex', marginBottom:'8px'}}>
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
                                         <Grid item xs={12} sm={8}>
-                                            <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
+                                            <TextField value={val[item]}  onChange={e => handleChangeTextArray(e, index)} name={"dataSocials_"+item}  fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
                                         </Grid> 
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
@@ -415,11 +504,11 @@ function Home (props) {
                             <div key={index} style={{marginBottom:'20px'}}>
                             {
                                     Object.keys(val).map((item, ind) => (
-                                        <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                                        <Grid key={ind}  container style={{display:'flex', marginBottom:'8px'}}>
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
                                         <Grid item xs={12} sm={8}>
-                                            <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
+                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataSkills_"+item}  fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
                                         </Grid> 
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
@@ -464,11 +553,11 @@ function Home (props) {
                             <div key={index} style={{marginBottom:'20px'}}>
                                 {
                                     Object.keys(val).map((item, ind) => (
-                                        <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                                        <Grid key={ind}  container style={{display:'flex', marginBottom:'8px'}}>
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
                                         <Grid item xs={12} sm={8}>
-                                            <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
+                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataProjects_"+item} fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
                                         </Grid> 
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
@@ -513,11 +602,11 @@ function Home (props) {
                             <div key={index} style={{marginBottom:'20px'}}>
                               {
                                     Object.keys(val).map((item, ind) => (
-                                        <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                                        <Grid key={ind}  container style={{display:'flex', marginBottom:'8px'}}>
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
                                         <Grid item xs={12} sm={8}>
-                                            <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
+                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataAchievements_"+item} fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={item+' ' + `${index+1}`}/>
                                         </Grid> 
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
