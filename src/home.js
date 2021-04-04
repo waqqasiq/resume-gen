@@ -90,12 +90,12 @@ const dataObject = {
 		],
         "experiences": [
             {
-                "company_name": "MGH Group",
+                "company_name": "",
                 "positions": [
                     {
-                        "title": "Senior Executive",
-                        "responsibilities": ["Communicate", "Prepare", "Develop"],
-                        "duration": "Jan 2020 - Present"
+                        "pos_title": "",
+                        "pos_responsibilities": [""],
+                        "pos_duration": ""
                     }
                 ]
             }
@@ -210,6 +210,7 @@ function Home (props) {
   const history = useHistory()
   const [cartqty, setCartqty] = useState(0);
   const [file, setFile] = React.useState("");
+  const [stateExperiences, setStateExperiences] = useState({dataExperiences: [...dataObject.experiences]});
 
 //   useEffect(() => {
 //     // Update the document title using the browser API
@@ -278,10 +279,60 @@ function Home (props) {
 
   }
 
+  const handleAddMoreExperience = () => {
+
+    const dataTemplate = {
+        "experiences": [
+            {
+                "company_name": "",
+                "positions": [
+                    {
+                        "pos_title": "",
+                        "pos_responsibilities": [""],
+                        "pos_duration": ""
+                    }
+                ]
+            }
+        ]
+    }
+
+    setStateExperiences((prevState) => {
+        //DO WHATEVER WITH THE CURRENT STATE AND RETURN A NEW ONE
+            prevState.dataExperiences.push(dataTemplate.experiences[0]);
+            return ({...prevState})
+        }
+    )
+    //   setDataEducations(oldArray => [...oldArray, newElem]);
+  }
+
+  const handleAddAnotherPosition = (e, index) => {
+      console.log("handleAddAnotherPosition ", index);
+
+      setStateExperiences((prevState) => {
+          prevState.dataExperiences[index].positions.push({
+              "pos_title": "",
+              "pos_duration": "",
+              "pos_responsibilities": [""]
+          })
+          return ({ ...prevState });
+      })
+
+  }
+  const handleNewResponsibilty = (e,index,ind) => {
+    console.log("handleNewResponsibilty index ind", index + ' ' + ind);
+
+    setStateExperiences((prevState) => {
+        prevState.dataExperiences[index].positions[ind].pos_responsibilities.push("");
+        return ({ ...prevState });
+    })
+  }
+
   
   return (
         <div className={classes.root}>
             {console.log('state ', state)}
+            {console.log('stateExperiences ', stateExperiences)}
+            
             {/* <Snackbar anchorOrigin={{vertical, horizontal}} open={openalert} autoHideDuration={2000} onClose={handleCloseAlert}>
             <Alert onClose={handleCloseAlert} severity="success">
               Order placed successfully!
@@ -600,6 +651,116 @@ function Home (props) {
                 </Grid>
 
                 <Divider light variant="middle" style={{margin:'20px'}}/>
+
+
+                {/* experiences */}
+                <Grid container style={{display:'flex', marginBottom:'8px', marginTop:'20px'}}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid> 
+                                <Grid item xs={12} sm={8}>
+                                    <Typography variant="h6">Experiences</Typography>
+                                </Grid> 
+                                <Grid item xs={12} sm={2}>
+                                </Grid> 
+                            </Grid>
+
+                {
+                        stateExperiences.dataExperiences.map((val, index) => (
+                            <div key={index} style={{marginBottom:'20px'}}>
+                                <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={8}>
+                                            <TextField fullWidth InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={`company_name ` + `${index+1}`}/>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        </Grid>
+                                        
+                              {
+                                    val.positions.map((item, ind) => (
+                                        <div key={ind} style={{marginTop:'16px'}}>
+                                            {/* {console.log(item)} */}
+                                        <Grid   container style={{display:'flex', marginBottom:'8px'}}>
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={8}>
+                                            <Typography variant="subtitle2">{'Position '+`${ind+1}`}</Typography>
+                                            <TextField  InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={`pos_title `+`${ind+1}`}/>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        </Grid>
+                                        <Grid   container style={{display:'flex', marginBottom:'8px'}}>
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={8}>
+                                            <TextField  InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={`pos_duration `+`${ind+1}`}/>
+                                        </Grid> 
+                                        <Grid item xs={12} sm={2}>
+                                        </Grid> 
+                                        </Grid>
+
+
+                                        {
+                                            item.pos_responsibilities.map((v, i) => (
+                                                <Grid  key={i} container style={{display:'flex', marginBottom:'8px'}}>
+                                                <Grid item xs={12} sm={2}>
+                                                </Grid> 
+                                                <Grid item xs={12} sm={8}>
+                                                    <Typography variant="subtitle2">Responsibilities</Typography>
+                                                    <TextField fullWidth  InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={`position `+`${ind+1}`+' resp '+`${i+1}`}/>
+                                                </Grid> 
+                                                <Grid item xs={12} sm={2}>
+                                                </Grid> 
+                                                </Grid>
+                                            ))
+                                        }
+                                        <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                                            <Grid item xs={12} sm={2}>
+                                            </Grid> 
+                                            <Grid item xs={12} sm={8} style={{display:'flex',alignItems:'center'}}>
+                                                    <Button onClick={(e)=>handleNewResponsibilty(e,index,ind)} variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px', textTransform:'capitalize'}} component="span">
+                                                        {'Add'+'\u00A0'+'new'+'\u00A0'+'responsibility'}
+                                                    </Button>
+                                            </Grid> 
+                                            <Grid item xs={12} sm={2}>
+                                            </Grid> 
+                                        </Grid>
+                                        
+                                        </div>
+                                    ))
+                                }
+                                <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                                            <Grid item xs={12} sm={2}>
+                                            </Grid> 
+                                            <Grid item xs={12} sm={8} style={{display:'flex',alignItems:'center'}}>
+                                                    <Button  onClick={(e) => handleAddAnotherPosition(e,index)} variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px', textTransform:'capitalize'}} component="span">
+                                                        {'Add'+'\u00A0'+'another'+'\u00A0'+'position'}
+                                                    </Button>
+                                            </Grid> 
+                                            <Grid item xs={12} sm={2}>
+                                            </Grid> 
+                                        </Grid>
+                            </div>
+                            )
+                        )
+                    }
+                            <Grid container style={{display:'flex', marginBottom:'8px'}}>
+                   <Grid item xs={12} sm={2}>
+                    </Grid> 
+                    <Grid item xs={12} sm={8} style={{display:'flex',alignItems:'center'}}>
+                            <Button onClick={handleAddMoreExperience}   variant="contained" style={{backgroundColor:'#2F4454', color:'#FFF', marginRight:'5px', textTransform:'capitalize'}} component="span">
+                                {'Add'+'\u00A0'+'More'+'\u00A0'+'Experiences'}
+                            </Button>
+                    </Grid> 
+                    <Grid item xs={12} sm={2}>
+                    </Grid> 
+                    
+                </Grid>
+
+                <Divider light variant="middle" style={{margin:'20px'}}/>
+
 
               </Paper>
             </Grid>
