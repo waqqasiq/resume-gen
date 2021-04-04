@@ -205,7 +205,7 @@ export default function Navbar(props) {
     <div className={classes.root}>
                 <AppBar position={'fixed'} style={{backgroundColor: '#2F4454'}}>
                     <Toolbar >
-                        <IconButton
+                        {/* <IconButton
                             color="inherit"
                             aria-label="open drawer"
                             onClick={()=>toggleDrawer(true)}
@@ -213,7 +213,7 @@ export default function Navbar(props) {
                             className={clsx(classes.menuButton, open && classes.hide)}
                         >
                             <MenuIcon />
-                        </IconButton>
+                        </IconButton> */}
                         <Typography variant="h6" className={classes.title}>
                             {/* {this.props.title} */}
                             {'Resume'+'\u00A0'+'Generator'}

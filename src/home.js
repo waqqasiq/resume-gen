@@ -352,7 +352,7 @@ function Home (props) {
               <Paper className={classes.paper}>
                           {/* <img style={{alignSelf:'center'}} src={peyalalogo} width="70" height="70"  /> */}
 
-                  <p className={classes.title} style={{marginBottom:'20px'}}>Fill in the details as required</p>
+                  {/* <p className={classes.title} style={{marginBottom:'20px'}}>Fill in the details as required</p> */}
 
                 <Grid container style={{display:'flex', marginBottom:'8px'}}>
                    <Grid item xs={12} sm={2}>
@@ -686,7 +686,16 @@ function Home (props) {
                                         </Grid> 
                                         <Grid item xs={12} sm={8}>
                                             <Typography variant="subtitle2">{'Position '+`${ind+1}`}</Typography>
-                                            <TextField  InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={`pos_title `+`${ind+1}`}/>
+                                            <Grid container spacing={1}>
+                                                <Grid item xs={6}>
+                                                <TextField fullWidth  InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={`pos_title `+`${ind+1}`}/>
+
+                                                </Grid>
+                                                <Grid item xs={6}>
+                                                <TextField fullWidth  InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={`pos_duration `+`${ind+1}`}/>
+
+                                                </Grid>
+                                            </Grid>
                                         </Grid> 
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
@@ -695,7 +704,6 @@ function Home (props) {
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
                                         <Grid item xs={12} sm={8}>
-                                            <TextField  InputProps={{ classes: { input: classes.resize }}} variant="outlined" placeholder={`pos_duration `+`${ind+1}`}/>
                                         </Grid> 
                                         <Grid item xs={12} sm={2}>
                                         </Grid> 
