@@ -49,8 +49,7 @@ import Divider from '@material-ui/core/Divider';
 //     ]
 // }
 
-const dataObject = 
-    {
+const dataObject = {
         "name": "Name",
         "email": "Email",
         "address": "Address",
@@ -102,7 +101,6 @@ const dataObject =
             }
         ]
     }
-    Object.freeze(dataObject)
 
 const GreenCheckbox = withStyles({
     root: {
@@ -230,41 +228,11 @@ function Home (props) {
   const handleAddMore = (event_type) => {
 
     const dataTemplate = {
-        "dataEducations": [
-            {
-                "school_name": "",
-                "major": "",
-                "cgpa": "",
-                "duration":""
-            }
-        ],
-        "dataSocials": [
-            {
-                "socail_name": "",
-                "social_url": ""
-            }
-        ],
-        "dataSkills": [
-            {
-                "skill_title": "",
-                "skill_desc": ""
-            }
-        ],
-        "dataProjects": [
-			{
-				"project_title": "",
-				"project_desc": "",
-				"redirect_url": ""
-			}
-		],
-        "dataAchievements": [
-			{
-				"achievement_title": "",
-				"achievement_desc": "",
-				"duration": "",
-				"redirect_url": ""
-			}
-		]
+        "dataEducations": [{ "school_name": "", "major": "", "cgpa": "", "duration":"" }],
+        "dataSocials": [{ "socail_name": "", "social_url": "" }],
+        "dataSkills": [{ "skill_title": "", "skill_desc": "" }],
+        "dataProjects": [{ "project_title": "", "project_desc": "", "redirect_url": "" }],
+        "dataAchievements": [{"achievement_title": "", "achievement_desc": "", "duration": "", "redirect_url": "" }]
     }
 
     console.log("state ", state[event_type]);
