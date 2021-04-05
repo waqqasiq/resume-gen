@@ -305,6 +305,20 @@ function Home(props) {
 
     }
 
+    const handleTextChangeResponsibility = (e, index, ind, i) => {
+        console.log("handleTextChangePosition ", e.target.value);
+        console.log("handleTextChangePosition ", e.target.name);
+        console.log("handleTextChangePosition ", index);
+        console.log("handleTextChangePosition ", ind);
+        console.log("handleTextChangePosition ", i);
+        
+        setStateExperiences((prevState) => {
+            prevState.dataExperiences[index].positions[ind].pos_responsibilities[i] = e.target.value;
+            return ({ ...prevState });
+        })
+
+    }
+
 
     return (
         <div className={classes.root}>
@@ -709,7 +723,7 @@ function Home(props) {
                                                             <Grid item xs={12} sm={2}>
                                                             </Grid>
                                                             <Grid item xs={12} sm={8}>
-                                                                <TextField fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`position ` + `${ind + 1}` + ' resp ' + `${i + 1}`} />
+                                                                <TextField onChange={(e)=>handleTextChangeResponsibility(e,index,ind,i)} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`position ` + `${ind + 1}` + ' resp ' + `${i + 1}`} />
                                                             </Grid>
                                                             <Grid item xs={12} sm={2}>
                                                             </Grid>
