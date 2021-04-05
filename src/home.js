@@ -245,20 +245,7 @@ function Home(props) {
 
     const handleAddMoreExperience = () => {
 
-        const dataTemplate = {
-            "experiences": [
-                {
-                    "company_name": "",
-                    "positions": [
-                        {
-                            "pos_title": "",
-                            "pos_responsibilities": [""],
-                            "pos_duration": ""
-                        }
-                    ]
-                }
-            ]
-        }
+        const dataTemplate = { "experiences": [{"company_name": "","positions": [{"pos_title": "","pos_responsibilities": [""],"pos_duration": ""}]}] }
 
         setStateExperiences((prevState) => {
             //DO WHATEVER WITH THE CURRENT STATE AND RETURN A NEW ONE
@@ -289,6 +276,29 @@ function Home(props) {
             prevState.dataExperiences[index].positions[ind].pos_responsibilities.push("");
             return ({ ...prevState });
         })
+    }
+
+    const handleChangeTextCompany = (e, index) => {
+        console.log("handleChangeTextCompany ", e.target.value);
+
+        setStateExperiences((prevState) => {
+            prevState.dataExperiences[index].company_name= e.target.value;
+            return ({ ...prevState });
+        })
+
+    }
+
+    const handleTextChangePosition = (e, index, ind) => {
+        console.log("handleTextChangePosition ", e.target.value);
+        console.log("handleTextChangePosition ", e.target.name);
+        console.log("handleTextChangePosition ", index);
+        
+
+        setStateExperiences((prevState) => {
+            prevState.dataExperiences[index].positions[ind][e.target.name] = e.target.value;
+            return ({ ...prevState });
+        })
+
     }
 
 
@@ -617,7 +627,7 @@ function Home(props) {
                                         <Grid item xs={12} sm={2}>
                                         </Grid>
                                         <Grid item xs={12} sm={8}>
-                                            <TextField fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`company_name ` + `${index + 1}`} />
+                                            <TextField onChange={(e) => handleChangeTextCompany(e,index)} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`company_name ` + `${index + 1}`} />
                                         </Grid>
                                         <Grid item xs={12} sm={2}>
                                         </Grid>
@@ -651,11 +661,11 @@ function Home(props) {
                                                         <Typography variant="subtitle2">{'Position ' + `${ind + 1}`}</Typography>
                                                         <Grid container spacing={1}>
                                                             <Grid item xs={6}>
-                                                                <TextField fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`pos_title ` + `${ind + 1}`} />
+                                                                <TextField onChange={(e)=>handleTextChangePosition(e,index,ind)} name="pos_title" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`pos_title ` + `${ind + 1}`} />
 
                                                             </Grid>
                                                             <Grid item xs={6}>
-                                                                <TextField fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`pos_duration ` + `${ind + 1}`} />
+                                                                <TextField onChange={(e)=>handleTextChangePosition(e,index,ind)} name="pos_duration" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`pos_duration ` + `${ind + 1}`} />
 
                                                             </Grid>
                                                         </Grid>
