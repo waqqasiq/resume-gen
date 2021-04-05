@@ -420,14 +420,9 @@ function Home(props) {
                                             <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
-                                                    <Fade
-                                                     in={checked}
-                                                     timeout={1000}
-                                                    >
-                                                        <Grid item xs={12} sm={8}>
-                                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataEducations_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
-                                                        </Grid>
-                                                    </Fade>
+                                                <Grid item xs={12} sm={8}>
+                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataEducations_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                </Grid>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
                                             </Grid>
@@ -469,14 +464,9 @@ function Home(props) {
                                             <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
-                                                    <Fade
-                                                        in={checked}
-                                                        timeout={1000}
-                                                    >
-                                                        <Grid item xs={12} sm={8}>
-                                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataSocials_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
-                                                        </Grid>
-                                                    </Fade>
+                                                <Grid item xs={12} sm={8}>
+                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataSocials_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                </Grid>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
                                             </Grid>
@@ -519,14 +509,9 @@ function Home(props) {
                                             <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
-                                                <Fade
-                                                        in={checked}
-                                                        timeout={1000}
-                                                    >
-                                                        <Grid item xs={12} sm={8}>
-                                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataSkills_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
-                                                        </Grid>
-                                                </Fade>
+                                                <Grid item xs={12} sm={8}>
+                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataSkills_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                </Grid>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
                                             </Grid>
@@ -567,14 +552,9 @@ function Home(props) {
                                             <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
-                                                <Fade
-                                                        in={checked}
-                                                        timeout={1000}
-                                                    >
-                                                        <Grid item xs={12} sm={8}>
-                                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataProjects_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
-                                                        </Grid>
-                                                </Fade>
+                                                <Grid item xs={12} sm={8}>
+                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataProjects_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                </Grid>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
                                             </Grid>
@@ -615,14 +595,9 @@ function Home(props) {
                                             <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
-                                                <Fade
-                                                        in={checked}
-                                                        timeout={1000}
-                                                    >
-                                                        <Grid item xs={12} sm={8}>
-                                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataAchievements_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
-                                                        </Grid>
-                                                </Fade>
+                                                <Grid item xs={12} sm={8}>
+                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataAchievements_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                </Grid>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
                                             </Grid>
