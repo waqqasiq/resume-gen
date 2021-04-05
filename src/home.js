@@ -20,19 +20,22 @@ import Button from '@material-ui/core/Button';
 //   KeyboardDatePicker,
 // } from '@material-ui/pickers';
 import { useHistory } from "react-router-dom";
-
 // import FacebookLogin from 'react-facebook-login';
 // import InfoIcon from '@material-ui/icons/Info';
-import { green } from '@material-ui/core/colors';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import { green } from '@material-ui/core/colors';
+// import FormGroup from '@material-ui/core/FormGroup';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 // import Alert from '@material-ui/lab/Alert';
-import Snackbar from '@material-ui/core/Snackbar';
+// import Snackbar from '@material-ui/core/Snackbar';
 import Divider from '@material-ui/core/Divider';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+// import AddCircleIcon from '@material-ui/icons/AddCircle';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+// import Grow from '@material-ui/core/Grow';
+import Fade from '@material-ui/core/Fade';
+// import Collapse from '@material-ui/core/Collapse';
+// import Zoom from '@material-ui/core/Zoom';
 
 const dataObject = {
     "name": "Name",
@@ -175,11 +178,12 @@ function Home(props) {
     const [cartqty, setCartqty] = useState(0);
     const [file, setFile] = React.useState("");
     const [stateExperiences, setStateExperiences] = useState({ dataExperiences: [...dataObject.experiences] });
+    const [checked, setChecked] = useState(true);
 
     //   useEffect(() => {
     //     // Update the document title using the browser API
-    //     setDataEducations(dataObject.educations);
-    //   });
+    //     setChecked(true);
+    //   },[]);
 
 
     // Handles file upload event and updates state
@@ -318,6 +322,10 @@ function Home(props) {
             </Alert>
           </Snackbar> */}
             <Navbar cartQuantity={1} />
+            <Fade
+                                        in={checked}
+                                        timeout={1000}
+                                    >
             <Grid container justify="center" spacing={1} style={{ marginTop: '8vh' }}>
                 {/* <Grid item xs={12}>
               <Paper className={classes.paper}><h2 className={classes.headerText}>Let's get started</h2></Paper>
@@ -328,31 +336,34 @@ function Home(props) {
 
                         {/* <p className={classes.title} style={{marginBottom:'20px'}}>Fill in the details as required</p> */}
 
+                       
                         <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
                             <Grid item xs={12} sm={2}>
                             </Grid>
                             <Grid item xs={12} sm={8}>
                                 <Typography variant="h6">Basic</Typography>
-                                <Grid container spacing={1}>
-                                    <Grid item xs={12} sm={6}>
-                                        <TextField value={state.dataName} onChange={handleChangeText} name="dataName" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder="Name" />
-                                    </Grid>
-                                    <Grid item xs={12} sm={6}>
-                                        <TextField value={state.dataEmail} onChange={handleChangeText} name="dataEmail" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder="Email" />
-                                    </Grid>
-                                </Grid>
+                              
+                                    <Grid container spacing={1}>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField value={state.dataName} onChange={handleChangeText} name="dataName" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder="Name" />
+                                        </Grid>
 
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField value={state.dataEmail} onChange={handleChangeText} name="dataEmail" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder="Email" />
+                                        </Grid>
+                                    </Grid>
                             </Grid>
                             <Grid item xs={12} sm={2}>
                             </Grid>
                         </Grid>
 
+
                         <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
                             <Grid item xs={12} sm={2}>
                             </Grid>
-                            <Grid item xs={12} sm={8}>
-                                <TextField value={state.dataAddress} onChange={handleChangeText} name="dataAddress" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder="Address" />
-                            </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <TextField value={state.dataAddress} onChange={handleChangeText} name="dataAddress" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder="Address" />
+                                </Grid>
                             <Grid item xs={12} sm={2}>
                             </Grid>
                         </Grid>
@@ -401,7 +412,6 @@ function Home(props) {
                             </Grid>
                         </Grid>
 
-
                         {
                             state.dataEducations.map((val, index) => (
                                 <div key={index} style={{ marginBottom: '24px' }}>
@@ -410,9 +420,14 @@ function Home(props) {
                                             <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
-                                                <Grid item xs={12} sm={8}>
-                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataEducations_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
-                                                </Grid>
+                                                    <Fade
+                                                     in={checked}
+                                                     timeout={1000}
+                                                    >
+                                                        <Grid item xs={12} sm={8}>
+                                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataEducations_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                        </Grid>
+                                                    </Fade>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
                                             </Grid>
@@ -423,6 +438,7 @@ function Home(props) {
                             )
                             )
                         }
+
 
                         <Divider light variant="middle" style={{ margin: '20px' }} />
 
@@ -453,9 +469,14 @@ function Home(props) {
                                             <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
-                                                <Grid item xs={12} sm={8}>
-                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataSocials_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
-                                                </Grid>
+                                                    <Fade
+                                                        in={checked}
+                                                        timeout={1000}
+                                                    >
+                                                        <Grid item xs={12} sm={8}>
+                                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataSocials_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                        </Grid>
+                                                    </Fade>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
                                             </Grid>
@@ -498,9 +519,14 @@ function Home(props) {
                                             <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
-                                                <Grid item xs={12} sm={8}>
-                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataSkills_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
-                                                </Grid>
+                                                <Fade
+                                                        in={checked}
+                                                        timeout={1000}
+                                                    >
+                                                        <Grid item xs={12} sm={8}>
+                                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataSkills_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                        </Grid>
+                                                </Fade>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
                                             </Grid>
@@ -541,9 +567,14 @@ function Home(props) {
                                             <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
-                                                <Grid item xs={12} sm={8}>
-                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataProjects_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
-                                                </Grid>
+                                                <Fade
+                                                        in={checked}
+                                                        timeout={1000}
+                                                    >
+                                                        <Grid item xs={12} sm={8}>
+                                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataProjects_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                        </Grid>
+                                                </Fade>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
                                             </Grid>
@@ -584,9 +615,14 @@ function Home(props) {
                                             <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
-                                                <Grid item xs={12} sm={8}>
-                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataAchievements_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
-                                                </Grid>
+                                                <Fade
+                                                        in={checked}
+                                                        timeout={1000}
+                                                    >
+                                                        <Grid item xs={12} sm={8}>
+                                                            <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataAchievements_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                        </Grid>
+                                                </Fade>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
                                             </Grid>
@@ -720,6 +756,7 @@ function Home(props) {
                 </Grid>
 
             </Grid>
+            </Fade>
         </div>
     );
 }
