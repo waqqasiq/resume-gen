@@ -32,7 +32,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Divider from '@material-ui/core/Divider';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 
 const dataObject = {
     "name": "Name",
@@ -361,7 +361,7 @@ function Home(props) {
                                 />
                                 <label htmlFor="contained-button-file">
                                     <Button variant="contained" style={{ backgroundColor: '#2F4454', color: '#FFF', marginRight: '5px', textTransform: 'capitalize' }} component="span">
-                                        {'Upload' + '\u00A0' + 'Image'}
+                                        <PhotoCameraIcon style={{marginRight:'5px'}}/>{'Upload'}
                                     </Button>
                                 </label>
                                 <Typography variant="body2" style={{ maxWidth: '40%', fontSize: '0.75em', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>{file.name}</Typography>
