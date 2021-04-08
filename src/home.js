@@ -38,9 +38,10 @@ import Fade from '@material-ui/core/Fade';
 // import Zoom from '@material-ui/core/Zoom';
 
 const dataObject = {
-    "name": "Name",
-    "email": "Email",
-    "address": "Address",
+    "name": "Waqqas Iqbal",
+    "email": "waqqas.ess@gmail.com",
+    "address": "House # 76, Road # 8/A, Dhanmondi, Dhaka",
+    "contact": "+8801917169663",
     "educations": [
         {
             "school_name": "",
@@ -51,9 +52,14 @@ const dataObject = {
     ],
     "socials": [
         {
-            "socail_name": "",
-            "social_url": ""
-        }
+            "social_name": "github",
+            "social_url": "github.com/waqqasiq"
+        },
+        {
+            "social_name": "linkedin",
+            "social_url": "linkedin.com/in/iqbalwaqqas"
+        },
+        
     ],
     "skills": [
         {
@@ -78,12 +84,27 @@ const dataObject = {
     ],
     "experiences": [
         {
-            "company_name": "",
+            "company_name": "MGH Group, Information Technology Department",
             "positions": [
                 {
-                    "pos_title": "",
-                    "pos_responsibilities": [""],
-                    "pos_duration": ""
+                    "pos_title": "Senior Executive",
+                    "pos_responsibilities": ["Prepare project scope statement", "Develop and deploy web and android applications", "Communicate with stakeholders and gather requirements and analyse them before development"],
+                    "pos_duration": "Jan 2020 - Present"
+                },
+                {
+                    "pos_title": "Management Trainee",
+                    "pos_responsibilities": ["Integrated Google authentication and Firebase Realtime Database in Android Application", "Performed Apha Testing on Radio Foorti android applicaion before going for production", "Developed a fully responsive song rating web application using ReactJS and ExpressJS for Radio Foorti Ltd."],
+                    "pos_duration": "Aug 2020 - Dec 2020"
+                }
+            ]
+        },
+        {
+            "company_name": "Grameenphone Ltd.",
+            "positions": [
+                {
+                    "pos_title": "System Engineer",
+                    "pos_responsibilities": ["Implemented logic to detect 3G Sleeping cells in Ericsson and Huawei Network and bring in automation in the existing applications for quick troubleshooting", "Schedule programs to send out BTS outage data at a set interval using FTP"],
+                    "pos_duration": "May 2020 - July 2020"
                 }
             ]
         }
@@ -173,7 +194,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Home(props) {
     const classes = useStyles();
-    const [state, setState] = useState({ dataName: "", dataEmail: "", dataAddress: "", dataEducations: [...dataObject.educations], dataSocials: [...dataObject.socials], dataSkills: [...dataObject.skills], dataAchievements: [...dataObject.honors_achievements], dataProjects: [...dataObject.projects] });
+    const [state, setState] = useState({ dataName: dataObject.name, dataEmail: dataObject.email, dataAddress: dataObject.address, dataContact: dataObject.contact, dataEducations: [...dataObject.educations], dataSocials: [...dataObject.socials], dataSkills: [...dataObject.skills], dataAchievements: [...dataObject.honors_achievements], dataProjects: [...dataObject.projects] });
     const history = useHistory()
     const [cartqty, setCartqty] = useState(0);
     const [file, setFile] = React.useState("");
@@ -188,7 +209,7 @@ function Home(props) {
 
     // Handles file upload event and updates state
     const handleUpload = (event) => {
-        console.log("event.target.files ", event.target.files[0].name)
+        console.log("event.target.files ", event.target.files[0])
         setFile(event.target.files[0]);
         // Add code here to upload file to server
         // ...
@@ -198,7 +219,7 @@ function Home(props) {
 
         const dataTemplate = {
             "dataEducations": [{ "school_name": "", "major": "", "cgpa": "", "duration": "" }],
-            "dataSocials": [{ "socail_name": "", "social_url": "" }],
+            "dataSocials": [{ "social_name": "", "social_url": "" }],
             "dataSkills": [{ "skill_title": "", "skill_desc": "" }],
             "dataProjects": [{ "project_title": "", "project_desc": "", "redirect_url": "" }],
             "dataAchievements": [{ "achievement_title": "", "achievement_desc": "", "duration": "", "redirect_url": "" }]
@@ -318,6 +339,13 @@ function Home(props) {
         })
 
     }
+    const handleGenResume = () => {
+        console.log("handleGenResume");
+        history.push({
+            pathname: '/resume',
+            state: { data: state, dataExp: stateExperiences, imagefile: file }
+        })
+    }
 
 
     return (
@@ -371,6 +399,15 @@ function Home(props) {
                             </Grid>
                         </Grid>
 
+                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                            <Grid item xs={12} sm={2}>
+                            </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <TextField value={state.dataContact} onChange={handleChangeText} name="dataContact" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder="Contact No" />
+                                </Grid>
+                            <Grid item xs={12} sm={2}>
+                            </Grid>
+                        </Grid>
 
                         <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
                             <Grid item xs={12} sm={2}>
@@ -652,7 +689,7 @@ function Home(props) {
                                         <Grid item xs={12} sm={2}>
                                         </Grid>
                                         <Grid item xs={12} sm={8}>
-                                            <TextField onChange={(e) => handleChangeTextCompany(e,index)} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`company_name ` + `${index + 1}`} />
+                                            <TextField value={val.company_name} onChange={(e) => handleChangeTextCompany(e,index)} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`company_name ` + `${index + 1}`} />
                                         </Grid>
                                         <Grid item xs={12} sm={2}>
                                         </Grid>
@@ -686,11 +723,11 @@ function Home(props) {
                                                         <Typography variant="subtitle2">{'Position ' + `${ind + 1}`}</Typography>
                                                         <Grid container spacing={1}>
                                                             <Grid item xs={6}>
-                                                                <TextField onChange={(e)=>handleTextChangePosition(e,index,ind)} name="pos_title" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`pos_title ` + `${ind + 1}`} />
+                                                                <TextField value={item.pos_title} onChange={(e)=>handleTextChangePosition(e,index,ind)} name="pos_title" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`pos_title ` + `${ind + 1}`} />
 
                                                             </Grid>
                                                             <Grid item xs={6}>
-                                                                <TextField onChange={(e)=>handleTextChangePosition(e,index,ind)} name="pos_duration" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`pos_duration ` + `${ind + 1}`} />
+                                                                <TextField value={item.pos_duration} onChange={(e)=>handleTextChangePosition(e,index,ind)} name="pos_duration" fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`pos_duration ` + `${ind + 1}`} />
 
                                                             </Grid>
                                                         </Grid>
@@ -723,7 +760,7 @@ function Home(props) {
                                                             <Grid item xs={12} sm={2}>
                                                             </Grid>
                                                             <Grid item xs={12} sm={8}>
-                                                                <TextField onChange={(e)=>handleTextChangeResponsibility(e,index,ind,i)} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`position ` + `${ind + 1}` + ' resp ' + `${i + 1}`} />
+                                                                <TextField value={v} onChange={(e)=>handleTextChangeResponsibility(e,index,ind,i)} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={`position ` + `${ind + 1}` + ' resp ' + `${i + 1}`} />
                                                             </Grid>
                                                             <Grid item xs={12} sm={2}>
                                                             </Grid>
@@ -740,6 +777,15 @@ function Home(props) {
                         }
 
                         <Divider light variant="middle" style={{ margin: '20px' }} />
+                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                                            <Grid item xs={12} sm={2}>
+                                                            </Grid>
+                                                            <Grid item xs={12} sm={8}>
+                                                                <Button onClick={handleGenResume} fullWidth variant="contained" style={{backgroundColor: '#2F4454', color:'#FFF'}}>Generate Resume</Button>
+                                                            </Grid>
+                                                            <Grid item xs={12} sm={2}>
+                                                            </Grid>
+                                                        </Grid>
 
                     </Paper>
                 </Grid>
