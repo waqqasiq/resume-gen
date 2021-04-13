@@ -39,12 +39,54 @@ import Fade from '@material-ui/core/Fade';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import CallRoundedIcon from '@material-ui/icons/CallRounded';
-import EmailIcon from '@material-ui/icons/Email';
+// import EmailIcon from '@material-ui/icons/Email';
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import WorkOutlineOutlinedIcon from '@material-ui/icons/WorkOutlineOutlined';
 import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
 import ArrowRightOutlinedIcon from '@material-ui/icons/ArrowRightOutlined';
 import ReactToPdf from 'react-to-pdf';
+// import { faHome } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import domToPdf from 'dom-to-pdf';
+// import jsPDF from 'jspdf'
+// import { Document, Page } from 'react-pdf';
+import { Document, Page, Text, View, StyleSheet, PDFViewer, Image } from '@react-pdf/renderer'; // this works best
+import Homesvg from '../src/homepng.png';
+import CallIcon from '../src/callicon.png'
+import EmailIcon from '../src/email.png'
+import GithubIcon from '../src/githubicon.png'
+import LinkedinIcon from '../src/linkedinicon.png'
+
+
+const styles = StyleSheet.create({
+    page: {
+      flexDirection: 'row',
+      paddingTop: '25.4mm', 
+      paddingBottom: '25.4mm', 
+    //   backgroundColor: '#E4E4E4'
+    },
+    section: {
+      display:'flex',
+      flexDirection:'column',
+      margin: 10,
+      padding: 10,
+      flexGrow: 1,
+      paddingRight:'19.1mm', 
+      paddingLeft:'19.1mm',
+    },
+    bulletpoint: {
+        width: '2px',
+       height: '2px',
+       border: '2px solid black',
+       borderRadius: '50%',
+       margin: '5px 5px 0 0'
+    },
+    line: {
+        borderTop:'1px solid lightgrey',
+        marginTop:'3px',
+        height:'3px',
+      },
+  });
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -140,6 +182,7 @@ function Resume(props) {
     const [file, setFile] = useState(props.location.state.imagefile)
     
     const ref = React.createRef();
+
     //   useEffect(() => {
     //     // Update the document title using the browser API
     //     // setChecked(true);
@@ -156,21 +199,219 @@ function Resume(props) {
         // ...
     }
 
-   
+    const generatePdf = () => {
+
+        const element = document.getElementById('divToPrint');
+    
+        const options = {
+          filename: "test.pdf",
+        };
+    
+        return domToPdf(element, options, () => {
+          // callback function
+          alert('done');
+        });
+
+        // const input = document.getElementById("divToPrint");
+        // const pdf = new jsPDF({ unit: "px", format: "a4", userUnit: "px" });
+        // pdf.html(input, { html2canvas: { scale: 0.57 } }).then(() => {
+        //     pdf.save("testjspdf.pdf");
+        // });
+
+      }
 
 
     return (
         <div className={classes.root}>
-          
-            <Navbar />
-            <Fade
-                in={checked}
-                timeout={1000}
-            >
+            {console.log(file)}
+
+                <PDFViewer
+                    style={{
+                        width: '100%',
+                        height:'100vh',
+                        float:'right'
+                    }}
+                >
+                    <Document>
+                        <Page size="A4" style={styles.page}>
+                            <View style={styles.section}>
+                                {/* <Text>Section #1</Text> */}
+                                
+
+                                    <View style={{display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:'10px'}}>
+
+                                        <View >
+                                            <Text style={{fontSize:'20px', marginBottom:'6px'}}>{state.dataName}</Text>
+
+                                            <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
+                                                <Image src={Homesvg} style={{height:'11px', width:'11px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataAddress}</Text>
+                                            </View>
+
+                                            <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
+                                                <Image src={CallIcon} style={{height:'9px', width:'9px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataContact + ' | '}</Text><Image src={EmailIcon} style={{width:'10px', height:'10px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataEmail}</Text>
+                                            </View>
+
+                                            <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
+                                                <Image src={GithubIcon} style={{height:'11px', width:'11px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[0].social_url + ' | '}</Text><Image src={LinkedinIcon} style={{width:'10px', height:'10px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[1].social_url}</Text>
+                                            </View>
+
+
+                                        </View>
+
+                                        <View >
+
+                                            {
+                                                file ? <Image style={{width:'80px', height:'80px'}} src={URL.createObjectURL(file)} /> : <View></View>
+                                            }
+                                            
+                                               {/* <Image style={{width:'80px', height:'80px'}} src={URL.createObjectURL(file)} />  */}
+                                            
+                                            
+
+                                        </View>
+                           
+                                    </View>
+
+                                    {/* experiences */}
+                                    {
+                                        stateExperiences.dataExperiences.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Work Experience'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                    }
+
+                                    {
+                                        stateExperiences.dataExperiences.map(val => {
+                                            return (
+                                                <View style={{marginBottom:'6px'}}>
+                                               
+
+                                                    <Text style={{fontSize:'11px' , marginBottom:'3px'}}>{val.company_name}</Text>
+                                                    
+                                                    {
+                                                            val.positions.map(pos => {
+
+                                                                return (
+                                                                    <View  style={{marginBottom:'4px'}}>
+                                                                        <View style={{display:'flex',flexDirection:'row', justifyContent:'space-between', marginBottom:'3px'}}>
+                                                                            <View style={{display:'flex', flexDirection:'row'}}>
+                                                                                <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{pos.pos_title}</Text>
+                                                                            </View>
+                                                                            <View  >
+                                                                                <Text style={{fontSize:'11px'}}>{pos.pos_duration}</Text>
+                                                                            </View>
+                                                                        </View>
+                                                               
+                                                                        {
+                                                                            pos.pos_responsibilities.map(resp => {
+                                                                                return (
+                                                                                    <View style={{display:'flex', flexDirection:'column', marginBottom:'3px'}}>
+                                                                                        <View style={{display:'flex', flexDirection:'row', marginLeft:'16px'}}>
+                                                                                            <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{resp}</Text>
+                                                                                            {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
+                                                                                        </View>
+                                                                                    </View>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                 
+                                                                             
+                                                                    </View>
+                                                                )
+                                                            }
+                                                            )
+                                                }
+
+                                                </View>
+                                            )
+                                        })
+                                    }
+
+
+                                    {/* education */}
+                                    <View style={{marginBottom:'4px'}}>
+                                    {
+                                        state.dataEducations.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Education'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                    }
+
+                                    {
+                                        state.dataEducations.map(val => {
+                                            return (
+                                                <View style={{marginBottom:'6px'}}>
+
+                                                    <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.school_name}</Text>
+                                                    
+                                                    <View style={{display:'flex',flexDirection:'row', justifyContent:'space-between'}}>
+                                                            <View style={{display:'flex', flexDirection:'row', justifyContent:'flex-start'}}><Text style={styles.bulletpoint}>*</Text><Text  style={{fontSize:'11px'}}>{val.major + ' | ' + val.cgpa}</Text></View>
+                                                            <Text  style={{fontSize:'11px'}}>{val.duration}</Text>
+                                                    </View>
+
+                                                </View>
+                                            )
+                                        })
+                                    }
+                                    </View>
+
+
+                                    {/* achievements */}
+                                    <View style={{marginBottom:'4px'}}>
+                                    {
+                                        state.dataAchievements.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Honors & Achievements'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                    }
+
+                                    {
+                                        state.dataAchievements.map(val => {
+                                            return (
+                                                <View style={{marginBottom:'6px'}}>
+
+                                                    <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.achievement_title + ' ' +val.duration}</Text>
+                                                    {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
+                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                                                        <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.achievement_desc}</Text>
+                                                                                            {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
+                                                    </View>
+                                                     
+                                                </View>
+                                            )
+                                        })
+                                    }
+                                    </View>
+
+
+                                     {/* projects */}
+                                     <View style={{marginBottom:'4px'}}>
+                                    {
+                                        state.dataProjects.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Projects'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                    }
+
+                                    {
+                                        state.dataProjects.map(val => {
+                                            return (
+                                                <View style={{marginBottom:'6px'}}>
+
+                                                    <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.project_title}</Text>
+                                                    {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
+                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                                                        <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.project_desc}</Text>
+                                                                                            {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
+                                                    </View>
+                                                     
+                                                </View>
+                                            )
+                                        })
+                                    }
+                                    </View>
+                                  
+                            </View>
+                        
+                        </Page>
+                    </Document>
+
+                </PDFViewer>
+           
+
                 <Grid container justify="center" spacing={1} style={{ marginTop: '8vh' }}>
 
                     <Paper style={{backgroundColor: 'gainsboro', margin:'10px 0px', width: 'calc(100% - 850px)', height: '297mm'}}>
-                        <ReactToPdf targetRef={ref} filename="myresume.pdf">
+                    <Button variant="contained" onClick={generatePdf} style={{backgroundColor:'#2F4454', color:'#FFF'}}>Generate pdf1</Button>
+                        <ReactToPdf targetRef={ref} filename="myresume.pdf" scale={0.5}>
                             {({toPdf}) => (
                                 <Button variant="contained" onClick={toPdf} style={{backgroundColor:'#2F4454', color:'#FFF'}}>Generate pdf</Button>
                             )}
@@ -178,7 +419,7 @@ function Resume(props) {
                     </Paper>
 
                      
-                    <div ref={ref} square style={{ marginTop:'10px', width: '210mm', height: '297mm', border:'1px solid lightgrey'}}>
+                    <div id="divToPrint" ref={ref} square style={{ marginTop:'10px', width: '210mm', height:'200%', border:'1px solid lightgrey'}}>
 
                         <Grid container justify="space-between" style={{paddingTop: '25.4mm', paddingRight:'19.1mm', paddingLeft:'19.1mm', paddingBottom: '32px'}}>
                             <Grid item xs={9}>
@@ -189,6 +430,7 @@ function Resume(props) {
                                     <Grid item xs={12} style={{marginBottom: '6px'}}>
                                         <Grid container style={{display:'flex'}} >
                                             <HomeRoundedIcon style={{fontSize:'16px', marginRight:'4px'}}/>
+                                            {/* <FontAwesomeIcon icon={faHome} style={{fontSize:'16px', marginRight:'4px'}}/> */}
                                             <Typography style={{textAlign:'center', fontSize:'0.9rem'}}  variant="h4">{state.dataAddress}</Typography>
                                         </Grid>
                                         
@@ -203,26 +445,35 @@ function Resume(props) {
                                         </Grid>
                                         
                                     </Grid>
-                                    <Grid item xs={12} style={{marginBottom: '6px'}}>
-                                        <Grid container style={{display:'flex'}}  >
-                                            <WorkOutlineOutlinedIcon style={{fontSize:'16px', marginRight:'4px'}}/>
-                                            <Typography style={{textAlign:'center', fontSize:'0.9rem'}}  variant="h4">{state.dataSocials[0].social_url + ' | '}</Typography>
+                                    {
+                                        (state.dataSocials.length > 0) 
+                                        ?
+                                        <Grid item xs={12} style={{marginBottom: '6px'}}>
+                                            <Grid container style={{display:'flex'}}  >
+                                                <WorkOutlineOutlinedIcon style={{fontSize:'16px', marginRight:'4px'}}/>
+                                                <Typography style={{textAlign:'center', fontSize:'0.9rem'}}  variant="h4">{state.dataSocials[0].social_url + ' | '}</Typography>
 
-                                            <PersonOutlinedIcon style={{fontSize:'16px', marginRight:'4px', marginLeft:'4px'}}/>
-                                            <Typography style={{textAlign:'center', fontSize:'0.9rem'}}  variant="h4">{state.dataSocials[1].social_url}</Typography>
+                                                <PersonOutlinedIcon style={{fontSize:'16px', marginRight:'4px', marginLeft:'4px'}}/>
+                                                <Typography style={{textAlign:'center', fontSize:'0.9rem'}}  variant="h4">{state.dataSocials[1].social_url}</Typography>
+                                            </Grid>
+                                            
                                         </Grid>
-                                        
-                                    </Grid>
+                                    :
+                                        <Grid></Grid>
+                                    }
                                 </Grid>
 
                             </Grid>
                             <Grid item xs={2} style={{border:'1px solid lightgrey'}}>
-                                <img width="auto" height="108px" src={URL.createObjectURL(file)} />
+                                {/* <img width="auto" height="108px" src={URL.createObjectURL(file)} /> */}
                             </Grid>
                            
                         </Grid>
 
-                        <Grid container style={{paddingLeft: '19.1mm', paddingRight:'19.1mm'}}>
+                        {
+                            (stateExperiences.dataExperiences.length > 0) 
+                            ?
+                            <Grid container style={{paddingLeft: '19.1mm', paddingRight:'19.1mm', marginBottom:'8px'}}>
                             <Grid item xs={12} >
                                     <Typography style={{fontSize:'1.2rem', color:'#202020', fontWeight:'bold'}}  variant="h4">{'Work Experience'}</Typography>
                             </Grid>
@@ -241,7 +492,7 @@ function Resume(props) {
                                             </Grid>
                                                 {
                                                     val.positions.map((pos, pos_ind) => (
-                                                        <Grid container style={{marginBottom:'8px'}}>
+                                                        <Grid container style={{marginBottom:'6px'}}>
                                                             <Grid container justify="space-between">
                                                                 <Grid item style={{marginLeft:'1.5rem'}}>
                                                                     <Typography variant="body1" style={{fontSize:'0.9rem', fontWeight:'bold'}}>{pos.pos_title}</Typography>
@@ -273,13 +524,141 @@ function Resume(props) {
                     
 
                         </Grid>
+                        :
+                        <Grid></Grid>
 
+                        }
+
+                        
+{
+                            (state.dataEducations.length > 0) 
+                            ?
+                            <Grid container style={{paddingLeft: '19.1mm', paddingRight:'19.1mm', marginBottom:'8px'}}>
+                            <Grid item xs={12} >
+                                    <Typography style={{fontSize:'1.2rem', color:'#202020', fontWeight:'bold'}}  variant="h4">{'Education'}</Typography>
+                            </Grid>
+                            <Grid item xs={12}   style={{marginBottom: '4px'}}>
+                                <div className={classes.line}></div>
+                            </Grid>
+
+                            {
+                                state.dataEducations.map((val, index) => (
+                                    <Grid container style={{display:'flex', flexDirection:'column'}}>
+                                        <Grid item >
+                                            <Grid container style={{display:'flex', marginBottom:'6px'}}>
+                                                <Grid  item>
+                                                    <ArrowRightOutlinedIcon />
+                                                </Grid>
+                                                <Grid  item>
+                                                    <Typography variant="body1" style={{fontSize:'1rem', fontWeight:'bold'}}>{val.school_name}</Typography>
+                                                </Grid>
+
+                                            </Grid>
+                                           
+                                        </Grid>
+                                        <Grid item >
+                                            <Grid container justify="space-between" style={{marginLeft:'1.5rem'}}>
+                                                    <p  style={{fontSize:'0.85rem'}}>{val.major + ' | ' + val.cgpa}</p>
+                                                    <p  style={{fontSize:'0.85rem'}}>{val.duration}</p>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    
+                                ))
+                            }
+                    
+
+                        </Grid>
+                        :
+                        <Grid></Grid>
+
+                        }
+
+{
+                            (state.dataAchievements.length > 0) 
+                            ?
+                            <Grid container style={{paddingLeft: '19.1mm', paddingRight:'19.1mm', marginBottom:'8px'}}>
+                            <Grid item xs={12} >
+                                    <Typography style={{fontSize:'1.2rem', color:'#202020', fontWeight:'bold'}}  variant="h4">{'Honors & Achievements'}</Typography>
+                            </Grid>
+                            <Grid item xs={12}   style={{marginBottom: '4px'}}>
+                                <div className={classes.line}></div>
+                            </Grid>
+
+                            {
+                                state.dataAchievements.map((val, index) => (
+                                    <Grid container style={{display:'flex', flexDirection:'column'}}>
+                                        <Grid item style={{display:'flex', marginBottom:'6px'}}>
+                                            <Grid item >
+                                                <ArrowRightOutlinedIcon />
+                                            </Grid>
+                                            <Grid item >
+                                                <Typography variant="body1" style={{fontSize:'1rem', fontWeight:'bold'}}><a style={{textDecoration:'none', color:'inherit'}} target="_blank" href={val.redirect_url}>{val.achievement_title + ' ' +val.duration +''}</a></Typography>
+                                            </Grid>
+                                           
+                                        </Grid>
+                                        <Grid item >
+                                                <Grid item style={{marginLeft:'1.5rem'}}>
+                                                    <Typography variant="body1" style={{fontSize:'0.85rem'}}>{val.achievement_desc}</Typography>
+                                                </Grid>
+                                        </Grid>
+                                    </Grid>
+                                ))
+                            }
+                    
+
+                        </Grid>
+                        :
+                        <Grid></Grid>
+
+                        }
+
+{
+                            (state.dataProjects.length > 0) 
+                            ?
+                            <Grid container style={{paddingLeft: '19.1mm', paddingRight:'19.1mm', marginBottom:'8px'}}>
+                            <Grid item xs={12} >
+                                    <Typography style={{fontSize:'1.2rem', color:'#202020', fontWeight:'bold'}}  variant="h4">{'Projects'}</Typography>
+                            </Grid>
+                            <Grid item xs={12}   style={{marginBottom: '4px'}}>
+                                <div className={classes.line}></div>
+                            </Grid>
+
+                            {
+                                state.dataProjects.map((val, index) => (
+                                    <Grid container style={{display:'flex', flexDirection:'column'}}>
+                                        <Grid item style={{display:'flex', marginBottom:'6px'}}>
+                                            <Grid item >
+                                                <ArrowRightOutlinedIcon />
+                                            </Grid>
+                                            <Grid item >
+                                                <Typography variant="body1" style={{fontSize:'1rem', fontWeight:'bold'}}><a style={{textDecoration:'none', color:'inherit'}} target="_blank" href={val.redirect_url}>{val.project_title}</a></Typography>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid item >
+                                                <Grid item style={{marginLeft:'1.5rem'}}>
+                                                    <Typography variant="body1" style={{fontSize:'0.85rem'}}>{val.project_desc}</Typography>
+                                                 </Grid>
+                                        </Grid>
+                                    </Grid>
+                                ))
+                            }
+                    
+
+                        </Grid>
+                        :
+                        <Grid></Grid>
+
+                        }
+
+                        
+                       
                     </div>
                 
 
 
                 </Grid>
-            </Fade>
+            {/* </Fade> */}
         </div>
     );
 }

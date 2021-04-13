@@ -44,10 +44,16 @@ const dataObject = {
     "contact": "+8801917169663",
     "educations": [
         {
-            "school_name": "",
-            "major": "",
-            "cgpa": "",
-            "duration": ""
+            "school_name": "BRAC University",
+            "major": "Computer Science and Engineering",
+            "cgpa": "CGPA: 3.AB",
+            "duration": "Jan 2015 - Dec 2018"
+        },
+        {
+            "school_name": "Mastermind English Medium School",
+            "major": "A-level",
+            "cgpa": "Result: 2 A*, 1 A",
+            "duration": "Jul 2012 - Jun 2014"
         }
     ],
     "socials": [
@@ -69,17 +75,33 @@ const dataObject = {
     ],
     "projects": [
         {
-            "project_title": "",
-            "project_desc": "",
-            "redirect_url": ""
+            "project_title": "vGab",
+            "project_desc": "A realtime chatting webapp developed using NodeJS, MongoDB, Websocket, Bootstrap4",
+            "redirect_url": "https://vgab.herokuapp.com"
+        },
+        {
+            "project_title": "SpendWise",
+            "project_desc": "A personal finance manager app that helps users track their cash inflow/outflow. Developed using ReactJS, NodeJS, Firebase",
+            "redirect_url": "https://wi-spendwise.netlify.app/"
+        },
+        {
+            "project_title": "Typing Maniac",
+            "project_desc": "A typing game to improve typing speed",
+            "redirect_url": "https://wi-typingmaniac.netlify.com/"
         }
     ],
     "honors_achievements": [
         {
-            "achievement_title": "",
-            "achievement_desc": "",
+            "achievement_title": "Performance Based Scholarship",
+            "achievement_desc": "Maintained a CGPA of 3.70 and above since summer 2016",
+            "duration": "(2016 - 2018)",
+            "redirect_url": "https://waqqasiqbal.com"
+        },
+        {
+            "achievement_title": "Information Technology Engineers Examination (ITEE) Level-2",
+            "achievement_desc": "Full Passer as of May 2019",
             "duration": "",
-            "redirect_url": ""
+            "redirect_url": "https://waqqasiqbal.com"
         }
     ],
     "experiences": [
@@ -105,6 +127,12 @@ const dataObject = {
                     "pos_title": "System Engineer",
                     "pos_responsibilities": ["Implemented logic to detect 3G Sleeping cells in Ericsson and Huawei Network and bring in automation in the existing applications for quick troubleshooting", "Schedule programs to send out BTS outage data at a set interval using FTP"],
                     "pos_duration": "May 2020 - July 2020"
+                },
+                {
+                    "pos_title": "Business Intelligence Intern",
+                    "pos_responsibilities": ["Worked in enhancing and improving the existing Location Intelligence (LI) System", "Used advanced filters, pivot tables, v-lookup to get desired data input from AppSheet", "Write a program in python to find the nearest Express POS for each General POS based on their latitude and longitude for a gift-redeem campaign", "Query out desired data from multiple tables using SQL joins and aggregate functions"],
+                    "pos_duration": "Jan 2019 - Apr 2019"
+                    
                 }
             ]
         }
