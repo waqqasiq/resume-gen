@@ -69,8 +69,24 @@ const dataObject = {
     ],
     "skills": [
         {
-            "skill_title": "",
-            "skill_desc": ""
+            "skill_title": "Programming Languages",
+            "skill_desc": "Javascript, Python, Java"
+        },
+        {
+            "skill_title": "Database",
+            "skill_desc": "MySQL, MongoDB, Firebase"
+        },
+        {
+            "skill_title": "Frontend",
+            "skill_desc": "ReactJS, HTML, CSS, Javascript"
+        },
+        {
+            "skill_title": "Backend",
+            "skill_desc": "NodeJS, ExpressJS, Database Design of SQL/NoSQL"
+        },
+        {
+            "skill_title": "Other",
+            "skill_desc": "MS Excel (Data validation, Pivot Tables, Advanced Filters, V-lookup)"
         }
     ],
     "projects": [
@@ -86,7 +102,7 @@ const dataObject = {
         },
         {
             "project_title": "Typing Maniac",
-            "project_desc": "A typing game to improve typing speed",
+            "project_desc": "A typing game to improve typing speed. Developed using ReactJS.",
             "redirect_url": "https://wi-typingmaniac.netlify.com/"
         }
     ],
@@ -100,6 +116,12 @@ const dataObject = {
         {
             "achievement_title": "Information Technology Engineers Examination (ITEE) Level-2",
             "achievement_desc": "Full Passer as of May 2019",
+            "duration": "",
+            "redirect_url": "https://waqqasiqbal.com"
+        },
+        {
+            "achievement_title": "Math Olympiad (2016)",
+            "achievement_desc": "Secured 3rd position in NUMO Dhaka North Region",
             "duration": "",
             "redirect_url": "https://waqqasiqbal.com"
         }
@@ -135,6 +157,31 @@ const dataObject = {
                     
                 }
             ]
+        }
+    ],
+    "eca": [
+        {
+            "eca_description": "Programming Contest – Participated in ACM ICPC Dhaka Regionals 2017 Online Preliminary Contest",
+        },
+        {
+            "eca_description": "Online Courses – Completed several courses at Udemy, Codecademy, Datacamp, LinkedIn, Coursera",
+        },
+        {
+            "eca_description": "Voluntary participation in a study – Research conducted by UCSD and Cornell University on “How computer programmers work” at IPA, Dhaka",
+        }
+    ],
+    "references": [
+        {
+            "ref_name": "Mr. Zobair Ibn Alam",
+            "ref_designation": "Application Engineer at Rakuten,",
+            "ref_email": "zobair.alam@rakuten.com",
+            "ref_mobile": "+8107026482535"
+        },
+        {
+            "ref_name": "Mr. Adnan Momin",
+            "ref_designation": "General Manager, Head of OSS - Service Operations, Grameenphone Ltd.",
+            "ref_email": "adnan@grameenphone.com",
+            "ref_mobile": "+880 1711-500193"
         }
     ]
 }
@@ -222,7 +269,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Home(props) {
     const classes = useStyles();
-    const [state, setState] = useState({ dataName: dataObject.name, dataEmail: dataObject.email, dataAddress: dataObject.address, dataContact: dataObject.contact, dataEducations: [...dataObject.educations], dataSocials: [...dataObject.socials], dataSkills: [...dataObject.skills], dataAchievements: [...dataObject.honors_achievements], dataProjects: [...dataObject.projects] });
+    const [state, setState] = useState({ dataName: dataObject.name, dataEmail: dataObject.email, dataAddress: dataObject.address, dataContact: dataObject.contact, dataEducations: [...dataObject.educations], dataSocials: [...dataObject.socials], dataSkills: [...dataObject.skills], dataAchievements: [...dataObject.honors_achievements], dataProjects: [...dataObject.projects], dataECA: [...dataObject.eca], dataReferences: [...dataObject.references] });
     const history = useHistory()
     const [cartqty, setCartqty] = useState(0);
     const [file, setFile] = React.useState("");
@@ -250,7 +297,9 @@ function Home(props) {
             "dataSocials": [{ "social_name": "", "social_url": "" }],
             "dataSkills": [{ "skill_title": "", "skill_desc": "" }],
             "dataProjects": [{ "project_title": "", "project_desc": "", "redirect_url": "" }],
-            "dataAchievements": [{ "achievement_title": "", "achievement_desc": "", "duration": "", "redirect_url": "" }]
+            "dataAchievements": [{ "achievement_title": "", "achievement_desc": "", "duration": "", "redirect_url": "" }],
+            "dataECA": [{ "eca_description": ""}],
+            "dataReferences": [{ "ref_name": "", "ref_designation": "", "ref_email": "", "ref_mobile": "" }]
         }
 
         console.log("state ", state[event_type]);
@@ -805,6 +854,92 @@ function Home(props) {
                         }
 
                         <Divider light variant="middle" style={{ margin: '20px' }} />
+
+
+
+                        {/* eca */}
+                        <Grid container style={{ display: 'flex', marginBottom: '20px', marginTop: '20px' }}>
+                            <Grid item xs={12} sm={2}>
+                            </Grid>
+                            <Grid item xs={12} sm={8}>
+                                <Grid container justify="space-between" spacing={1} alignItems="center">
+                                    <Grid item >
+                                        <Typography variant="h6">Extra-Curricular Activities</Typography>
+                                    </Grid>
+                                    <Grid item >
+                                        <AddCircleOutlineIcon className={classes.addBtn} onClick={() => handleAddMore("dataECA")} />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12} sm={2}>
+                            </Grid>
+                        </Grid>
+                        {
+                            state.dataECA.map((val, index) => (
+                                <div key={index} style={{ marginBottom: '24px' }}>
+                                    {
+                                        Object.keys(val).map((item, ind) => (
+                                            <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
+                                                <Grid item xs={12} sm={2}>
+                                                </Grid>
+                                                <Grid item xs={12} sm={8}>
+                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataECA_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                </Grid>
+                                                <Grid item xs={12} sm={2}>
+                                                </Grid>
+                                            </Grid>
+                                        ))
+                                    }
+                                </div>
+
+                            )
+                            )
+                        }
+
+                        <Divider light variant="middle" style={{ margin: '20px' }} />
+
+
+                        {/* references */}
+                        <Grid container style={{ display: 'flex', marginBottom: '20px', marginTop: '20px' }}>
+                            <Grid item xs={12} sm={2}>
+                            </Grid>
+                            <Grid item xs={12} sm={8}>
+                                <Grid container justify="space-between" spacing={1} alignItems="center">
+                                    <Grid item >
+                                        <Typography variant="h6">References</Typography>
+                                    </Grid>
+                                    <Grid item >
+                                        <AddCircleOutlineIcon className={classes.addBtn} onClick={() => handleAddMore("dataReferences")} />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12} sm={2}>
+                            </Grid>
+                        </Grid>
+                        {
+                            state.dataReferences.map((val, index) => (
+                                <div key={index} style={{ marginBottom: '24px' }}>
+                                    {
+                                        Object.keys(val).map((item, ind) => (
+                                            <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
+                                                <Grid item xs={12} sm={2}>
+                                                </Grid>
+                                                <Grid item xs={12} sm={8}>
+                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataReferences_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                </Grid>
+                                                <Grid item xs={12} sm={2}>
+                                                </Grid>
+                                            </Grid>
+                                        ))
+                                    }
+                                </div>
+
+                            )
+                            )
+                        }
+
+                        <Divider light variant="middle" style={{ margin: '20px' }} />
+
                         <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
                                                             <Grid item xs={12} sm={2}>
                                                             </Grid>

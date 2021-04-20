@@ -86,6 +86,13 @@ const styles = StyleSheet.create({
         marginTop:'3px',
         height:'3px',
       },
+      bulletpointhidden: {
+        width: '2px',
+       height: '2px',
+       border: '2px solid white',
+       borderRadius: '50%',
+       margin: '5px 5px 0 0'
+    },
   });
 
 const useStyles = makeStyles((theme) => ({
@@ -391,6 +398,86 @@ function Resume(props) {
                                                     <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
                                                         <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.project_desc}</Text>
                                                                                             {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
+                                                    </View>
+                                                     
+                                                </View>
+                                            )
+                                        })
+                                    }
+                                    </View>
+
+
+                                    {/* skills */}
+                                    <View style={{marginBottom:'4px'}}>
+                                    {
+                                        state.dataSkills.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Skills'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                    }
+
+                                    {
+                                        state.dataSkills.map(val => {
+                                            return (
+                                                <View style={{marginBottom:'6px'}}>
+
+                                                    <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.skill_title}</Text>
+                                                    {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
+                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                                                        <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.skill_desc}</Text>
+                                                                                            {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
+                                                    </View>
+                                                     
+                                                </View>
+                                            )
+                                        })
+                                    }
+                                    </View>
+
+
+
+                                    {/* eca */}
+                                    <View style={{marginBottom:'4px'}}>
+                                    {
+                                        state.dataECA.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Extra-Curricular Activities'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                    }
+
+                                    {
+                                        state.dataECA.map(val => {
+                                            return (
+                                                <View style={{marginBottom:'6px'}}>
+
+                                                    {/* <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.eca_desc}</Text> */}
+                                                    {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
+                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                                                        <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.eca_description}</Text>
+                                                                                            {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
+                                                    </View>
+                                                     
+                                                </View>
+                                            )
+                                        })
+                                    }
+                                    </View>
+
+
+
+                                    {/* eca */}
+                                    <View style={{marginBottom:'4px'}}>
+                                    {
+                                        state.dataReferences.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Reference'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                    }
+
+                                    {
+                                        state.dataReferences.map(val => {
+                                            return (
+                                                <View style={{marginBottom:'6px'}}>
+
+                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                                                        <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11.5px'}}>{val.ref_name}</Text>
+                                                    </View>
+                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                                                        <Text style={styles.bulletpointhidden}>*</Text><Text style={{fontSize:'11px'}}>{val.ref_designation}</Text>
+                                                    </View>
+                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                                                        <Text style={styles.bulletpointhidden}>*</Text><Text style={{fontSize:'11px'}}>{'Email: ' + val.ref_email + ' | Mobile: ' + val.ref_mobile}</Text>
                                                     </View>
                                                      
                                                 </View>
