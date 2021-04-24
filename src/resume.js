@@ -50,19 +50,29 @@ import ReactToPdf from 'react-to-pdf';
 import domToPdf from 'dom-to-pdf';
 // import jsPDF from 'jspdf'
 // import { Document, Page } from 'react-pdf';
-import { Document, Page, Text, View, StyleSheet, PDFViewer, Image, renderToFile } from '@react-pdf/renderer'; // this works best
+import { Document, Page, Text, View, StyleSheet, PDFViewer, Image, Font } from '@react-pdf/renderer'; // this works best
 import Homesvg from '../src/homepng.png';
 import CallIcon from '../src/callicon.png'
 import EmailIcon from '../src/email.png'
 import GithubIcon from '../src/githubicon.png'
 import LinkedinIcon from '../src/linkedinicon.png'
+import RobotoRegular from '../src/Roboto/Roboto-Light.ttf';
+import RobotoBold from '../src/Roboto/Roboto-Bold.ttf';
+import CalibriRegular from '../src/Calibri/Calibri-Regular.ttf'
+import CalibriBold from '../src/Calibri/Calibri-Bold.ttf'
 
+
+// Create styles
+  Font.register({ family: 'Calibri', fonts: [
+    { src: CalibriRegular }, // font-style: normal, font-weight: normal
+    { src: CalibriBold, fontStyle: 'italic' }
+   ]});
 
 const styles = StyleSheet.create({
     page: {
       flexDirection: 'row',
       paddingTop: '25.4mm', 
-      paddingBottom: '25.4mm', 
+      paddingBottom: '25.4mm',
     //   backgroundColor: '#E4E4E4'
     },
     section: {
@@ -73,16 +83,18 @@ const styles = StyleSheet.create({
       flexGrow: 1,
       paddingRight:'19.1mm', 
       paddingLeft:'19.1mm',
+      fontFamily:'Calibri'
+    //   fontFamily: 'Oswald'
     },
     bulletpoint: {
         width: '2px',
        height: '2px',
        border: '2px solid black',
        borderRadius: '50%',
-       margin: '5px 5px 0 0'
+       margin: '3px 5px 0 0'
     },
     line: {
-        borderTop:'1px solid lightgrey',
+        borderTop:'1px solid #E8E8E8',
         marginTop:'3px',
         height:'3px',
       },
@@ -253,7 +265,7 @@ function Resume(props) {
                                     <View style={{display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:'10px'}}>
 
                                         <View >
-                                            <Text style={{fontSize:'20px', marginBottom:'6px'}}>{state.dataName}</Text>
+                                            <Text style={{fontSize:'22px', marginBottom:'4px', fontFamily:"Calibri", fontStyle:'italic'}}>{state.dataName}</Text>
 
                                             <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
                                                 <Image src={Homesvg} style={{height:'11px', width:'11px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataAddress}</Text>
@@ -298,7 +310,7 @@ function Resume(props) {
 
                                     {/* experiences */}
                                     {
-                                        stateExperiences.dataExperiences.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Work Experience'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                        stateExperiences.dataExperiences.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Work Experience'}</Text></View><View style={styles.line}></View></View> : <View></View>
                                     }
 
                                     {
@@ -352,7 +364,7 @@ function Resume(props) {
                                     {/* education */}
                                     <View style={{marginBottom:'4px'}}>
                                     {
-                                        state.dataEducations.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Education'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                        state.dataEducations.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Education'}</Text></View><View style={styles.line}></View></View> : <View></View>
                                     }
 
                                     {
@@ -377,7 +389,7 @@ function Resume(props) {
                                     {/* achievements */}
                                     <View style={{marginBottom:'4px'}}>
                                     {
-                                        state.dataAchievements.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Honors & Achievements'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                        state.dataAchievements.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Honors & Achievements'}</Text></View><View style={styles.line}></View></View> : <View></View>
                                     }
 
                                     {
@@ -402,7 +414,7 @@ function Resume(props) {
                                      {/* projects */}
                                      <View style={{marginBottom:'4px'}}>
                                     {
-                                        state.dataProjects.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Projects'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                        state.dataProjects.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Projects'}</Text></View><View style={styles.line}></View></View> : <View></View>
                                     }
 
                                     {
@@ -427,7 +439,7 @@ function Resume(props) {
                                     {/* skills */}
                                     <View style={{marginBottom:'4px'}}>
                                     {
-                                        state.dataSkills.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Skills'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                        state.dataSkills.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Skills'}</Text></View><View style={styles.line}></View></View> : <View></View>
                                     }
 
                                     {
@@ -453,7 +465,7 @@ function Resume(props) {
                                     {/* eca */}
                                     <View style={{marginBottom:'4px'}}>
                                     {
-                                        state.dataECA.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Extra-Curricular Activities'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                        state.dataECA.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Extra-Curricular Activities'}</Text></View><View style={styles.line}></View></View> : <View></View>
                                     }
 
                                     {
@@ -479,7 +491,7 @@ function Resume(props) {
                                     {/* eca */}
                                     <View style={{marginBottom:'4px'}}>
                                     {
-                                        state.dataReferences.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px'}}>{'Reference'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                        state.dataReferences.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Reference'}</Text></View><View style={styles.line}></View></View> : <View></View>
                                     }
 
                                     {
