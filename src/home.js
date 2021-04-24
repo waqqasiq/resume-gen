@@ -36,6 +36,7 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import Fade from '@material-ui/core/Fade';
 // import Collapse from '@material-ui/core/Collapse';
 // import Zoom from '@material-ui/core/Zoom';
+import Logo from './logo.png'
 
 const dataObject = {
     "name": "Waqqas Iqbal",
@@ -455,7 +456,10 @@ function Home(props) {
 
                         {/* <p className={classes.title} style={{marginBottom:'20px'}}>Fill in the details as required</p> */}
 
-                       
+                        <div style={{textAlign:'center'}}>
+                            <img src={Logo} height="100px" width="85px" />                       
+
+                        </div>
                         <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
                             <Grid item xs={12} sm={2}>
                             </Grid>

@@ -5,12 +5,15 @@ import './index.css';
 // import reportWebVitals from './reportWebVitals';
 import Home from './home';
 import Resume from './resume';
+import SplashScreen from './splashscreen';
+
 
 import { Route, BrowserRouter as Router } from "react-router-dom";
 
 const Routing = (
     <Router>
-        <Route exact path="/" component={Home}/>
+        <Route exact path="/" component={SplashScreen}/>
+        <Route exact path="/home" component={Home}/>
         <Route exact path="/resume" component={Resume}/>
         
     </Router>

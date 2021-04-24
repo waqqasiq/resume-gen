@@ -216,8 +216,9 @@ export default function Navbar(props) {
                         </IconButton> */}
                         <Typography variant="h6" className={classes.title}>
                             {/* {this.props.title} */}
-                            {'Resume'+'\u00A0'+'Generator'}
+                            {'Resume'+'\u00A0'+'Gen'}
                         </Typography>
+                        
                         {/*<Button color="inherit" onClick={this.logout}>Logout</Button>*/}
                         <div className={classes.toolbarButtons}>
                         {/* <Button color="inherit" > <Badge badgeContent={props.cartQuantity} color='secondary'><ShoppingCartIcon /></Badge></Button> */}

@@ -50,7 +50,7 @@ import ReactToPdf from 'react-to-pdf';
 import domToPdf from 'dom-to-pdf';
 // import jsPDF from 'jspdf'
 // import { Document, Page } from 'react-pdf';
-import { Document, Page, Text, View, StyleSheet, PDFViewer, Image } from '@react-pdf/renderer'; // this works best
+import { Document, Page, Text, View, StyleSheet, PDFViewer, Image, renderToFile } from '@react-pdf/renderer'; // this works best
 import Homesvg from '../src/homepng.png';
 import CallIcon from '../src/callicon.png'
 import EmailIcon from '../src/email.png'
@@ -176,6 +176,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+
 function Resume(props) {
     const classes = useStyles();
     // const [state, setState] = useState(props.state);
@@ -208,6 +209,8 @@ function Resume(props) {
 
     const generatePdf = () => {
 
+        // renderToFile()
+
         const element = document.getElementById('divToPrint');
     
         const options = {
@@ -226,6 +229,7 @@ function Resume(props) {
         // });
 
       }
+    
 
 
     return (
@@ -236,12 +240,13 @@ function Resume(props) {
                     style={{
                         width: '100%',
                         height:'100vh',
-                        float:'right'
+                        // float:'right'
                     }}
+      
                 >
-                    <Document>
+                    <Document >
                         <Page size="A4" style={styles.page}>
-                            <View style={styles.section}>
+                            <View style={styles.section} >
                                 {/* <Text>Section #1</Text> */}
                                 
 
@@ -494,258 +499,6 @@ function Resume(props) {
                 </PDFViewer>
            
 
-                <Grid container justify="center" spacing={1} style={{ marginTop: '8vh' }}>
-
-                    <Paper style={{backgroundColor: 'gainsboro', margin:'10px 0px', width: 'calc(100% - 850px)', height: '297mm'}}>
-                    <Button variant="contained" onClick={generatePdf} style={{backgroundColor:'#2F4454', color:'#FFF'}}>Generate pdf1</Button>
-                        <ReactToPdf targetRef={ref} filename="myresume.pdf" scale={0.5}>
-                            {({toPdf}) => (
-                                <Button variant="contained" onClick={toPdf} style={{backgroundColor:'#2F4454', color:'#FFF'}}>Generate pdf</Button>
-                            )}
-                        </ReactToPdf>
-                    </Paper>
-
-                     
-                    <div id="divToPrint" ref={ref} square style={{ marginTop:'10px', width: '210mm', height:'200%', border:'1px solid lightgrey'}}>
-
-                        <Grid container justify="space-between" style={{paddingTop: '25.4mm', paddingRight:'19.1mm', paddingLeft:'19.1mm', paddingBottom: '32px'}}>
-                            <Grid item xs={9}>
-                                <Grid container >
-                                        <Grid item xs={12} style={{marginBottom:'10px'}}>
-                                        <Typography style={{ fontSize:'1.8rem', fontWeight: 'bold'}}  variant="h4">{state.dataName}</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} style={{marginBottom: '6px'}}>
-                                        <Grid container style={{display:'flex'}} >
-                                            <HomeRoundedIcon style={{fontSize:'16px', marginRight:'4px'}}/>
-                                            {/* <FontAwesomeIcon icon={faHome} style={{fontSize:'16px', marginRight:'4px'}}/> */}
-                                            <Typography style={{textAlign:'center', fontSize:'0.9rem'}}  variant="h4">{state.dataAddress}</Typography>
-                                        </Grid>
-                                        
-                                    </Grid>
-                                    <Grid item xs={12} style={{marginBottom: '6px'}}>
-                                        <Grid container style={{display:'flex'}}  >
-                                            <CallRoundedIcon style={{fontSize:'16px', marginRight:'4px'}}/>
-                                            <Typography style={{textAlign:'center', fontSize:'0.9rem'}}  variant="h4">{state.dataContact + ' | '}</Typography>
-
-                                            <EmailOutlinedIcon style={{fontSize:'16px', marginRight:'4px', marginLeft:'4px'}}/>
-                                            <Typography style={{textAlign:'center', fontSize:'0.9rem'}}  variant="h4">{state.dataEmail}</Typography>
-                                        </Grid>
-                                        
-                                    </Grid>
-                                    {
-                                        (state.dataSocials.length > 0) 
-                                        ?
-                                        <Grid item xs={12} style={{marginBottom: '6px'}}>
-                                            <Grid container style={{display:'flex'}}  >
-                                                <WorkOutlineOutlinedIcon style={{fontSize:'16px', marginRight:'4px'}}/>
-                                                <Typography style={{textAlign:'center', fontSize:'0.9rem'}}  variant="h4">{state.dataSocials[0].social_url + ' | '}</Typography>
-
-                                                <PersonOutlinedIcon style={{fontSize:'16px', marginRight:'4px', marginLeft:'4px'}}/>
-                                                <Typography style={{textAlign:'center', fontSize:'0.9rem'}}  variant="h4">{state.dataSocials[1].social_url}</Typography>
-                                            </Grid>
-                                            
-                                        </Grid>
-                                    :
-                                        <Grid></Grid>
-                                    }
-                                </Grid>
-
-                            </Grid>
-                            <Grid item xs={2} style={{border:'1px solid lightgrey'}}>
-                                {/* <img width="auto" height="108px" src={URL.createObjectURL(file)} /> */}
-                            </Grid>
-                           
-                        </Grid>
-
-                        {
-                            (stateExperiences.dataExperiences.length > 0) 
-                            ?
-                            <Grid container style={{paddingLeft: '19.1mm', paddingRight:'19.1mm', marginBottom:'8px'}}>
-                            <Grid item xs={12} >
-                                    <Typography style={{fontSize:'1.2rem', color:'#202020', fontWeight:'bold'}}  variant="h4">{'Work Experience'}</Typography>
-                            </Grid>
-                            <Grid item xs={12} style={{marginBottom: '4px'}}>
-                                <div className={classes.line}></div>
-                            </Grid>
-
-                            {
-                                stateExperiences.dataExperiences.map((val, index) => (
-                                        <Grid container style={{display:'flex', marginBottom:'8px'}}>
-                                            <Grid item >
-                                                <ArrowRightOutlinedIcon />
-                                            </Grid>
-                                            <Grid item >
-                                                <Typography variant="body1" style={{fontSize:'1rem', fontWeight:'bold'}}>{val.company_name}</Typography>
-                                            </Grid>
-                                                {
-                                                    val.positions.map((pos, pos_ind) => (
-                                                        <Grid container style={{marginBottom:'6px'}}>
-                                                            <Grid container justify="space-between">
-                                                                <Grid item style={{marginLeft:'1.5rem'}}>
-                                                                    <Typography variant="body1" style={{fontSize:'0.9rem', fontWeight:'bold'}}>{pos.pos_title}</Typography>
-                                                                </Grid>
-                                                                <Grid item style={{marginLeft:'1.5rem'}}>
-                                                                    <Typography variant="body1" style={{fontSize:'0.85rem'}}>{pos.pos_duration}</Typography>
-                                                                </Grid>
-                                                            </Grid>
-                                                             
-                                                             {
-                                                                 pos.pos_responsibilities.map((resp, i) => (
-                                                                    <Grid container style={{marginTop:'-10px', marginBottom:'-16px', marginLeft:'16px'}}>
-                                                                            <ul>
-                                                                                <li style={{fontSize:'0.9rem'}}>{resp}</li>
-                                                                            </ul>
-                                                                            {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
-                                                                    </Grid>
-                                                                 ))
-                                                             }
-                                                        </Grid>
-                                                        
-                                                    ))
-                                                }
-
-                                        </Grid>
-                                    
-                                ))
-                            }
-                    
-
-                        </Grid>
-                        :
-                        <Grid></Grid>
-
-                        }
-
-                        
-{
-                            (state.dataEducations.length > 0) 
-                            ?
-                            <Grid container style={{paddingLeft: '19.1mm', paddingRight:'19.1mm', marginBottom:'8px'}}>
-                            <Grid item xs={12} >
-                                    <Typography style={{fontSize:'1.2rem', color:'#202020', fontWeight:'bold'}}  variant="h4">{'Education'}</Typography>
-                            </Grid>
-                            <Grid item xs={12}   style={{marginBottom: '4px'}}>
-                                <div className={classes.line}></div>
-                            </Grid>
-
-                            {
-                                state.dataEducations.map((val, index) => (
-                                    <Grid container style={{display:'flex', flexDirection:'column'}}>
-                                        <Grid item >
-                                            <Grid container style={{display:'flex', marginBottom:'6px'}}>
-                                                <Grid  item>
-                                                    <ArrowRightOutlinedIcon />
-                                                </Grid>
-                                                <Grid  item>
-                                                    <Typography variant="body1" style={{fontSize:'1rem', fontWeight:'bold'}}>{val.school_name}</Typography>
-                                                </Grid>
-
-                                            </Grid>
-                                           
-                                        </Grid>
-                                        <Grid item >
-                                            <Grid container justify="space-between" style={{marginLeft:'1.5rem'}}>
-                                                    <p  style={{fontSize:'0.85rem'}}>{val.major + ' | ' + val.cgpa}</p>
-                                                    <p  style={{fontSize:'0.85rem'}}>{val.duration}</p>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    
-                                ))
-                            }
-                    
-
-                        </Grid>
-                        :
-                        <Grid></Grid>
-
-                        }
-
-{
-                            (state.dataAchievements.length > 0) 
-                            ?
-                            <Grid container style={{paddingLeft: '19.1mm', paddingRight:'19.1mm', marginBottom:'8px'}}>
-                            <Grid item xs={12} >
-                                    <Typography style={{fontSize:'1.2rem', color:'#202020', fontWeight:'bold'}}  variant="h4">{'Honors & Achievements'}</Typography>
-                            </Grid>
-                            <Grid item xs={12}   style={{marginBottom: '4px'}}>
-                                <div className={classes.line}></div>
-                            </Grid>
-
-                            {
-                                state.dataAchievements.map((val, index) => (
-                                    <Grid container style={{display:'flex', flexDirection:'column'}}>
-                                        <Grid item style={{display:'flex', marginBottom:'6px'}}>
-                                            <Grid item >
-                                                <ArrowRightOutlinedIcon />
-                                            </Grid>
-                                            <Grid item >
-                                                <Typography variant="body1" style={{fontSize:'1rem', fontWeight:'bold'}}><a style={{textDecoration:'none', color:'inherit'}} target="_blank" href={val.redirect_url}>{val.achievement_title + ' ' +val.duration +''}</a></Typography>
-                                            </Grid>
-                                           
-                                        </Grid>
-                                        <Grid item >
-                                                <Grid item style={{marginLeft:'1.5rem'}}>
-                                                    <Typography variant="body1" style={{fontSize:'0.85rem'}}>{val.achievement_desc}</Typography>
-                                                </Grid>
-                                        </Grid>
-                                    </Grid>
-                                ))
-                            }
-                    
-
-                        </Grid>
-                        :
-                        <Grid></Grid>
-
-                        }
-
-{
-                            (state.dataProjects.length > 0) 
-                            ?
-                            <Grid container style={{paddingLeft: '19.1mm', paddingRight:'19.1mm', marginBottom:'8px'}}>
-                            <Grid item xs={12} >
-                                    <Typography style={{fontSize:'1.2rem', color:'#202020', fontWeight:'bold'}}  variant="h4">{'Projects'}</Typography>
-                            </Grid>
-                            <Grid item xs={12}   style={{marginBottom: '4px'}}>
-                                <div className={classes.line}></div>
-                            </Grid>
-
-                            {
-                                state.dataProjects.map((val, index) => (
-                                    <Grid container style={{display:'flex', flexDirection:'column'}}>
-                                        <Grid item style={{display:'flex', marginBottom:'6px'}}>
-                                            <Grid item >
-                                                <ArrowRightOutlinedIcon />
-                                            </Grid>
-                                            <Grid item >
-                                                <Typography variant="body1" style={{fontSize:'1rem', fontWeight:'bold'}}><a style={{textDecoration:'none', color:'inherit'}} target="_blank" href={val.redirect_url}>{val.project_title}</a></Typography>
-                                            </Grid>
-                                        </Grid>
-                                        <Grid item >
-                                                <Grid item style={{marginLeft:'1.5rem'}}>
-                                                    <Typography variant="body1" style={{fontSize:'0.85rem'}}>{val.project_desc}</Typography>
-                                                 </Grid>
-                                        </Grid>
-                                    </Grid>
-                                ))
-                            }
-                    
-
-                        </Grid>
-                        :
-                        <Grid></Grid>
-
-                        }
-
-                        
-                       
-                    </div>
-                
-
-
-                </Grid>
-            {/* </Fade> */}
         </div>
     );
 }
