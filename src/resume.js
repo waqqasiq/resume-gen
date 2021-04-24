@@ -263,9 +263,21 @@ function Resume(props) {
                                                 <Image src={CallIcon} style={{height:'9px', width:'9px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataContact + ' | '}</Text><Image src={EmailIcon} style={{width:'10px', height:'10px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataEmail}</Text>
                                             </View>
 
-                                            <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
-                                                <Image src={GithubIcon} style={{height:'11px', width:'11px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[0].social_url + ' | '}</Text><Image src={LinkedinIcon} style={{width:'10px', height:'10px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[1].social_url}</Text>
+                                            {state.dataSocials.length > 0 && state.dataSocials.length < 2 ? 
+                                             <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
+                                                <Image src={LinkedinIcon} style={{width:'10px', height:'10px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[0].social_url}</Text>
                                             </View>
+                                            : <View></View>
+                                            } 
+
+                                            {state.dataSocials.length === 2 ? 
+                                             <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
+                                                <Image src={LinkedinIcon} style={{width:'10px', height:'10px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[0].social_url + ' | '}</Text>
+                                                <Image src={GithubIcon} style={{height:'11px', width:'11px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[1].social_url}</Text>
+                                            </View>
+                                            : <View></View>
+                                            } 
+                                           
 
 
                                         </View>

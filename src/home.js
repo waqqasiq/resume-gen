@@ -39,151 +39,33 @@ import Fade from '@material-ui/core/Fade';
 import Logo from './logo.png'
 
 const dataObject = {
-    "name": "Waqqas Iqbal",
-    "email": "waqqas.ess@gmail.com",
-    "address": "House # 76, Road # 8/A, Dhanmondi, Dhaka",
-    "contact": "+8801917169663",
+    "name": "",
+    "email": "",
+    "address": "",
+    "contact": "",
     "educations": [
-        {
-            "school_name": "BRAC University",
-            "major": "Computer Science and Engineering",
-            "cgpa": "CGPA: 3.AB",
-            "duration": "Jan 2015 - Dec 2018"
-        },
-        {
-            "school_name": "Mastermind English Medium School",
-            "major": "A-level",
-            "cgpa": "Result: 2 A*, 1 A",
-            "duration": "Jul 2012 - Jun 2014"
-        }
+       
     ],
     "socials": [
-        {
-            "social_name": "github",
-            "social_url": "github.com/waqqasiq"
-        },
-        {
-            "social_name": "linkedin",
-            "social_url": "linkedin.com/in/iqbalwaqqas"
-        },
-        
+     
     ],
     "skills": [
-        {
-            "skill_title": "Programming Languages",
-            "skill_desc": "Javascript, Python, Java"
-        },
-        {
-            "skill_title": "Database",
-            "skill_desc": "MySQL, MongoDB, Firebase"
-        },
-        {
-            "skill_title": "Frontend",
-            "skill_desc": "ReactJS, HTML, CSS, Javascript"
-        },
-        {
-            "skill_title": "Backend",
-            "skill_desc": "NodeJS, ExpressJS, Database Design of SQL/NoSQL"
-        },
-        {
-            "skill_title": "Other",
-            "skill_desc": "MS Excel (Data validation, Pivot Tables, Advanced Filters, V-lookup)"
-        }
+      
     ],
     "projects": [
-        {
-            "project_title": "vGab",
-            "project_desc": "A realtime chatting webapp developed using NodeJS, MongoDB, Websocket, Bootstrap4",
-            "redirect_url": "https://vgab.herokuapp.com"
-        },
-        {
-            "project_title": "SpendWise",
-            "project_desc": "A personal finance manager app that helps users track their cash inflow/outflow. Developed using ReactJS, NodeJS, Firebase",
-            "redirect_url": "https://wi-spendwise.netlify.app/"
-        },
-        {
-            "project_title": "Typing Maniac",
-            "project_desc": "A typing game to improve typing speed. Developed using ReactJS.",
-            "redirect_url": "https://wi-typingmaniac.netlify.com/"
-        }
+     
     ],
     "honors_achievements": [
-        {
-            "achievement_title": "Performance Based Scholarship",
-            "achievement_desc": "Maintained a CGPA of 3.70 and above since summer 2016",
-            "duration": "(2016 - 2018)",
-            "redirect_url": "https://waqqasiqbal.com"
-        },
-        {
-            "achievement_title": "Information Technology Engineers Examination (ITEE) Level-2",
-            "achievement_desc": "Full Passer as of May 2019",
-            "duration": "",
-            "redirect_url": "https://waqqasiqbal.com"
-        },
-        {
-            "achievement_title": "Math Olympiad (2016)",
-            "achievement_desc": "Secured 3rd position in NUMO Dhaka North Region",
-            "duration": "",
-            "redirect_url": "https://waqqasiqbal.com"
-        }
+        
     ],
     "experiences": [
-        {
-            "company_name": "MGH Group, Information Technology Department",
-            "positions": [
-                {
-                    "pos_title": "Senior Executive",
-                    "pos_responsibilities": ["Prepare project scope statement", "Develop and deploy web and android applications", "Communicate with stakeholders and gather requirements and analyse them before development"],
-                    "pos_duration": "Jan 2020 - Present"
-                },
-                {
-                    "pos_title": "Management Trainee",
-                    "pos_responsibilities": ["Integrated Google authentication and Firebase Realtime Database in Android Application", "Performed Apha Testing on Radio Foorti android applicaion before going for production", "Developed a fully responsive song rating web application using ReactJS and ExpressJS for Radio Foorti Ltd."],
-                    "pos_duration": "Aug 2020 - Dec 2020"
-                }
-            ]
-        },
-        {
-            "company_name": "Grameenphone Ltd.",
-            "positions": [
-                {
-                    "pos_title": "System Engineer",
-                    "pos_responsibilities": ["Implemented logic to detect 3G Sleeping cells in Ericsson and Huawei Network and bring in automation in the existing applications for quick troubleshooting", "Schedule programs to send out BTS outage data at a set interval using FTP"],
-                    "pos_duration": "May 2020 - July 2020"
-                },
-                {
-                    "pos_title": "Business Intelligence Intern",
-                    "pos_responsibilities": ["Worked in enhancing and improving the existing Location Intelligence (LI) System", "Used advanced filters, pivot tables, v-lookup to get desired data input from AppSheet", "Write a program in python to find the nearest Express POS for each General POS based on their latitude and longitude for a gift-redeem campaign", "Query out desired data from multiple tables using SQL joins and aggregate functions"],
-                    "pos_duration": "Jan 2019 - Apr 2019"
-                    
-                }
-            ]
-        }
+        
     ],
     "eca": [
-        {
-            "eca_description": "Programming Contest – Participated in ACM ICPC Dhaka Regionals 2017 Online Preliminary Contest",
-        },
-        {
-            "eca_description": "Online Courses – Completed several courses at Udemy, Codecademy, Datacamp, LinkedIn, Coursera",
-        },
-        {
-            "eca_description": "Voluntary participation in a study – Research conducted by UCSD and Cornell University on “How computer programmers work” at IPA, Dhaka",
-        }
+       
     ],
     "references": [
-        {
-            "ref_name": "Mr. Zobair Ibn Alam",
-            "ref_designation": "Application Engineer at Rakuten,",
-            "ref_email": "zobair.alam@rakuten.com",
-            "ref_mobile": "+8107026482535"
-        },
-        {
-            "ref_name": "Mr. Adnan Momin",
-            "ref_designation": "General Manager, Head of OSS - Service Operations, Grameenphone Ltd.",
-            "ref_email": "adnan@grameenphone.com",
-            "ref_mobile": "+880 1711-500193"
-        }
+       
     ]
 }
 
