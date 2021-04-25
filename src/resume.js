@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
       flexGrow: 1,
       paddingRight:'19.1mm', 
       paddingLeft:'19.1mm',
-      fontFamily:'Calibri'
+      fontFamily:'Calibri',
+    //   color: '#000080'
     //   fontFamily: 'Oswald'
     },
     bulletpoint: {
@@ -113,6 +114,7 @@ const styles = StyleSheet.create({
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        display:'flex'
     },
     paper: {
         padding: theme.spacing(1),
@@ -203,9 +205,12 @@ function Resume(props) {
     // const [stateExperiences, setStateExperiences] = useState(props.stateExperiences);
     const [checked, setChecked] = useState(true);
     const [state, setState] = useState(props.location.state.data)
-    console.log('props location ', props.location)
+    // console.log('props location ', props.location)
     const [stateExperiences, setStateExperiences] = useState(props.location.state.dataExp)
     const [file, setFile] = useState(props.location.state.imagefile)
+    // const sequence = props.location.state.orderSequence; // ["skill", "education", "reference"]
+    const sequence = props.location.state.sequence;
+    const namefont = props.location.state.namefont;
     
     const ref = React.createRef();
 
@@ -342,13 +347,22 @@ function Resume(props) {
     })
 
 
-    const arrayOrder = [{'divname': educationDiv, 'category': 'Education', 'type':'dataEducations'}, {'divname': achievementDiv, 'category': 'Honors & Achievements','type':'dataAchievements'}, {'divname':projectDiv, 'category': 'Projects','type':'dataProjects'}, {'divname':skillDiv, 'category': 'Skills','type':'dataSkills'}, {'divname':ecaDiv, 'category': 'Extra-Curricular Activities','type':'dataECA'}, {'divname': refDiv, 'category': 'Reference', 'type':'dataReferences'}]
+    const [refArray, setRefArray] = useState([{'divname': educationDiv, 'category': 'Education', 'type':'dataEducations'}, {'divname': achievementDiv, 'category': 'Honors & Achievements','type':'dataAchievements'}, {'divname':projectDiv, 'category': 'Projects','type':'dataProjects'}, {'divname':skillDiv, 'category': 'Skills','type':'dataSkills'}, {'divname':ecaDiv, 'category': 'Extra-Curricular Activities','type':'dataECA'}, {'divname': refDiv, 'category': 'Reference', 'type':'dataReferences'}])
     
-
+    let arrayOrder = [];
+    sequence.map(val => {
+        // console.log('seq val ', val);
+        refArray.map(val_inner => {
+            console.log('val inner ', val_inner);
+            if (val.name === val_inner.type) {
+                arrayOrder.push(val_inner);
+            }
+        })
+    })
 
     return (
         <div className={classes.root}>
-            {console.log(file)}
+            {/* {console.log('seq ', sequence)} */}
 
                 <PDFViewer
                     style={{
@@ -367,7 +381,7 @@ function Resume(props) {
                                     <View style={{display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:'10px'}}>
 
                                         <View >
-                                            <Text style={{fontSize:'22px', marginBottom:'4px', fontFamily:"Calibri", fontStyle:'italic'}}>{state.dataName}</Text>
+                                            <Text style={{fontSize: namefont, marginBottom:'4px', fontFamily:"Calibri", fontStyle:'italic'}}>{state.dataName}</Text>
 
                                             <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
                                                 <Image src={Homesvg} style={{height:'11px', width:'11px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataAddress}</Text>
@@ -465,6 +479,7 @@ function Resume(props) {
 
                                     {
                                         arrayOrder.map(val => {
+                                            // console.log(val.divname);
                                             let headerDiv = state[val.type].length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{val.category}</Text></View><View style={styles.line}></View></View> : <View></View>
                                             let sectionDiv = <View>{headerDiv}<View>{val.divname}</View></View>
                                             return sectionDiv;
@@ -480,6 +495,9 @@ function Resume(props) {
 
                 </PDFViewer>
            
+           {/* <div style={{width: '20%', backgroundColor: 'lightgrey', height:'100vh' }}>
+                <Button onClick={handleSwapOrder}>Swap Sections</Button>
+           </div> */}
 
         </div>
     );

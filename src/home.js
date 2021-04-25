@@ -185,7 +185,7 @@ function Home(props) {
             "dataReferences": [{ "ref_name": "", "ref_designation": "", "ref_email": "", "ref_mobile": "" }]
         }
 
-        console.log("state ", state[event_type]);
+        // console.log("state ", state[event_type]);
 
         setState((prevState) => {
             //DO WHATEVER WITH THE CURRENT STATE AND RETURN A NEW ONE
@@ -196,8 +196,8 @@ function Home(props) {
         //   setDataEducations(oldArray => [...oldArray, newElem]);
     }
     const handleChangeText = (e) => {
-        console.log("handleChangeText ", e.target.value);
-        console.log("handleChangeText ", e.target.name);
+        // console.log("handleChangeText ", e.target.value);
+        // console.log("handleChangeText ", e.target.name);
 
         setState((prevState) => {
             prevState[e.target.name] = e.target.value;
@@ -207,8 +207,8 @@ function Home(props) {
     }
 
     const handleChangeTextArray = (e, index) => {
-        console.log("handleChangeText ", e.target.value);
-        console.log("handleChangeText ", e.target.name);
+        // console.log("handleChangeText ", e.target.value);
+        // console.log("handleChangeText ", e.target.name);
         let temparray = e.target.name.split("_");
 
         if (temparray.length === 3) {
@@ -216,7 +216,7 @@ function Home(props) {
             temparray.splice(2, 1);
         }
 
-        console.log('temparray ', temparray);
+        // console.log('temparray ', temparray);
 
         let arrayname = temparray[0] // dataEducation
         let key_to_change = temparray[1]; // school_name
@@ -242,7 +242,7 @@ function Home(props) {
     }
 
     const handleAddAnotherPosition = (e, index) => {
-        console.log("handleAddAnotherPosition ", index);
+        // console.log("handleAddAnotherPosition ", index);
 
         setStateExperiences((prevState) => {
             prevState.dataExperiences[index].positions.push({
@@ -255,7 +255,7 @@ function Home(props) {
 
     }
     const handleNewResponsibilty = (e, index, ind) => {
-        console.log("handleNewResponsibilty index ind", index + ' ' + ind);
+        // console.log("handleNewResponsibilty index ind", index + ' ' + ind);
 
         setStateExperiences((prevState) => {
             prevState.dataExperiences[index].positions[ind].pos_responsibilities.push("");
@@ -264,7 +264,7 @@ function Home(props) {
     }
 
     const handleChangeTextCompany = (e, index) => {
-        console.log("handleChangeTextCompany ", e.target.value);
+        // console.log("handleChangeTextCompany ", e.target.value);
 
         setStateExperiences((prevState) => {
             prevState.dataExperiences[index].company_name= e.target.value;
@@ -274,9 +274,9 @@ function Home(props) {
     }
 
     const handleTextChangePosition = (e, index, ind) => {
-        console.log("handleTextChangePosition ", e.target.value);
-        console.log("handleTextChangePosition ", e.target.name);
-        console.log("handleTextChangePosition ", index);
+        // console.log("handleTextChangePosition ", e.target.value);
+        // console.log("handleTextChangePosition ", e.target.name);
+        // console.log("handleTextChangePosition ", index);
         
 
         setStateExperiences((prevState) => {
@@ -287,11 +287,11 @@ function Home(props) {
     }
 
     const handleTextChangeResponsibility = (e, index, ind, i) => {
-        console.log("handleTextChangePosition ", e.target.value);
-        console.log("handleTextChangePosition ", e.target.name);
-        console.log("handleTextChangePosition ", index);
-        console.log("handleTextChangePosition ", ind);
-        console.log("handleTextChangePosition ", i);
+        // console.log("handleTextChangePosition ", e.target.value);
+        // console.log("handleTextChangePosition ", e.target.name);
+        // console.log("handleTextChangePosition ", index);
+        // console.log("handleTextChangePosition ", ind);
+        // console.log("handleTextChangePosition ", i);
         
         setStateExperiences((prevState) => {
             prevState.dataExperiences[index].positions[ind].pos_responsibilities[i] = e.target.value;
@@ -299,10 +299,10 @@ function Home(props) {
         })
 
     }
-    const handleGenResume = () => {
-        console.log("handleGenResume");
+    const handlePersonalize = () => {
+        // console.log("handlePersonalize");
         history.push({
-            pathname: '/resume',
+            pathname: '/personalize',
             state: { data: state, dataExp: stateExperiences, imagefile: file }
         })
     }
@@ -310,8 +310,8 @@ function Home(props) {
 
     return (
         <div className={classes.root}>
-            {console.log('state ', state)}
-            {console.log('stateExperiences ', stateExperiences)}
+            {/* {console.log('state ', state)} */}
+            {/* {console.log('stateExperiences ', stateExperiences)} */}
 
             {/* <Snackbar anchorOrigin={{vertical, horizontal}} open={openalert} autoHideDuration={2000} onClose={handleCloseAlert}>
             <Alert onClose={handleCloseAlert} severity="success">
@@ -830,7 +830,7 @@ function Home(props) {
                                                             <Grid item xs={12} sm={2}>
                                                             </Grid>
                                                             <Grid item xs={12} sm={8}>
-                                                                <Button onClick={handleGenResume} fullWidth variant="contained" style={{backgroundColor: '#2F4454', color:'#FFF'}}>Generate Resume</Button>
+                                                                <Button onClick={handlePersonalize} fullWidth variant="contained" style={{backgroundColor: '#2F4454', color:'#FFF'}}>Proceed</Button>
                                                             </Grid>
                                                             <Grid item xs={12} sm={2}>
                                                             </Grid>
