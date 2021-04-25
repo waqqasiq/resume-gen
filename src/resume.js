@@ -60,6 +60,9 @@ import RobotoRegular from '../src/Roboto/Roboto-Light.ttf';
 import RobotoBold from '../src/Roboto/Roboto-Bold.ttf';
 import CalibriRegular from '../src/Calibri/Calibri-Regular.ttf'
 import CalibriBold from '../src/Calibri/Calibri-Bold.ttf'
+import ProfileIcon from '../src/linkedinlogo.png'
+import EmailIcon2 from '../src/emailicon.png'
+import GithubIcon2 from '../src/githubicon2.png'
 
 
 // Create styles
@@ -268,24 +271,24 @@ function Resume(props) {
                                             <Text style={{fontSize:'22px', marginBottom:'4px', fontFamily:"Calibri", fontStyle:'italic'}}>{state.dataName}</Text>
 
                                             <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
-                                                <Image src={Homesvg} style={{height:'11px', width:'11px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataAddress}</Text>
+                                                <Image src={Homesvg} style={{height:'11px', width:'11px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataAddress}</Text>
                                             </View>
 
                                             <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
-                                                <Image src={CallIcon} style={{height:'9px', width:'9px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataContact + ' | '}</Text><Image src={EmailIcon} style={{width:'10px', height:'10px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataEmail}</Text>
+                                                <Image src={CallIcon} style={{height:'9px', width:'9px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataContact + ' | '}</Text><Image src={EmailIcon2} style={{width:'10px', height:'10px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataEmail}</Text>
                                             </View>
 
                                             {state.dataSocials.length > 0 && state.dataSocials.length < 2 ? 
                                              <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
-                                                <Image src={LinkedinIcon} style={{width:'10px', height:'10px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[0].social_url}</Text>
+                                                <Image src={ProfileIcon} style={{width:'10px', height:'10px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[0].social_url}</Text>
                                             </View>
                                             : <View></View>
                                             } 
 
                                             {state.dataSocials.length === 2 ? 
                                              <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
-                                                <Image src={LinkedinIcon} style={{width:'10px', height:'10px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[0].social_url + ' | '}</Text>
-                                                <Image src={GithubIcon} style={{height:'11px', width:'11px', marginRight:'2px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[1].social_url}</Text>
+                                                <Image src={ProfileIcon} style={{width:'10px', height:'10px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[0].social_url + ' | '}</Text>
+                                                <Image src={GithubIcon2} style={{height:'11px', width:'11px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[1].social_url}</Text>
                                             </View>
                                             : <View></View>
                                             } 
