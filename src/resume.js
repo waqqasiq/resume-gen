@@ -192,6 +192,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+       
+
+
 function Resume(props) {
     const classes = useStyles();
     // const [state, setState] = useState(props.state);
@@ -244,6 +247,102 @@ function Resume(props) {
         // });
 
       }
+
+    const educationDiv = state.dataEducations.map(val => {
+        return (
+            <View style={{marginBottom:'6px'}}>
+
+                <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.school_name}</Text>
+                
+                <View style={{display:'flex',flexDirection:'row', justifyContent:'space-between'}}>
+                        <View style={{display:'flex', flexDirection:'row', justifyContent:'flex-start'}}><Text style={styles.bulletpoint}>*</Text><Text  style={{fontSize:'11px'}}>{val.major + ' | ' + val.cgpa}</Text></View>
+                        <Text  style={{fontSize:'11px'}}>{val.duration}</Text>
+                </View>
+
+            </View>
+        )
+    })
+
+    const achievementDiv = state.dataAchievements.map(val => {
+        return (
+            <View style={{marginBottom:'6px'}}>
+
+                <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.achievement_title + ' ' +val.duration}</Text>
+                {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
+                <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.achievement_desc}</Text>
+                                                        {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
+                </View>
+                 
+            </View>
+        )
+    })
+
+    const projectDiv = state.dataProjects.map(val => {
+        return (
+            <View style={{marginBottom:'6px'}}>
+
+                <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.project_title}</Text>
+                {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
+                <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.project_desc}</Text>
+                                                        {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
+                </View>
+                 
+            </View>
+        )
+    })
+
+    const skillDiv = state.dataSkills.map(val => {
+        return (
+            <View style={{marginBottom:'6px'}}>
+
+                <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.skill_title}</Text>
+                {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
+                <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.skill_desc}</Text>
+                                                        {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
+                </View>
+                 
+            </View>
+        )
+    })
+    
+    const ecaDiv = state.dataECA.map(val => {
+        return (
+            <View style={{marginBottom:'6px'}}>
+
+                {/* <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.eca_desc}</Text> */}
+                {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
+                <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.eca_description}</Text>
+                                                        {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
+                </View>
+                 
+            </View>
+        )
+    })
+
+    const refDiv = state.dataReferences.map(val => {
+        return (
+            <View style={{marginBottom:'6px'}}>
+
+                <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11.5px'}}>{val.ref_name}</Text>
+                </View>
+                <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                    <Text style={styles.bulletpointhidden}>*</Text><Text style={{fontSize:'11px'}}>{val.ref_designation}</Text>
+                </View>
+                <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
+                    <Text style={styles.bulletpointhidden}>*</Text><Text style={{fontSize:'11px'}}>{'Email: ' + val.ref_email + ' | Mobile: ' + val.ref_mobile}</Text>
+                </View>
+                 
+            </View>
+        )
+    })
+
+
+    const arrayOrder = [{'divname': educationDiv, 'category': 'Education', 'type':'dataEducations'}, {'divname': achievementDiv, 'category': 'Honors & Achievements','type':'dataAchievements'}, {'divname':projectDiv, 'category': 'Projects','type':'dataProjects'}, {'divname':skillDiv, 'category': 'Skills','type':'dataSkills'}, {'divname':ecaDiv, 'category': 'Extra-Curricular Activities','type':'dataECA'}, {'divname': refDiv, 'category': 'Reference', 'type':'dataReferences'}]
     
 
 
@@ -364,159 +463,15 @@ function Resume(props) {
                                     }
 
 
-                                    {/* education */}
-                                    <View style={{marginBottom:'4px'}}>
                                     {
-                                        state.dataEducations.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Education'}</Text></View><View style={styles.line}></View></View> : <View></View>
-                                    }
-
-                                    {
-                                        state.dataEducations.map(val => {
-                                            return (
-                                                <View style={{marginBottom:'6px'}}>
-
-                                                    <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.school_name}</Text>
-                                                    
-                                                    <View style={{display:'flex',flexDirection:'row', justifyContent:'space-between'}}>
-                                                            <View style={{display:'flex', flexDirection:'row', justifyContent:'flex-start'}}><Text style={styles.bulletpoint}>*</Text><Text  style={{fontSize:'11px'}}>{val.major + ' | ' + val.cgpa}</Text></View>
-                                                            <Text  style={{fontSize:'11px'}}>{val.duration}</Text>
-                                                    </View>
-
-                                                </View>
-                                            )
+                                        arrayOrder.map(val => {
+                                            let headerDiv = state[val.type].length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{val.category}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                            let sectionDiv = <View>{headerDiv}<View>{val.divname}</View></View>
+                                            return sectionDiv;
                                         })
-                                    }
-                                    </View>
 
-
-                                    {/* achievements */}
-                                    <View style={{marginBottom:'4px'}}>
-                                    {
-                                        state.dataAchievements.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Honors & Achievements'}</Text></View><View style={styles.line}></View></View> : <View></View>
                                     }
 
-                                    {
-                                        state.dataAchievements.map(val => {
-                                            return (
-                                                <View style={{marginBottom:'6px'}}>
-
-                                                    <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.achievement_title + ' ' +val.duration}</Text>
-                                                    {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
-                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                                                        <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.achievement_desc}</Text>
-                                                                                            {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
-                                                    </View>
-                                                     
-                                                </View>
-                                            )
-                                        })
-                                    }
-                                    </View>
-
-
-                                     {/* projects */}
-                                     <View style={{marginBottom:'4px'}}>
-                                    {
-                                        state.dataProjects.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Projects'}</Text></View><View style={styles.line}></View></View> : <View></View>
-                                    }
-
-                                    {
-                                        state.dataProjects.map(val => {
-                                            return (
-                                                <View style={{marginBottom:'6px'}}>
-
-                                                    <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.project_title}</Text>
-                                                    {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
-                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                                                        <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.project_desc}</Text>
-                                                                                            {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
-                                                    </View>
-                                                     
-                                                </View>
-                                            )
-                                        })
-                                    }
-                                    </View>
-
-
-                                    {/* skills */}
-                                    <View style={{marginBottom:'4px'}}>
-                                    {
-                                        state.dataSkills.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Skills'}</Text></View><View style={styles.line}></View></View> : <View></View>
-                                    }
-
-                                    {
-                                        state.dataSkills.map(val => {
-                                            return (
-                                                <View style={{marginBottom:'6px'}}>
-
-                                                    <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.skill_title}</Text>
-                                                    {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
-                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                                                        <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.skill_desc}</Text>
-                                                                                            {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
-                                                    </View>
-                                                     
-                                                </View>
-                                            )
-                                        })
-                                    }
-                                    </View>
-
-
-
-                                    {/* eca */}
-                                    <View style={{marginBottom:'4px'}}>
-                                    {
-                                        state.dataECA.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Extra-Curricular Activities'}</Text></View><View style={styles.line}></View></View> : <View></View>
-                                    }
-
-                                    {
-                                        state.dataECA.map(val => {
-                                            return (
-                                                <View style={{marginBottom:'6px'}}>
-
-                                                    {/* <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.eca_desc}</Text> */}
-                                                    {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
-                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                                                        <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.eca_description}</Text>
-                                                                                            {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
-                                                    </View>
-                                                     
-                                                </View>
-                                            )
-                                        })
-                                    }
-                                    </View>
-
-
-
-                                    {/* eca */}
-                                    <View style={{marginBottom:'4px'}}>
-                                    {
-                                        state.dataReferences.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Reference'}</Text></View><View style={styles.line}></View></View> : <View></View>
-                                    }
-
-                                    {
-                                        state.dataReferences.map(val => {
-                                            return (
-                                                <View style={{marginBottom:'6px'}}>
-
-                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                                                        <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11.5px'}}>{val.ref_name}</Text>
-                                                    </View>
-                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                                                        <Text style={styles.bulletpointhidden}>*</Text><Text style={{fontSize:'11px'}}>{val.ref_designation}</Text>
-                                                    </View>
-                                                    <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                                                        <Text style={styles.bulletpointhidden}>*</Text><Text style={{fontSize:'11px'}}>{'Email: ' + val.ref_email + ' | Mobile: ' + val.ref_mobile}</Text>
-                                                    </View>
-                                                     
-                                                </View>
-                                            )
-                                        })
-                                    }
-                                    </View>
                                   
                             </View>
                         
