@@ -274,7 +274,7 @@ function Personalize(props) {
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
                                     <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6">{'Name Font Size'}</Typography>
+                                        <Typography variant="h6">{'Name font size'}</Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
