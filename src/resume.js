@@ -442,7 +442,7 @@ function Resume(props) {
                                         state.dataObjective.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Career Objective'}</Text></View><View style={styles.line}></View></View> : <View></View>
                                     }
                                     {
-                                        careerDiv
+                                        state.dataObjective.length > 0 ? <View>{careerDiv}</View> : <View></View>
                                     }
                                     
 
