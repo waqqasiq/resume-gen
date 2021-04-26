@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     line: {
         borderTop:'1px solid #E8E8E8',
-        marginTop:'3px',
+        marginTop:'1px',
         height:'3px',
       },
       bulletpointhidden: {
