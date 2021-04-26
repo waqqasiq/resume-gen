@@ -414,7 +414,7 @@ function Personalize(props) {
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
                                     <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Space Between Sections'}</Typography>
+                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Space between sections'}</Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
