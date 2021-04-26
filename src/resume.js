@@ -211,6 +211,7 @@ function Resume(props) {
     // const sequence = props.location.state.orderSequence; // ["skill", "education", "reference"]
     const sequence = props.location.state.sequence;
     const namefont = props.location.state.namefont;
+    const [marginBetweenSections, setMarginBetweenSections] = useState(props.location.state.marginBetweenSections);
     
     const ref = React.createRef();
 
@@ -255,7 +256,7 @@ function Resume(props) {
 
     const educationDiv = state.dataEducations.map(val => {
         return (
-            <View style={{marginBottom:'6px'}}>
+            <View >
 
                 <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.school_name}</Text>
                 
@@ -270,7 +271,7 @@ function Resume(props) {
 
     const achievementDiv = state.dataAchievements.map(val => {
         return (
-            <View style={{marginBottom:'6px'}}>
+            <View >
 
                 <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.achievement_title + ' ' +val.duration}</Text>
                 {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
@@ -285,7 +286,7 @@ function Resume(props) {
 
     const projectDiv = state.dataProjects.map(val => {
         return (
-            <View style={{marginBottom:'6px'}}>
+            <View >
 
                 <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.project_title}</Text>
                 {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
@@ -300,7 +301,7 @@ function Resume(props) {
 
     const skillDiv = state.dataSkills.map(val => {
         return (
-            <View style={{marginBottom:'6px'}}>
+            <View >
 
                 <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.skill_title}</Text>
                 {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
@@ -315,7 +316,7 @@ function Resume(props) {
     
     const ecaDiv = state.dataECA.map(val => {
         return (
-            <View style={{marginBottom:'6px'}}>
+            <View >
 
                 {/* <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.eca_desc}</Text> */}
                 {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
@@ -330,7 +331,7 @@ function Resume(props) {
 
     const refDiv = state.dataReferences.map(val => {
         return (
-            <View style={{marginBottom:'6px'}}>
+            <View >
 
                 <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
                     <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11.5px'}}>{val.ref_name}</Text>
@@ -432,7 +433,7 @@ function Resume(props) {
                                     {
                                         stateExperiences.dataExperiences.map(val => {
                                             return (
-                                                <View style={{marginBottom:'6px'}}>
+                                                <View style={{marginBottom: ''+(parseInt(marginBetweenSections.substring(0,2))-8)+'px'   }}>
                                                
 
                                                     <Text style={{fontSize:'11px' , marginBottom:'3px'}}>{val.company_name}</Text>
@@ -481,7 +482,7 @@ function Resume(props) {
                                         arrayOrder.map(val => {
                                             // console.log(val.divname);
                                             let headerDiv = state[val.type].length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{val.category}</Text></View><View style={styles.line}></View></View> : <View></View>
-                                            let sectionDiv = <View>{headerDiv}<View>{val.divname}</View></View>
+                                            let sectionDiv = <View>{headerDiv}<View style={{marginBottom: marginBetweenSections}}>{val.divname}</View></View>
                                             return sectionDiv;
                                         })
 

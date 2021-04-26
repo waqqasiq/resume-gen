@@ -193,6 +193,7 @@ function Personalize(props) {
     const [open, setOpen] = React.useState(false);
     const vertical = 'top';
     const horizontal = 'center';
+    const [marginBetweenSections, setMarginBetweenSections] = useState('6px');
 
     const handleClick = () => {
         setOpen(true);
@@ -217,7 +218,7 @@ function Personalize(props) {
         // console.log("handleGenResume");
         history.push({
             pathname: '/resume',
-            state: { data: state, dataExp: stateExperiences, imagefile: file, sequence: sequence, namefont: namefont }
+            state: { data: state, dataExp: stateExperiences, imagefile: file, sequence: sequence, namefont: namefont, marginBetweenSections: marginBetweenSections }
         })
     }
 
@@ -249,6 +250,9 @@ function Personalize(props) {
     const handleChangeFont = (e) => {
         setNamefont(e.target.value);
     }
+    const handleMarginChange = (e) => {
+        setMarginBetweenSections(e.target.value)
+    }
 
 
     const handleSwap = (from, to) => {
@@ -258,7 +262,7 @@ function Personalize(props) {
            
             // console.log('sequence inside promise1 ', sequence);
             // let tempseq = JSON.parse(localStorage.getItem("newseq"));
-            
+
             let tempseq = [...sequence];
             tempseq = tempseq.map(val => {
                 return val.name
@@ -377,6 +381,7 @@ function Personalize(props) {
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
                                 </Grid>
+          
                                 <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
@@ -397,6 +402,41 @@ function Personalize(props) {
                                                     <MenuItem value={'26px'}>{'26 pts'}</MenuItem>
                                                     <MenuItem value={'28px'}>{'28 pts'}</MenuItem>
                                                     <MenuItem value={'30px'}>{'30 pts'}</MenuItem>
+                                                
+                                                    </Select>
+                                                </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                    <Grid item xs={12} sm={8}>
+                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Space Between Sections'}</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                </Grid>
+                                <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                    <Grid item xs={12} sm={8}>
+                                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                                    
+                                                    <Select
+                                                    labelId="demo-simple-select-outlined-label"
+                                                    id="demo-simple-select-outlined"
+                                                    value={marginBetweenSections}
+                                                    onChange={handleMarginChange}
+                                                    >
+                                                    <MenuItem value={'2px'}>{'2 pts'}</MenuItem>
+                                                    <MenuItem value={'4px'}>{'4 pts'}</MenuItem>
+                                                    <MenuItem value={'6px'}>{'6 pts'}</MenuItem>
+                                                    <MenuItem value={'8px'}>{'8 pts'}</MenuItem>
+                                                    <MenuItem value={'10px'}>{'10 pts'}</MenuItem>
+                                                    <MenuItem value={'12px'}>{'12 pts'}</MenuItem>
                                                 
                                                     </Select>
                                                 </FormControl>
