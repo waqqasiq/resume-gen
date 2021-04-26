@@ -43,6 +43,9 @@ const dataObject = {
     "email": "",
     "address": "",
     "contact": "",
+    "career": [
+
+    ],
     "educations": [
        
     ],
@@ -145,6 +148,12 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             color: "#000"
         }
+    },
+    addBtnCareer: {
+        cursor: 'pointer',
+        '&:hover': {
+            color: "#000"
+        }
     }
     
 
@@ -152,7 +161,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Home(props) {
     const classes = useStyles();
-    const [state, setState] = useState({ dataName: dataObject.name, dataEmail: dataObject.email, dataAddress: dataObject.address, dataContact: dataObject.contact, dataEducations: [...dataObject.educations], dataSocials: [...dataObject.socials], dataSkills: [...dataObject.skills], dataAchievements: [...dataObject.honors_achievements], dataProjects: [...dataObject.projects], dataECA: [...dataObject.eca], dataReferences: [...dataObject.references] });
+    const [state, setState] = useState({ dataName: dataObject.name, dataEmail: dataObject.email, dataAddress: dataObject.address, dataContact: dataObject.contact, dataEducations: [...dataObject.educations], dataSocials: [...dataObject.socials], dataSkills: [...dataObject.skills], dataAchievements: [...dataObject.honors_achievements], dataProjects: [...dataObject.projects], dataECA: [...dataObject.eca], dataReferences: [...dataObject.references], dataObjective: [...dataObject.career] });
     const history = useHistory()
     const [cartqty, setCartqty] = useState(0);
     const [file, setFile] = React.useState("");
@@ -307,6 +316,24 @@ function Home(props) {
         })
     }
 
+    const handleAddCareerObjective = (event_type) => {
+
+        const dataTemplate = {
+            "dataObjective": [{ "description": ""}]
+        }
+        document.getElementById("addbtncareer").style.display = 'none';
+
+        // console.log("state ", state[event_type]);
+
+        setState((prevState) => {
+            //DO WHATEVER WITH THE CURRENT STATE AND RETURN A NEW ONE
+            prevState[event_type].push(dataTemplate[event_type][0]);
+            return ({ ...prevState })
+        }
+        )
+        //   setDataEducations(oldArray => [...oldArray, newElem]);
+    }
+
 
     return (
         <div className={classes.root}>
@@ -406,6 +433,52 @@ function Home(props) {
 
                         </Grid>
                         <Divider light variant="middle" style={{ margin: '20px' }} />
+
+
+                        {/* career objective */}
+                        <Grid container style={{ display: 'flex', marginBottom: '20px', marginTop: '20px' }}>
+                            <Grid item xs={12} sm={2}>
+                            </Grid>
+                            <Grid item xs={12} sm={8}>
+                                <Grid container justify="space-between" spacing={1} alignItems="center">
+                                    <Grid item >
+                                        <Typography variant="h6">Career Objective</Typography>
+                                    </Grid>
+                                    <Grid item id="addbtncareer">
+                                        <AddCircleOutlineIcon className={classes.addBtnCareer} onClick={() => handleAddCareerObjective("dataObjective")} />
+                                    </Grid>
+                                </Grid>
+
+                            </Grid>
+                            <Grid item xs={12} sm={2}>
+                            </Grid>
+                        </Grid>
+
+                        {
+                            state.dataObjective.map((val, index) => (
+                                <div key={index} style={{ marginBottom: '24px' }}>
+                                    {
+                                        Object.keys(val).map((item, ind) => (
+                                            <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
+                                                <Grid item xs={12} sm={2}>
+                                                </Grid>
+                                                <Grid item xs={12} sm={8}>
+                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataObjective_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                </Grid>
+                                                <Grid item xs={12} sm={2}>
+                                                </Grid>
+                                            </Grid>
+                                        ))
+                                    }
+                                </div>
+
+                            )
+                            )
+                        }
+
+
+                        <Divider light variant="middle" style={{ margin: '20px' }} />
+
 
                         {/* education */}
                         <Grid container style={{ display: 'flex', marginBottom: '20px', marginTop: '20px' }}>

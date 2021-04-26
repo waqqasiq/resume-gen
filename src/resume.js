@@ -347,6 +347,19 @@ function Resume(props) {
         )
     })
 
+    const careerDiv = state.dataObjective.map(val => {
+        return (
+            <View style={{marginBottom: marginBetweenSections}}>
+
+                <View style={{display:'flex', flexDirection:'row'}}>
+                    <Text style={{fontSize:'11.5px'}}>{val.description}</Text>
+                </View>
+              
+                 
+            </View>
+        )
+    })
+
 
     const [refArray, setRefArray] = useState([{'divname': educationDiv, 'category': 'Education', 'type':'dataEducations'}, {'divname': achievementDiv, 'category': 'Honors & Achievements','type':'dataAchievements'}, {'divname':projectDiv, 'category': 'Projects','type':'dataProjects'}, {'divname':skillDiv, 'category': 'Skills','type':'dataSkills'}, {'divname':ecaDiv, 'category': 'Extra-Curricular Activities','type':'dataECA'}, {'divname': refDiv, 'category': 'Reference', 'type':'dataReferences'}])
     
@@ -424,6 +437,14 @@ function Resume(props) {
                                         </View>
                            
                                     </View>
+                                    {/* career objective */}
+                                    {
+                                        state.dataObjective.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Career Objective'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                    }
+                                    {
+                                        careerDiv
+                                    }
+                                    
 
                                     {/* experiences */}
                                     {
