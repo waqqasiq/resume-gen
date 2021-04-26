@@ -463,7 +463,7 @@ function Home(props) {
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
                                                 <Grid item xs={12} sm={8}>
-                                                    <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataObjective_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                    <TextField multiline={true} rows={2} rowsMax={3} value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataObjective_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={'briefly describe your career objective'} />
                                                 </Grid>
                                                 <Grid item xs={12} sm={2}>
                                                 </Grid>
