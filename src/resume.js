@@ -353,7 +353,7 @@ function Resume(props) {
     sequence.map(val => {
         // console.log('seq val ', val);
         refArray.map(val_inner => {
-            console.log('val inner ', val_inner);
+            // console.log('val inner ', val_inner);
             if (val.name === val_inner.type) {
                 arrayOrder.push(val_inner);
             }

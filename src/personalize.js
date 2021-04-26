@@ -41,6 +41,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import MuiAlert from '@material-ui/lab/Alert';
+import { Draggable } from "react-drag-reorder";
 
 const dataObject = {
     "name": "",
@@ -153,8 +154,19 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             color: "#000"
         }
+    },
+    swapGridMobile: {
+        display:'none',
+        marginBottom: '8px',
+        ['@media (max-width: 1024px)']: { // for desktop or larger screen width
+            display: 'flex'
+        },
+    },
+    desktopTypography: {
+        ['@media (max-width: 1024px)']: { // for desktop or larger screen width
+            display: 'none'
+        },
     }
-    
 
 }));
 
@@ -196,7 +208,8 @@ function Personalize(props) {
     
     //   useEffect(() => {
     //     // Update the document title using the browser API
-    //     setChecked(true);
+    //     // setChecked(true);
+    //     localStorage.setItem("newseq",JSON.stringify(sequence));
     //   },[]);
 
 
@@ -238,6 +251,91 @@ function Personalize(props) {
     }
 
 
+    const handleSwap = (from, to) => {
+        // console.log('from, to ', from + ', '+ to);
+        
+        let promise1 = new Promise((resolve, reject) => {
+           
+            // console.log('sequence inside promise1 ', sequence);
+            // let tempseq = JSON.parse(localStorage.getItem("newseq"));
+            
+            let tempseq = [...sequence];
+            tempseq = tempseq.map(val => {
+                return val.name
+            })
+            // console.log(tempseq);
+            let toIndex = tempseq.indexOf(to);
+            let fromIndex = tempseq.indexOf(from);
+
+            console.log("toIndex ", toIndex);
+            console.log("fromIndex ", fromIndex);
+
+            if ( fromIndex < toIndex ) {
+                for (let i = fromIndex; i<=toIndex; i++) {
+
+                    if(i === toIndex) {
+                        tempseq[toIndex] = from
+                    }
+                    else{
+                        tempseq[i] = tempseq[i+1]
+                    }
+                }
+            }
+            else {
+                for (let i=fromIndex; i>=toIndex; i--) {
+                    if(i === toIndex) {
+                        tempseq[toIndex] = from
+                    }
+                    else {
+                        tempseq[i] = tempseq[i-1]
+
+                    }
+                }
+            }
+            
+            // console.log('temp seq ', tempseq)
+
+            let newsequence = tempseq.map(val => {
+                if (typeof val !== 'undefined') {
+                    return {
+                        "name": val,
+                        "len": state[val].length
+                    }
+                }
+            })
+            resolve(newsequence)
+
+        })
+
+        promise1.then(newseq => {
+            setSequence(newseq)
+            let jsonstring = JSON.stringify(newseq);
+            // localStorage.setItem("newseq",jsonstring);
+        })
+
+
+    }
+
+    let endIndex = -1;
+
+    const handleDrag = (e) => {
+        console.log('handleDrag ', e)
+        // setDragStartIndex(e);
+        if (e !== '' && endIndex !== '') {
+            console.log('handle Drag if ', e +' '+endIndex);
+            // setSectionFrom(e);
+            // setSectionTo(endIndex);
+            // handleSwapOrder();
+            handleSwap(e, endIndex);
+        }
+    }
+
+    const handleOnDrop = (e) => {
+        console.log('handleOnDrop ', e)
+        endIndex = e;
+    }
+
+
     return (
         <div className={classes.root}>
             {/* {console.log('state ', state)} */}
@@ -274,7 +372,7 @@ function Personalize(props) {
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
                                     <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6">{'Name font size'}</Typography>
+                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Name font size'}</Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
@@ -312,32 +410,41 @@ function Personalize(props) {
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
                                     <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6">{'Current sequence of sections'}</Typography>
+                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Current sequence of sections'}</Typography>
+                                        <Typography variant="body2" style={{fontSize:'12px'}} className={classes.desktopTypography}>{'(Drag and drop to change order)'}</Typography>
+                                        
                                     </Grid>
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
                                 </Grid>
-                        {
-                            sequence.map((item, idx) => {
-                                if (item.len > 0) {
-                                    return (<Grid container style={{ display: 'flex' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <ul>
-                                            <li>{item.name.slice(4)}</li>
-                                        </ul>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                </Grid>)
-                                }
-                                
-                            }
-                            )
-                        }
+                                {/* <div className="flex-container">
+                                    <div className="row" >
+                                    <Draggable> */}
+                                        {sequence.map((item, idx) => {
+                                            if(item.len > 0) {
+                                                return (
+                                                    <Grid key={idx} container  draggable="true" onDragEnd={()=>handleDrag(item.name)} onDragLeave={()=>handleOnDrop(item.name)}>
+                                                        <Grid item xs={12} sm={2}>
+                                                        </Grid>
+                                                        <Grid item xs={12} sm={8}>
+                                                            <ul>
+                                                                <li>{item.name.slice(4)}</li>
+                                                            </ul>
+                                                        </Grid>
+                                                        <Grid item xs={12} sm={2}>
+                                                        </Grid>
+                                                    </Grid>
+                                                )
+                                            }
+                                        
+                                        })}
+                                    {/* </Draggable>
+                                    </div>
+                                </div>
+                        */}
                          
-                                   <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                    {/* For Mobile or iPad since draggable component doesn't work */}
+                                   <Grid container className={classes.swapGridMobile}>
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
                                     <Grid item xs={12} sm={8}>
@@ -399,7 +506,7 @@ function Personalize(props) {
                                 </Grid>
 
 
-                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                        <Grid container className={classes.swapGridMobile}>
                             <Grid item xs={12} sm={2}>
                             </Grid>
                             <Grid item xs={12} sm={8}>
