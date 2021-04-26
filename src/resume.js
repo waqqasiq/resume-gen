@@ -503,7 +503,8 @@ function Resume(props) {
                                         arrayOrder.map(val => {
                                             // console.log(val.divname);
                                             let headerDiv = state[val.type].length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{val.category}</Text></View><View style={styles.line}></View></View> : <View></View>
-                                            let sectionDiv = <View>{headerDiv}<View style={{marginBottom: marginBetweenSections}}>{val.divname}</View></View>
+                                            let contentDiv = state[val.type].length > 0 ? <View style={{marginBottom: marginBetweenSections}}>{val.divname}</View> : <View></View>
+                                            let sectionDiv = <View>{headerDiv}<View>{contentDiv}</View></View>
                                             return sectionDiv;
                                         })
 
