@@ -163,7 +163,7 @@ function Personalize(props) {
     const [state, setState] = useState(props.location.state.data);
     const history = useHistory()
     const [cartqty, setCartqty] = useState(0);
-    const [file, setFile] = React.useState("");
+    const [file, setFile] = useState(props.location.state.imagefile)
     const [stateExperiences, setStateExperiences] = useState(props.location.state.dataExp);
     const [checked, setChecked] = useState(true);
     const [sequence, setSequence] = useState([
