@@ -194,6 +194,8 @@ function Personalize(props) {
     const vertical = 'top';
     const horizontal = 'center';
     const [marginBetweenSections, setMarginBetweenSections] = useState('6px');
+    const [sectionTitleFontSize, setSectionTitleFontSize] = useState('14px');
+    const [contentFontSize, setContentFontSize] = useState('11px');
 
     const handleClick = () => {
         setOpen(true);
@@ -218,7 +220,7 @@ function Personalize(props) {
         // console.log("handleGenResume");
         history.push({
             pathname: '/resume',
-            state: { data: state, dataExp: stateExperiences, imagefile: file, sequence: sequence, namefont: namefont, marginBetweenSections: marginBetweenSections }
+            state: { data: state, dataExp: stateExperiences, imagefile: file, sequence: sequence, namefont: namefont, marginBetweenSections: marginBetweenSections, sectionTitleFontSize: sectionTitleFontSize, contentFontSize: contentFontSize }
         })
     }
 
@@ -252,6 +254,14 @@ function Personalize(props) {
     }
     const handleMarginChange = (e) => {
         setMarginBetweenSections(e.target.value)
+    }
+
+    const handleSectionTitleFontSize = (e) => {
+        setSectionTitleFontSize(e.target.value)
+    }
+
+    const handleContentFontSize = (e) => {
+        setContentFontSize(e.target.value)
     }
 
 
@@ -410,6 +420,8 @@ function Personalize(props) {
                                     </Grid>
                                 </Grid>
 
+                                <Divider light variant="middle" style={{ margin: '10px' }} />
+
                                 <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
                                     <Grid item xs={12} sm={2}>
                                     </Grid>
@@ -445,7 +457,79 @@ function Personalize(props) {
                                     </Grid>
                                 </Grid>
 
-                        <Divider light variant="middle" style={{ margin: '20px' }} />
+                        <Divider light variant="middle" style={{ margin: '10px' }} />
+
+                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                    <Grid item xs={12} sm={8}>
+                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Section title font size'}</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                </Grid>
+                                <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                    <Grid item xs={12} sm={8}>
+                                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                                    
+                                                    <Select
+                                                    labelId="demo-simple-select-outlined-label"
+                                                    id="demo-simple-select-outlined"
+                                                    value={sectionTitleFontSize}
+                                                    onChange={handleSectionTitleFontSize}
+                                                    >
+                                                    <MenuItem value={'12px'}>{'12 pts'}</MenuItem>
+                                                    <MenuItem value={'14px'}>{'14 pts'}</MenuItem>
+                                                    <MenuItem value={'16px'}>{'16 pts'}</MenuItem>
+                                                    <MenuItem value={'18px'}>{'18 pts'}</MenuItem>
+                                                    <MenuItem value={'20px'}>{'20 pts'}</MenuItem>
+                                                   
+                                                    </Select>
+                                                </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                </Grid>
+
+                        <Divider light variant="middle" style={{ margin: '10px' }} />
+
+                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                    <Grid item xs={12} sm={8}>
+                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Content font size'}</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                </Grid>
+                                <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                    <Grid item xs={12} sm={8}>
+                                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                                    
+                                                    <Select
+                                                    labelId="demo-simple-select-outlined-label"
+                                                    id="demo-simple-select-outlined"
+                                                    value={contentFontSize}
+                                                    onChange={handleContentFontSize}
+                                                    >
+                                                    <MenuItem value={'10px'}>{'10 pts'}</MenuItem>
+                                                    <MenuItem value={'11px'}>{'11 pts'}</MenuItem>
+                                                    <MenuItem value={'12px'}>{'12 pts'}</MenuItem>
+                                                    <MenuItem value={'13px'}>{'13 pts'}</MenuItem>
+                                                   
+                                                    </Select>
+                                                </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} sm={2}>
+                                    </Grid>
+                                </Grid>
+
+                        <Divider light variant="middle" style={{ margin: '10px' }} />
+
                         <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
                                     <Grid item xs={12} sm={2}>
                                     </Grid>

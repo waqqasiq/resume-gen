@@ -212,6 +212,9 @@ function Resume(props) {
     const sequence = props.location.state.sequence;
     const namefont = props.location.state.namefont;
     const [marginBetweenSections, setMarginBetweenSections] = useState(props.location.state.marginBetweenSections);
+    const [sectionTitleFontSize, setSectionTitleFontSize] = useState(props.location.state.sectionTitleFontSize);
+    const [contentFontSize, setContentFontSize] = useState(props.location.state.contentFontSize);
+    
     
     const ref = React.createRef();
 
@@ -258,11 +261,11 @@ function Resume(props) {
         return (
             <View >
 
-                <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.school_name}</Text>
+                <Text style={{fontSize: contentFontSize, fontWeight:'bold', marginBottom:'3px'}}>{val.school_name}</Text>
                 
                 <View style={{display:'flex',flexDirection:'row', justifyContent:'space-between'}}>
-                        <View style={{display:'flex', flexDirection:'row', justifyContent:'flex-start'}}><Text style={styles.bulletpoint}>*</Text><Text  style={{fontSize:'11px'}}>{val.major + ' | ' + val.cgpa}</Text></View>
-                        <Text  style={{fontSize:'11px'}}>{val.duration}</Text>
+                        <View style={{display:'flex', flexDirection:'row', justifyContent:'flex-start'}}><Text style={styles.bulletpoint}>*</Text><Text  style={{fontSize: contentFontSize}}>{val.major + ' | ' + val.cgpa}</Text></View>
+                        <Text  style={{fontSize: contentFontSize}}>{val.duration}</Text>
                 </View>
 
             </View>
@@ -273,10 +276,10 @@ function Resume(props) {
         return (
             <View >
 
-                <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.achievement_title + ' ' +val.duration}</Text>
+                <Text style={{fontSize: contentFontSize, fontWeight:'bold', marginBottom:'3px'}}>{val.achievement_title + ' ' +val.duration}</Text>
                 {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
                 <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.achievement_desc}</Text>
+                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize: contentFontSize}}>{val.achievement_desc}</Text>
                                                         {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
                 </View>
                  
@@ -288,10 +291,10 @@ function Resume(props) {
         return (
             <View >
 
-                <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.project_title}</Text>
+                <Text style={{fontSize: contentFontSize, fontWeight:'bold', marginBottom:'3px'}}>{val.project_title}</Text>
                 {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
                 <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.project_desc}</Text>
+                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize: contentFontSize}}>{val.project_desc}</Text>
                                                         {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
                 </View>
                  
@@ -303,10 +306,10 @@ function Resume(props) {
         return (
             <View >
 
-                <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.skill_title}</Text>
+                <Text style={{fontSize: contentFontSize, fontWeight:'bold', marginBottom:'3px'}}>{val.skill_title}</Text>
                 {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
                 <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.skill_desc}</Text>
+                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize: contentFontSize}}>{val.skill_desc}</Text>
                                                         {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
                 </View>
                  
@@ -321,7 +324,7 @@ function Resume(props) {
                 {/* <Text style={{fontSize:'11px', fontWeight:'bold', marginBottom:'3px'}}>{val.eca_desc}</Text> */}
                 {/* <Text  style={{fontSize:'11px'}}>{val.achievement_desc}</Text> */}
                 <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{val.eca_description}</Text>
+                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize: contentFontSize}}>{val.eca_description}</Text>
                                                         {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
                 </View>
                  
@@ -334,13 +337,13 @@ function Resume(props) {
             <View >
 
                 <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11.5px'}}>{val.ref_name}</Text>
+                    <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize: contentFontSize}}>{val.ref_name}</Text>
                 </View>
                 <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                    <Text style={styles.bulletpointhidden}>*</Text><Text style={{fontSize:'11px'}}>{val.ref_designation}</Text>
+                    <Text style={styles.bulletpointhidden}>*</Text><Text style={{fontSize: contentFontSize}}>{val.ref_designation}</Text>
                 </View>
                 <View style={{display:'flex', flexDirection:'row', marginLeft:'6px'}}>
-                    <Text style={styles.bulletpointhidden}>*</Text><Text style={{fontSize:'11px'}}>{'Email: ' + val.ref_email + ' | Mobile: ' + val.ref_mobile}</Text>
+                    <Text style={styles.bulletpointhidden}>*</Text><Text style={{fontSize: contentFontSize}}>{'Email: ' + val.ref_email + ' | Mobile: ' + val.ref_mobile}</Text>
                 </View>
                  
             </View>
@@ -352,7 +355,7 @@ function Resume(props) {
             <View style={{marginBottom: marginBetweenSections}}>
 
                 <View style={{display:'flex', flexDirection:'row'}}>
-                    <Text style={{fontSize:'11.5px'}}>{val.description}</Text>
+                    <Text style={{fontSize: contentFontSize}}>{val.description}</Text>
                 </View>
               
                  
@@ -398,24 +401,24 @@ function Resume(props) {
                                             <Text style={{fontSize: namefont, marginBottom:'4px', fontFamily:"Calibri", fontStyle:'italic'}}>{state.dataName}</Text>
 
                                             <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
-                                                <Image src={Homesvg} style={{height:'11px', width:'11px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataAddress}</Text>
+                                                <Image src={Homesvg} style={{height:'11px', width:'11px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize: contentFontSize}}>{state.dataAddress}</Text>
                                             </View>
 
                                             <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
-                                                <Image src={CallIcon} style={{height:'9px', width:'9px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataContact + ' | '}</Text><Image src={EmailIcon2} style={{width:'10px', height:'10px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataEmail}</Text>
+                                                <Image src={CallIcon} style={{height:'9px', width:'9px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize: contentFontSize}}>{state.dataContact + ' | '}</Text><Image src={EmailIcon2} style={{width:'10px', height:'10px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize: contentFontSize}}>{state.dataEmail}</Text>
                                             </View>
 
                                             {state.dataSocials.length > 0 && state.dataSocials.length < 2 ? 
                                              <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
-                                                <Image src={ProfileIcon} style={{width:'10px', height:'10px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[0].social_url}</Text>
+                                                <Image src={ProfileIcon} style={{width:'10px', height:'10px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize: contentFontSize}}>{state.dataSocials[0].social_url}</Text>
                                             </View>
                                             : <View></View>
                                             } 
 
                                             {state.dataSocials.length === 2 ? 
                                              <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'4px'}}>
-                                                <Image src={ProfileIcon} style={{width:'10px', height:'10px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[0].social_url + ' | '}</Text>
-                                                <Image src={GithubIcon2} style={{height:'11px', width:'11px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize:'11px'}}>{state.dataSocials[1].social_url}</Text>
+                                                <Image src={ProfileIcon} style={{width:'10px', height:'10px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize: contentFontSize}}>{state.dataSocials[0].social_url + ' | '}</Text>
+                                                <Image src={GithubIcon2} style={{height:'11px', width:'11px', marginRight:'2px', marginBottom:'4px'}}/><Text style={{fontSize: contentFontSize}}>{state.dataSocials[1].social_url}</Text>
                                             </View>
                                             : <View></View>
                                             } 
@@ -439,7 +442,7 @@ function Resume(props) {
                                     </View>
                                     {/* career objective */}
                                     {
-                                        state.dataObjective.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Career Objective'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                        state.dataObjective.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize: sectionTitleFontSize, fontFamily:'Calibri', fontStyle:'italic'}}>{'Career Objective'}</Text></View><View style={styles.line}></View></View> : <View></View>
                                     }
                                     {
                                         state.dataObjective.length > 0 ? <View>{careerDiv}</View> : <View></View>
@@ -448,7 +451,7 @@ function Resume(props) {
 
                                     {/* experiences */}
                                     {
-                                        stateExperiences.dataExperiences.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{'Work Experience'}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                        stateExperiences.dataExperiences.length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize: sectionTitleFontSize, fontFamily:'Calibri', fontStyle:'italic'}}>{'Work Experience'}</Text></View><View style={styles.line}></View></View> : <View></View>
                                     }
 
                                     {
@@ -457,7 +460,7 @@ function Resume(props) {
                                                 <View style={{marginBottom: ''+(parseInt(marginBetweenSections.substring(0,2))-8)+'px'   }}>
                                                
 
-                                                    <Text style={{fontSize:'11px' , marginBottom:'3px'}}>{val.company_name}</Text>
+                                                    <Text style={{fontSize: contentFontSize , marginBottom:'3px'}}>{val.company_name}</Text>
                                                     
                                                     {
                                                             val.positions.map(pos => {
@@ -466,10 +469,10 @@ function Resume(props) {
                                                                     <View  style={{marginBottom:'4px'}}>
                                                                         <View style={{display:'flex',flexDirection:'row', justifyContent:'space-between', marginBottom:'3px'}}>
                                                                             <View style={{display:'flex', flexDirection:'row'}}>
-                                                                                <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{pos.pos_title}</Text>
+                                                                                <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize: contentFontSize}}>{pos.pos_title}</Text>
                                                                             </View>
                                                                             <View  >
-                                                                                <Text style={{fontSize:'11px'}}>{pos.pos_duration}</Text>
+                                                                                <Text style={{fontSize: contentFontSize}}>{pos.pos_duration}</Text>
                                                                             </View>
                                                                         </View>
                                                                
@@ -478,7 +481,7 @@ function Resume(props) {
                                                                                 return (
                                                                                     <View style={{display:'flex', flexDirection:'column', marginBottom:'3px'}}>
                                                                                         <View style={{display:'flex', flexDirection:'row', marginLeft:'16px'}}>
-                                                                                            <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize:'11px'}}>{resp}</Text>
+                                                                                            <Text style={styles.bulletpoint}>*</Text><Text style={{fontSize: contentFontSize}}>{resp}</Text>
                                                                                             {/* <Typography variant="body1" style={{fontSize:'0.9rem'}} >{}</Typography> */}
                                                                                         </View>
                                                                                     </View>
@@ -502,7 +505,7 @@ function Resume(props) {
                                     {
                                         arrayOrder.map(val => {
                                             // console.log(val.divname);
-                                            let headerDiv = state[val.type].length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize:'14px', fontFamily:'Calibri', fontStyle:'italic'}}>{val.category}</Text></View><View style={styles.line}></View></View> : <View></View>
+                                            let headerDiv = state[val.type].length > 0 ? <View style={{marginBottom:'4px'}}><View style={{marginTop:'6px'}}><Text style={{fontSize: sectionTitleFontSize, fontFamily:'Calibri', fontStyle:'italic'}}>{val.category}</Text></View><View style={styles.line}></View></View> : <View></View>
                                             let contentDiv = state[val.type].length > 0 ? <View style={{marginBottom: marginBetweenSections}}>{val.divname}</View> : <View></View>
                                             let sectionDiv = <View>{headerDiv}<View>{contentDiv}</View></View>
                                             return sectionDiv;
