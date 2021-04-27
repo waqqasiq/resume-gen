@@ -19,5 +19,5 @@ Build a minimal design resume with your own data, having the flexibility of pers
 * Increase/reduce space between sections
 * Change order of sequence in which the sections appear
 
-Note: Note of your personal data is stored on any physical/cloud server or any database whatsoever. 
+Note: None of your personal data or uploaded image is stored on any physical/cloud server or any database whatsoever. 
 
