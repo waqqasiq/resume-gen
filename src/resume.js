@@ -214,6 +214,7 @@ function Resume(props) {
     const [marginBetweenSections, setMarginBetweenSections] = useState(props.location.state.marginBetweenSections);
     const [sectionTitleFontSize, setSectionTitleFontSize] = useState(props.location.state.sectionTitleFontSize);
     const [contentFontSize, setContentFontSize] = useState(props.location.state.contentFontSize);
+    const [imageWidthHeight, setImageWidthHeight] = useState(props.location.state.imageWidthHeight);
     
     
     const ref = React.createRef();
@@ -430,7 +431,7 @@ function Resume(props) {
                                         <View >
 
                                             {
-                                                file ? <Image style={{width:'80px', height:'80px'}} src={URL.createObjectURL(file)} /> : <View></View>
+                                                file ? <Image style={{width: imageWidthHeight, height: imageWidthHeight}} src={URL.createObjectURL(file)} /> : <View></View>
                                             }
                                             
                                                {/* <Image style={{width:'80px', height:'80px'}} src={URL.createObjectURL(file)} />  */}
