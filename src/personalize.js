@@ -1,83 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './navbar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem, Select, TextField, Typography } from '@material-ui/core';
-import { borders } from '@material-ui/system';
-import Box from '@material-ui/core/Box';
 import React, { useState, useEffect } from 'react';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
-// import 'moment';
-// import DateFnsUtils from '@date-io/moment';
-// import {
-//   MuiPickersUtilsProvider,
-//   KeyboardTimePicker,
-//   KeyboardDatePicker,
-// } from '@material-ui/pickers';
 import { useHistory } from "react-router-dom";
-// import FacebookLogin from 'react-facebook-login';
-// import InfoIcon from '@material-ui/icons/Info';
-// import { green } from '@material-ui/core/colors';
-// import FormGroup from '@material-ui/core/FormGroup';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
-// import Alert from '@material-ui/lab/Alert';
-// import Snackbar from '@material-ui/core/Snackbar';
 import Divider from '@material-ui/core/Divider';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-// import AddCircleIcon from '@material-ui/icons/AddCircle';
-import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
-// import Grow from '@material-ui/core/Grow';
 import Fade from '@material-ui/core/Fade';
-// import Collapse from '@material-ui/core/Collapse';
-// import Zoom from '@material-ui/core/Zoom';
-import Logo from './logo.png'
 import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import MuiAlert from '@material-ui/lab/Alert';
 import { Draggable } from "react-drag-reorder";
 
-const dataObject = {
-    "name": "",
-    "email": "",
-    "address": "",
-    "contact": "",
-    "educations": [
-       
-    ],
-    "socials": [
-     
-    ],
-    "skills": [
-      
-    ],
-    "projects": [
-     
-    ],
-    "honors_achievements": [
-        
-    ],
-    "experiences": [
-        
-    ],
-    "eca": [
-       
-    ],
-    "references": [
-       
-    ]
-}
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
-  
+}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -101,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundPosition: 'center',
         backgroundSize: 'cover',
     },
-  
+
     title: {
         marginTop: '1px',
         marginRight: '20px',
@@ -156,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     swapGridMobile: {
-        display:'none',
+        display: 'none',
         marginBottom: '8px',
         ['@media (max-width: 1024px)']: { // for desktop or larger screen width
             display: 'flex'
@@ -179,12 +119,12 @@ function Personalize(props) {
     const [stateExperiences, setStateExperiences] = useState(props.location.state.dataExp);
     const [checked, setChecked] = useState(true);
     const [sequence, setSequence] = useState([
-        {"name":"dataEducations","len": state.dataEducations.length},
-        {"name":"dataAchievements","len": state.dataAchievements.length},
-        {"name":"dataProjects","len": state.dataProjects.length},
-        {"name": "dataSkills", "len": state.dataSkills.length}, 
-        {"name":"dataECA","len": state.dataECA.length},
-        {"name":"dataReferences","len": state.dataReferences.length}
+        { "name": "dataEducations", "len": state.dataEducations.length },
+        { "name": "dataAchievements", "len": state.dataAchievements.length },
+        { "name": "dataProjects", "len": state.dataProjects.length },
+        { "name": "dataSkills", "len": state.dataSkills.length },
+        { "name": "dataECA", "len": state.dataECA.length },
+        { "name": "dataReferences", "len": state.dataReferences.length }
     ]);
     const [sectionFrom, setSectionFrom] = useState('None');
     const [sectionTo, setSectionTo] = useState('None');
@@ -205,12 +145,12 @@ function Personalize(props) {
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
-        return;
+            return;
         }
 
         setOpen(false);
     };
-    
+
     //   useEffect(() => {
     //     // Update the document title using the browser API
     //     // setChecked(true);
@@ -226,10 +166,10 @@ function Personalize(props) {
         })
     }
 
-    const handleSwapOrder = () =>{
+    const handleSwapOrder = () => {
         // console.log('swap order handler' , sectionFrom + ' , to: '+ sectionTo)
 
-        if (sectionFrom === 'None' || sectionTo === 'None'){
+        if (sectionFrom === 'None' || sectionTo === 'None') {
             setOpen(true);
         }
         else {
@@ -238,7 +178,7 @@ function Personalize(props) {
             let t = temp[sectionFrom];
             temp[sectionFrom] = temp[sectionTo];
             temp[sectionTo] = t;
-    
+
             setSequence(temp);
         }
     }
@@ -265,16 +205,16 @@ function Personalize(props) {
     const handleContentFontSize = (e) => {
         setContentFontSize(e.target.value)
     }
-    
+
     const handleImageWidthHeight = (e) => {
         setImageWidthHeight(e.target.value)
     }
 
     const handleSwap = (from, to) => {
         // console.log('from, to ', from + ', '+ to);
-        
+
         let promise1 = new Promise((resolve, reject) => {
-           
+
             // console.log('sequence inside promise1 ', sequence);
             // let tempseq = JSON.parse(localStorage.getItem("newseq"));
 
@@ -289,29 +229,29 @@ function Personalize(props) {
             console.log("toIndex ", toIndex);
             console.log("fromIndex ", fromIndex);
 
-            if ( fromIndex < toIndex ) {
-                for (let i = fromIndex; i<=toIndex; i++) {
+            if (fromIndex < toIndex) {
+                for (let i = fromIndex; i <= toIndex; i++) {
 
-                    if(i === toIndex) {
+                    if (i === toIndex) {
                         tempseq[toIndex] = from
                     }
-                    else{
-                        tempseq[i] = tempseq[i+1]
+                    else {
+                        tempseq[i] = tempseq[i + 1]
                     }
                 }
             }
             else {
-                for (let i=fromIndex; i>=toIndex; i--) {
-                    if(i === toIndex) {
+                for (let i = fromIndex; i >= toIndex; i--) {
+                    if (i === toIndex) {
                         tempseq[toIndex] = from
                     }
                     else {
-                        tempseq[i] = tempseq[i-1]
+                        tempseq[i] = tempseq[i - 1]
 
                     }
                 }
             }
-            
+
             // console.log('temp seq ', tempseq)
 
             let newsequence = tempseq.map(val => {
@@ -341,371 +281,355 @@ function Personalize(props) {
         console.log('handleDrag ', e)
         // setDragStartIndex(e);
         if (e !== '' && endIndex !== '') {
-            console.log('handle Drag if ', e +' '+endIndex);
-            // setSectionFrom(e);
-            // setSectionTo(endIndex);
-            // handleSwapOrder();
+            // console.log('handle Drag if ', e +' '+endIndex);
             handleSwap(e, endIndex);
         }
     }
 
     const handleOnDrop = (e) => {
-        console.log('handleOnDrop ', e)
+        // console.log('handleOnDrop ', e)
         endIndex = e;
     }
 
-    
+
 
 
     return (
         <div className={classes.root}>
-            {/* {console.log('state ', state)} */}
-            {/* {console.log('sequence ', sequence)} */}
-            {/* {console.log('stateExperiences ', stateExperiences)} */}
 
-            {/* <Snackbar anchorOrigin={{vertical, horizontal}} open={openalert} autoHideDuration={2000} onClose={handleCloseAlert}>
-            <Alert onClose={handleCloseAlert} severity="success">
-              Order placed successfully!
+            <Snackbar anchorOrigin={{ vertical, horizontal }} open={open} autoHideDuration={3000} onClose={handleClose}>
+                <Alert onClose={handleClick} severity="warning">
+                    Please select from valid sections
             </Alert>
-          </Snackbar> */}
-          <Snackbar anchorOrigin={{vertical, horizontal}} open={open} autoHideDuration={3000} onClose={handleClose}>
-            <Alert onClose={handleClick} severity="warning">
-              Please select from valid sections
-            </Alert>
-          </Snackbar>
+            </Snackbar>
             <Navbar cartQuantity={1} />
             <Fade
-                                        in={checked}
-                                        timeout={1000}
-                                    >
-            <Grid container justify="center" spacing={1} style={{ marginTop: '8vh' }}>
-           
-                {/* <Grid item xs={12}>
-              <Paper className={classes.paper}><h2 className={classes.headerText}>Let's get started</h2></Paper>
-            </Grid> */}
-                <Grid item sm={8} xs={12}>
-                    <Paper className={classes.paper}>
-                        {/* <img style={{alignSelf:'center'}} src={peyalalogo} width="70" height="70"  /> */}
+                in={checked}
+                timeout={1000}
+            >
+                <Grid container justify="center" spacing={1} style={{ marginTop: '8vh' }}>
 
-                        {/* <p className={classes.title} style={{marginBottom:'20px'}}>Fill in the details as required</p> */}
 
-                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Name font size'}</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                </Grid>
-          
-                                <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
-                                                    
-                                                    <Select
-                                                    labelId="demo-simple-select-outlined-label"
-                                                    id="demo-simple-select-outlined"
-                                                    value={namefont}
-                                                    onChange={handleChangeFont}
-                                                    >
-                                                    <MenuItem value={'16px'}>{'16 pts'}</MenuItem>
-                                                    <MenuItem value={'18px'}>{'18 pts'}</MenuItem>
-                                                    <MenuItem value={'20px'}>{'20 pts'}</MenuItem>
-                                                    <MenuItem value={'22px'}>{'22 pts'}</MenuItem>
-                                                    <MenuItem value={'24px'}>{'24 pts'}</MenuItem>
-                                                    <MenuItem value={'26px'}>{'26 pts'}</MenuItem>
-                                                    <MenuItem value={'28px'}>{'28 pts'}</MenuItem>
-                                                    <MenuItem value={'30px'}>{'30 pts'}</MenuItem>
-                                                
-                                                    </Select>
-                                                </FormControl>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                </Grid>
+                    <Grid item sm={8} xs={12}>
+                        <Paper className={classes.paper}>
 
-                                <Divider light variant="middle" style={{ margin: '10px' }} />
-
-                                <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Space between sections'}</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                </Grid>
-                                <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
-                                                    
-                                                    <Select
-                                                    labelId="demo-simple-select-outlined-label"
-                                                    id="demo-simple-select-outlined"
-                                                    value={marginBetweenSections}
-                                                    onChange={handleMarginChange}
-                                                    >
-                                                    <MenuItem value={'2px'}>{'2 pts'}</MenuItem>
-                                                    <MenuItem value={'4px'}>{'4 pts'}</MenuItem>
-                                                    <MenuItem value={'6px'}>{'6 pts'}</MenuItem>
-                                                    <MenuItem value={'8px'}>{'8 pts'}</MenuItem>
-                                                    <MenuItem value={'10px'}>{'10 pts'}</MenuItem>
-                                                    <MenuItem value={'12px'}>{'12 pts'}</MenuItem>
-                                                
-                                                    </Select>
-                                                </FormControl>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                </Grid>
-
-                        <Divider light variant="middle" style={{ margin: '10px' }} />
-
-                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Section title font size'}</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                </Grid>
-                                <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
-                                                    
-                                                    <Select
-                                                    labelId="demo-simple-select-outlined-label"
-                                                    id="demo-simple-select-outlined"
-                                                    value={sectionTitleFontSize}
-                                                    onChange={handleSectionTitleFontSize}
-                                                    >
-                                                    <MenuItem value={'12px'}>{'12 pts'}</MenuItem>
-                                                    <MenuItem value={'14px'}>{'14 pts'}</MenuItem>
-                                                    <MenuItem value={'16px'}>{'16 pts'}</MenuItem>
-                                                    <MenuItem value={'18px'}>{'18 pts'}</MenuItem>
-                                                    <MenuItem value={'20px'}>{'20 pts'}</MenuItem>
-                                                   
-                                                    </Select>
-                                                </FormControl>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                </Grid>
-
-                        <Divider light variant="middle" style={{ margin: '10px' }} />
-
-                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Content font size'}</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                </Grid>
-                                <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
-                                                    
-                                                    <Select
-                                                    labelId="demo-simple-select-outlined-label"
-                                                    id="demo-simple-select-outlined"
-                                                    value={contentFontSize}
-                                                    onChange={handleContentFontSize}
-                                                    >
-                                                    <MenuItem value={'10px'}>{'10 pts'}</MenuItem>
-                                                    <MenuItem value={'11px'}>{'11 pts'}</MenuItem>
-                                                    <MenuItem value={'12px'}>{'12 pts'}</MenuItem>
-                                                    <MenuItem value={'13px'}>{'13 pts'}</MenuItem>
-                                                   
-                                                    </Select>
-                                                </FormControl>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                </Grid>
-
-                        <Divider light variant="middle" style={{ margin: '10px' }} />
-                        {
-                            file ? 
-                            <Grid>
                             <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Image (width, height)'}</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
+                                <Grid item xs={12} sm={2}>
                                 </Grid>
-                                <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
-                                                    
+                                <Grid item xs={12} sm={8}>
+                                    <Typography variant="h6" style={{ fontSize: '18px' }}>{'Name font size'}</Typography>
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+
+                            <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <FormControl fullWidth variant="outlined" className={classes.formControl}>
+
+                                        <Select
+                                            labelId="demo-simple-select-outlined-label"
+                                            id="demo-simple-select-outlined"
+                                            value={namefont}
+                                            onChange={handleChangeFont}
+                                        >
+                                            <MenuItem value={'16px'}>{'16 pts'}</MenuItem>
+                                            <MenuItem value={'18px'}>{'18 pts'}</MenuItem>
+                                            <MenuItem value={'20px'}>{'20 pts'}</MenuItem>
+                                            <MenuItem value={'22px'}>{'22 pts'}</MenuItem>
+                                            <MenuItem value={'24px'}>{'24 pts'}</MenuItem>
+                                            <MenuItem value={'26px'}>{'26 pts'}</MenuItem>
+                                            <MenuItem value={'28px'}>{'28 pts'}</MenuItem>
+                                            <MenuItem value={'30px'}>{'30 pts'}</MenuItem>
+
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+
+                            <Divider light variant="middle" style={{ margin: '10px' }} />
+
+                            <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <Typography variant="h6" style={{ fontSize: '18px' }}>{'Space between sections'}</Typography>
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+                            <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <FormControl fullWidth variant="outlined" className={classes.formControl}>
+
+                                        <Select
+                                            labelId="demo-simple-select-outlined-label"
+                                            id="demo-simple-select-outlined"
+                                            value={marginBetweenSections}
+                                            onChange={handleMarginChange}
+                                        >
+                                            <MenuItem value={'2px'}>{'2 pts'}</MenuItem>
+                                            <MenuItem value={'4px'}>{'4 pts'}</MenuItem>
+                                            <MenuItem value={'6px'}>{'6 pts'}</MenuItem>
+                                            <MenuItem value={'8px'}>{'8 pts'}</MenuItem>
+                                            <MenuItem value={'10px'}>{'10 pts'}</MenuItem>
+                                            <MenuItem value={'12px'}>{'12 pts'}</MenuItem>
+
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+
+                            <Divider light variant="middle" style={{ margin: '10px' }} />
+
+                            <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <Typography variant="h6" style={{ fontSize: '18px' }}>{'Section title font size'}</Typography>
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+                            <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <FormControl fullWidth variant="outlined" className={classes.formControl}>
+
+                                        <Select
+                                            labelId="demo-simple-select-outlined-label"
+                                            id="demo-simple-select-outlined"
+                                            value={sectionTitleFontSize}
+                                            onChange={handleSectionTitleFontSize}
+                                        >
+                                            <MenuItem value={'12px'}>{'12 pts'}</MenuItem>
+                                            <MenuItem value={'14px'}>{'14 pts'}</MenuItem>
+                                            <MenuItem value={'16px'}>{'16 pts'}</MenuItem>
+                                            <MenuItem value={'18px'}>{'18 pts'}</MenuItem>
+                                            <MenuItem value={'20px'}>{'20 pts'}</MenuItem>
+
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+
+                            <Divider light variant="middle" style={{ margin: '10px' }} />
+
+                            <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <Typography variant="h6" style={{ fontSize: '18px' }}>{'Content font size'}</Typography>
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+                            <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <FormControl fullWidth variant="outlined" className={classes.formControl}>
+
+                                        <Select
+                                            labelId="demo-simple-select-outlined-label"
+                                            id="demo-simple-select-outlined"
+                                            value={contentFontSize}
+                                            onChange={handleContentFontSize}
+                                        >
+                                            <MenuItem value={'10px'}>{'10 pts'}</MenuItem>
+                                            <MenuItem value={'11px'}>{'11 pts'}</MenuItem>
+                                            <MenuItem value={'12px'}>{'12 pts'}</MenuItem>
+                                            <MenuItem value={'13px'}>{'13 pts'}</MenuItem>
+
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+
+                            <Divider light variant="middle" style={{ margin: '10px' }} />
+                            {
+                                file ?
+                                    <Grid>
+                                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                            <Grid item xs={12} sm={2}>
+                                            </Grid>
+                                            <Grid item xs={12} sm={8}>
+                                                <Typography variant="h6" style={{ fontSize: '18px' }}>{'Image (width, height)'}</Typography>
+                                            </Grid>
+                                            <Grid item xs={12} sm={2}>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                            <Grid item xs={12} sm={2}>
+                                            </Grid>
+                                            <Grid item xs={12} sm={8}>
+                                                <FormControl fullWidth variant="outlined" className={classes.formControl}>
+
                                                     <Select
-                                                    labelId="demo-simple-select-outlined-label"
-                                                    id="demo-simple-select-outlined"
-                                                    value={imageWidthHeight}
-                                                    onChange={handleImageWidthHeight}
+                                                        labelId="demo-simple-select-outlined-label"
+                                                        id="demo-simple-select-outlined"
+                                                        value={imageWidthHeight}
+                                                        onChange={handleImageWidthHeight}
                                                     >
-                                                    <MenuItem value={'75px'}>{'75 pts'}</MenuItem>
-                                                    <MenuItem value={'80px'}>{'80 pts'}</MenuItem>
-                                                    <MenuItem value={'85px'}>{'85 pts'}</MenuItem>
-                                                    <MenuItem value={'90px'}>{'90 pts'}</MenuItem>
-                                                    <MenuItem value={'95px'}>{'95 pts'}</MenuItem>
-                                                    <MenuItem value={'100px'}>{'100 pts'}</MenuItem>
-                                                   
+                                                        <MenuItem value={'75px'}>{'75 pts'}</MenuItem>
+                                                        <MenuItem value={'80px'}>{'80 pts'}</MenuItem>
+                                                        <MenuItem value={'85px'}>{'85 pts'}</MenuItem>
+                                                        <MenuItem value={'90px'}>{'90 pts'}</MenuItem>
+                                                        <MenuItem value={'95px'}>{'95 pts'}</MenuItem>
+                                                        <MenuItem value={'100px'}>{'100 pts'}</MenuItem>
+
                                                     </Select>
                                                 </FormControl>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                </Grid>
+                                            </Grid>
+                                            <Grid item xs={12} sm={2}>
+                                            </Grid>
+                                        </Grid>
 
-                        <Divider light variant="middle" style={{ margin: '10px' }} />
-                        </Grid>
-                        : 
-                        <Grid></Grid>
-                        }
-                        
+                                        <Divider light variant="middle" style={{ margin: '10px' }} />
+                                    </Grid>
+                                    :
+                                    <Grid></Grid>
+                            }
 
-                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6" style={{fontSize:'18px'}}>{'Current sequence of sections'}</Typography>
-                                        <Typography variant="body2" style={{fontSize:'12px'}} className={classes.desktopTypography}>{'(Drag and drop to change order)'}</Typography>
-                                        
-                                    </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
+
+                            <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                <Grid item xs={12} sm={2}>
                                 </Grid>
-                                {/* <div className="flex-container">
+                                <Grid item xs={12} sm={8}>
+                                    <Typography variant="h6" style={{ fontSize: '18px' }}>{'Current sequence of sections'}</Typography>
+                                    <Typography variant="body2" style={{ fontSize: '12px' }} className={classes.desktopTypography}>{'(Drag and drop to change order)'}</Typography>
+
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+                            {/* <div className="flex-container">
                                     <div className="row" >
                                     <Draggable> */}
-                                        {sequence.map((item, idx) => {
-                                            if(item.len > 0) {
-                                                return (
-                                                    <Grid key={idx} container  draggable="true" onDragEnd={()=>handleDrag(item.name)} onDragLeave={()=>handleOnDrop(item.name)}>
-                                                        <Grid item xs={12} sm={2}>
-                                                        </Grid>
-                                                        <Grid item xs={12} sm={8}>
-                                                            <ul>
-                                                                <li>{item.name.slice(4)}</li>
-                                                            </ul>
-                                                        </Grid>
-                                                        <Grid item xs={12} sm={2}>
-                                                        </Grid>
-                                                    </Grid>
-                                                )
-                                            }
-                                        
-                                        })}
-                                    {/* </Draggable>
+                            {sequence.map((item, idx) => {
+                                if (item.len > 0) {
+                                    return (
+                                        <Grid key={idx} container draggable="true" onDragEnd={() => handleDrag(item.name)} onDragLeave={() => handleOnDrop(item.name)}>
+                                            <Grid item xs={12} sm={2}>
+                                            </Grid>
+                                            <Grid item xs={12} sm={8}>
+                                                <ul>
+                                                    <li>{item.name.slice(4)}</li>
+                                                </ul>
+                                            </Grid>
+                                            <Grid item xs={12} sm={2}>
+                                            </Grid>
+                                        </Grid>
+                                    )
+                                }
+
+                            })}
+                            {/* </Draggable>
                                     </div>
                                 </div>
                         */}
-                         
-                                    {/* For Mobile or iPad since draggable component doesn't work */}
-                                   <Grid container className={classes.swapGridMobile}>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography style={{marginTop:'10px'}} variant="body1">{'Swap order of sections'}</Typography>
-                                        <Grid container>
-                                            <Grid item xs={6} sm={6}>
-                                                <FormControl fullWidth variant="outlined" className={classes.formControl}>
-                                                    
-                                                    <Select
+
+                            {/* For Mobile or iPad since draggable component doesn't work */}
+                            <Grid container className={classes.swapGridMobile}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <Typography style={{ marginTop: '10px' }} variant="body1">{'Swap order of sections'}</Typography>
+                                    <Grid container>
+                                        <Grid item xs={6} sm={6}>
+                                            <FormControl fullWidth variant="outlined" className={classes.formControl}>
+
+                                                <Select
                                                     labelId="demo-simple-select-outlined-label"
                                                     id="demo-simple-select-outlined"
                                                     value={sectionFrom}
                                                     onChange={handleSelectChangeFrom}
-                                                    >
+                                                >
                                                     <MenuItem value={'None'}>{'None'}</MenuItem>
 
-                                                        {
-                                                            sequence.map((val, idx) => {
-                                                                if (val.len > 0){
-                                                                    return (<MenuItem value={idx}>{val.name.slice(4)}</MenuItem>)
-                                                                }
-                                                                
-                                                            })
-                                                        }
-                                                
-                                                    </Select>
-                                                </FormControl>
+                                                    {
+                                                        sequence.map((val, idx) => {
+                                                            if (val.len > 0) {
+                                                                return (<MenuItem value={idx}>{val.name.slice(4)}</MenuItem>)
+                                                            }
 
-                                            </Grid>
-                                            <Grid item xs={6}>
+                                                        })
+                                                    }
+
+                                                </Select>
+                                            </FormControl>
+
+                                        </Grid>
+                                        <Grid item xs={6}>
                                             <FormControl fullWidth variant="outlined" className={classes.formControl}>
-                                                    
-                                                    <Select
+
+                                                <Select
                                                     labelId="demo-simple-select-outlined-label"
                                                     id="demo-simple-select-outlined"
                                                     value={sectionTo}
                                                     onChange={handleSelectChangeTo}
-                                                    
-                                                    >
-                                                        <MenuItem value={'None'}>{'None'}</MenuItem>
-                                                        {
-                                                            sequence.map((val, idx) => {
-                                                                if (val.len > 0){
-                                                                    return (<MenuItem value={idx}>{val.name.slice(4)}</MenuItem>)
-                                                                }
-                                                                
-                                                            })
-                                                        }
-                                                
-                                                    </Select>
-                                                </FormControl>
-                                                
-                                            </Grid>
+
+                                                >
+                                                    <MenuItem value={'None'}>{'None'}</MenuItem>
+                                                    {
+                                                        sequence.map((val, idx) => {
+                                                            if (val.len > 0) {
+                                                                return (<MenuItem value={idx}>{val.name.slice(4)}</MenuItem>)
+                                                            }
+
+                                                        })
+                                                    }
+
+                                                </Select>
+                                            </FormControl>
+
                                         </Grid>
-                                        
                                     </Grid>
-                                    <Grid item xs={12} sm={2}>
-                                    </Grid>
+
                                 </Grid>
-
-
-                        <Grid container className={classes.swapGridMobile}>
-                            <Grid item xs={12} sm={2}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12} sm={8}>
-                                <Button onClick={handleSwapOrder} variant="contained" style={{backgroundColor: '#2F4454', color:'#FFF'}}>Swap Order</Button>
-                            </Grid>
-                            <Grid item xs={12} sm={2}>
-                            </Grid>
-                        </Grid>
-                        <Divider light variant="middle" style={{ margin: '20px' }} />
 
-                        <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
-                                                            <Grid item xs={12} sm={2}>
-                                                            </Grid>
-                                                            <Grid item xs={12} sm={8}>
-                                                                <Button onClick={handleGenResume} fullWidth variant="contained" style={{backgroundColor: '#2F4454', color:'#FFF'}}>Generate Resume</Button>
-                                                            </Grid>
-                                                            <Grid item xs={12} sm={2}>
-                                                            </Grid>
-                                                        </Grid>
 
-                    </Paper>
+                            <Grid container className={classes.swapGridMobile}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <Button onClick={handleSwapOrder} variant="contained" style={{ backgroundColor: '#2F4454', color: '#FFF' }}>Swap Order</Button>
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+                            <Divider light variant="middle" style={{ margin: '20px' }} />
+
+                            <Grid container style={{ display: 'flex', marginBottom: '8px' }}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <Button onClick={handleGenResume} fullWidth variant="contained" style={{ backgroundColor: '#2F4454', color: '#FFF' }}>Generate Resume</Button>
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+
+                        </Paper>
+                    </Grid>
+
                 </Grid>
-
-            </Grid>
             </Fade>
         </div>
     );

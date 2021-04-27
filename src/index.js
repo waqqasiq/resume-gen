@@ -6,8 +6,6 @@ import './index.css';
 import Home from './home';
 import Resume from './resume';
 import SplashScreen from './splashscreen';
-
-
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import Personalize from './personalize';
 
@@ -17,7 +15,6 @@ const Routing = (
         <Route exact path="/home" component={Home}/>
         <Route exact path="/personalize" component={Personalize}/>
         <Route exact path="/resume" component={Resume}/>
-        
     </Router>
 )
 
