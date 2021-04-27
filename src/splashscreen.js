@@ -107,7 +107,7 @@ function SplashScreen(props) {
         const timer = setInterval(() => {
             // the following two lines of code get executed 2s later
             clearInterval(timer);
-            // history.push('/home');
+            history.push('/home');
 
         }, 2000);
 
