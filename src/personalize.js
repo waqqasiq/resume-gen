@@ -120,6 +120,7 @@ function Personalize(props) {
     const [checked, setChecked] = useState(true);
     const [sequence, setSequence] = useState([
         { "name": "dataEducations", "len": state.dataEducations.length },
+        { "name": "dataResearches", "len": state.dataResearches.length },
         { "name": "dataAchievements", "len": state.dataAchievements.length },
         { "name": "dataProjects", "len": state.dataProjects.length },
         { "name": "dataSkills", "len": state.dataSkills.length },

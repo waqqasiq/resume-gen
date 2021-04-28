@@ -5,6 +5,7 @@ Build a minimal design resume with your own data, having the flexibility of pers
 * Add your best **picture** to your CV/Resume 
 * Add your **education** backgrounds
 * Add as many **experiences** you have that are worthwhile mentioning
+* Include any **thesis or research** you have done
 * List down your personal or professional **proejcts**
 * Showcase your **skills**
 * Share your **achievements** and accomplishments

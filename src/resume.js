@@ -180,19 +180,10 @@ function Resume(props) {
 
     //   },[]);
 
-    // Handles file upload event and updates state
-    const handleUpload = (event) => {
-        console.log("event.target.files ", event.target.files[0].name)
-        setFile(event.target.files[0]);
-        // Add code here to upload file to server
-        // ...
-    }
-
-
 
     const educationDiv = state.dataEducations.map(val => {
         return (
-            <View >
+            <View style={{ marginBottom: '6px' }}>
 
                 <Text style={{ fontSize: contentFontSize, fontWeight: 'bold', marginBottom: '3px' }}>{val.school_name}</Text>
 
@@ -207,7 +198,7 @@ function Resume(props) {
 
     const achievementDiv = state.dataAchievements.map(val => {
         return (
-            <View >
+            <View style={{ marginBottom: '6px' }}>
 
                 <Text style={{ fontSize: contentFontSize, fontWeight: 'bold', marginBottom: '3px' }}>{val.achievement_title + ' ' + val.duration}</Text>
                 <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '6px' }}>
@@ -220,7 +211,7 @@ function Resume(props) {
 
     const projectDiv = state.dataProjects.map(val => {
         return (
-            <View >
+            <View style={{ marginBottom: '6px' }}>
 
                 <Text style={{ fontSize: contentFontSize, fontWeight: 'bold', marginBottom: '3px' }}>{val.project_title}</Text>
                 <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '6px' }}>
@@ -233,7 +224,7 @@ function Resume(props) {
 
     const skillDiv = state.dataSkills.map(val => {
         return (
-            <View >
+            <View style={{ marginBottom: '6px' }}>
 
                 <Text style={{ fontSize: contentFontSize, fontWeight: 'bold', marginBottom: '3px' }}>{val.skill_title}</Text>
                 <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '6px' }}>
@@ -246,7 +237,7 @@ function Resume(props) {
 
     const ecaDiv = state.dataECA.map(val => {
         return (
-            <View >
+            <View style={{ marginBottom: '6px' }}>
 
                 <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '6px' }}>
                     <Text style={styles.bulletpoint}>*</Text><Text style={{ fontSize: contentFontSize }}>{val.eca_description}</Text>
@@ -258,7 +249,7 @@ function Resume(props) {
 
     const refDiv = state.dataReferences.map(val => {
         return (
-            <View >
+            <View style={{ marginBottom: '6px' }}>
 
                 <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '6px' }}>
                     <Text style={styles.bulletpoint}>*</Text><Text style={{ fontSize: contentFontSize }}>{val.ref_name}</Text>
@@ -276,7 +267,7 @@ function Resume(props) {
 
     const careerDiv = state.dataObjective.map(val => {
         return (
-            <View style={{ marginBottom: marginBetweenSections }}>
+            <View style={{ marginBottom: '6px' }}>
 
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     <Text style={{ fontSize: contentFontSize }}>{val.description}</Text>
@@ -285,10 +276,22 @@ function Resume(props) {
 
             </View>
         )
+    });
+
+    const researchDiv = state.dataResearches.map(val => {
+        return (
+            <View style={{ marginBottom: '6px' }}>
+
+                <Text style={{ fontSize: contentFontSize, fontWeight: 'bold', marginBottom: '3px' }}>{val.research_title}</Text>
+                <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '6px' }}>
+                    <Text style={styles.bulletpoint}>*</Text><Text style={{ fontSize: contentFontSize }}>{val.research_desc}</Text>
+                </View>
+
+            </View>
+        )
     })
 
-
-    const [refArray, setRefArray] = useState([{ 'divname': educationDiv, 'category': 'Education', 'type': 'dataEducations' }, { 'divname': achievementDiv, 'category': 'Honors & Achievements', 'type': 'dataAchievements' }, { 'divname': projectDiv, 'category': 'Projects', 'type': 'dataProjects' }, { 'divname': skillDiv, 'category': 'Skills', 'type': 'dataSkills' }, { 'divname': ecaDiv, 'category': 'Extra-Curricular Activities', 'type': 'dataECA' }, { 'divname': refDiv, 'category': 'Reference', 'type': 'dataReferences' }])
+    const [refArray, setRefArray] = useState([{ 'divname': educationDiv, 'category': 'Education', 'type': 'dataEducations' }, { 'divname': researchDiv, 'category': 'Thesis/Research', 'type': 'dataResearches' }, { 'divname': achievementDiv, 'category': 'Honors & Achievements', 'type': 'dataAchievements' }, { 'divname': projectDiv, 'category': 'Projects', 'type': 'dataProjects' }, { 'divname': skillDiv, 'category': 'Skills', 'type': 'dataSkills' }, { 'divname': ecaDiv, 'category': 'Extra-Curricular Activities', 'type': 'dataECA' }, { 'divname': refDiv, 'category': 'Reference', 'type': 'dataReferences' }])
 
     let arrayOrder = [];
     sequence.map(val => {

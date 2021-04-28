@@ -13,6 +13,8 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import Fade from '@material-ui/core/Fade';
 import Logo from './logo.png'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const dataObject = {
     "name": "",
@@ -45,9 +47,15 @@ const dataObject = {
     ],
     "references": [
 
+    ],
+    'researches':[
+
     ]
 }
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -137,13 +145,17 @@ const useStyles = makeStyles((theme) => ({
 
 function Home(props) {
     const classes = useStyles();
-    const [state, setState] = useState({ dataName: dataObject.name, dataEmail: dataObject.email, dataAddress: dataObject.address, dataContact: dataObject.contact, dataEducations: [...dataObject.educations], dataSocials: [...dataObject.socials], dataSkills: [...dataObject.skills], dataAchievements: [...dataObject.honors_achievements], dataProjects: [...dataObject.projects], dataECA: [...dataObject.eca], dataReferences: [...dataObject.references], dataObjective: [...dataObject.career] });
+    const [state, setState] = useState({ dataName: dataObject.name, dataEmail: dataObject.email, dataAddress: dataObject.address, dataContact: dataObject.contact, dataEducations: [...dataObject.educations], dataSocials: [...dataObject.socials], dataSkills: [...dataObject.skills], dataAchievements: [...dataObject.honors_achievements], dataProjects: [...dataObject.projects], dataECA: [...dataObject.eca], dataReferences: [...dataObject.references], dataObjective: [...dataObject.career], dataResearches: [...dataObject.researches] });
     const history = useHistory()
     const [cartqty, setCartqty] = useState(0);
     const [file, setFile] = React.useState("");
     const [stateExperiences, setStateExperiences] = useState({ dataExperiences: [...dataObject.experiences] });
     const [checked, setChecked] = useState(true);
-
+    const [open, setOpen] = React.useState(false);
+    const vertical = 'top';
+    const horizontal = 'center';
+    const [snackBarMessage, setSnackBarMessage] = useState('');
+    
     //   useEffect(() => {
     //     // Update the document title using the browser API
     //     setChecked(true);
@@ -167,7 +179,8 @@ function Home(props) {
             "dataProjects": [{ "project_title": "", "project_desc": "", "redirect_url": "" }],
             "dataAchievements": [{ "achievement_title": "", "achievement_desc": "", "duration": "", "redirect_url": "" }],
             "dataECA": [{ "eca_description": "" }],
-            "dataReferences": [{ "ref_name": "", "ref_designation": "", "ref_email": "", "ref_mobile": "" }]
+            "dataReferences": [{ "ref_name": "", "ref_designation": "", "ref_email": "", "ref_mobile": "" }],
+            "dataResearches": [{ "research_title": "", "research_desc": "" }],
         }
 
         // console.log("state ", state[event_type]);
@@ -277,10 +290,16 @@ function Home(props) {
     }
     const handlePersonalize = () => {
         // console.log("handlePersonalize");
-        history.push({
-            pathname: '/personalize',
-            state: { data: state, dataExp: stateExperiences, imagefile: file }
-        })
+        if(state.dataName === "" || state.dataEmail === "" || state.dataContact === "" || state.dataAddress === "") {
+            setSnackBarMessage("Please fill in the basic details first");
+            handleClick() // opens the snackbar alert
+        }
+        else {
+            history.push({
+                pathname: '/personalize',
+                state: { data: state, dataExp: stateExperiences, imagefile: file }
+            })
+        }
     }
 
     const handleAddCareerObjective = (event_type) => {
@@ -301,9 +320,25 @@ function Home(props) {
         //   setDataEducations(oldArray => [...oldArray, newElem]);
     }
 
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
 
     return (
         <div className={classes.root}>
+            <Snackbar anchorOrigin={{ vertical, horizontal }} open={open} autoHideDuration={3000} onClose={handleClose}>
+                <Alert onClose={handleClick} severity="warning">
+                    {snackBarMessage}
+            </Alert>
+            </Snackbar>
 
             <Navbar cartQuantity={1} />
             <Fade
@@ -757,6 +792,47 @@ function Home(props) {
                                         }
 
                                     </div>
+                                )
+                                )
+                            }
+
+                            <Divider light variant="middle" style={{ margin: '20px' }} />
+
+                            {/* researches */}
+                            <Grid container style={{ display: 'flex', marginBottom: '20px', marginTop: '20px' }}>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                                <Grid item xs={12} sm={8}>
+                                    <Grid container justify="space-between" spacing={1} alignItems="center">
+                                        <Grid item >
+                                            <Typography variant="h6">Thesis/Research</Typography>
+                                        </Grid>
+                                        <Grid item >
+                                            <AddCircleOutlineIcon className={classes.addBtn} onClick={() => handleAddMore("dataResearches")} />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={12} sm={2}>
+                                </Grid>
+                            </Grid>
+                            {
+                                state.dataResearches.map((val, index) => (
+                                    <div key={index} style={{ marginBottom: '24px' }}>
+                                        {
+                                            Object.keys(val).map((item, ind) => (
+                                                <Grid key={ind} container style={{ display: 'flex', marginBottom: '8px' }}>
+                                                    <Grid item xs={12} sm={2}>
+                                                    </Grid>
+                                                    <Grid item xs={12} sm={8}>
+                                                        <TextField value={val[item]} onChange={e => handleChangeTextArray(e, index)} name={"dataResearches_" + item} fullWidth InputProps={{ classes: { input: classes.resize } }} variant="outlined" placeholder={item + ' ' + `${index + 1}`} />
+                                                    </Grid>
+                                                    <Grid item xs={12} sm={2}>
+                                                    </Grid>
+                                                </Grid>
+                                            ))
+                                        }
+                                    </div>
+
                                 )
                                 )
                             }
