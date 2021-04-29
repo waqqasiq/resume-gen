@@ -413,10 +413,12 @@ function Personalize(props) {
                                             onChange={handleSectionTitleFontSize}
                                         >
                                             <MenuItem value={'12px'}>{'12 pts'}</MenuItem>
+                                            <MenuItem value={'13px'}>{'13 pts'}</MenuItem>
                                             <MenuItem value={'14px'}>{'14 pts'}</MenuItem>
+                                            <MenuItem value={'15px'}>{'15 pts'}</MenuItem>
                                             <MenuItem value={'16px'}>{'16 pts'}</MenuItem>
+                                            <MenuItem value={'17px'}>{'17 pts'}</MenuItem>
                                             <MenuItem value={'18px'}>{'18 pts'}</MenuItem>
-                                            <MenuItem value={'20px'}>{'20 pts'}</MenuItem>
 
                                         </Select>
                                     </FormControl>
