@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import Navbar from './navbar';
+import Navbar from './components/navbar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -12,7 +11,7 @@ import Divider from '@material-ui/core/Divider';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import Fade from '@material-ui/core/Fade';
-import Logo from './logo.png'
+import Logo from './icons/logo.png'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 

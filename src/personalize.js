@@ -1,5 +1,5 @@
 import './App.css';
-import Navbar from './navbar';
+import Navbar from './components/navbar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -12,7 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import Fade from '@material-ui/core/Fade';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { Draggable } from "react-drag-reorder";
+// import { Draggable } from "react-drag-reorder";
 
 
 function Alert(props) {

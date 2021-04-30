@@ -1,24 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
-import Navbar from './navbar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { Document, Page, Text, View, StyleSheet, PDFViewer, Image, Font } from '@react-pdf/renderer'; // this works best
-import Homesvg from '../src/homepng.png';
-import CallIcon from '../src/callicon.png'
-import EmailIcon from '../src/email.png'
-import GithubIcon from '../src/githubicon.png'
-import LinkedinIcon from '../src/linkedinicon.png'
-import RobotoRegular from '../src/Roboto/Roboto-Light.ttf';
-import RobotoBold from '../src/Roboto/Roboto-Bold.ttf';
-import CalibriRegular from '../src/Calibri/Calibri-Regular.ttf'
-import CalibriBold from '../src/Calibri/Calibri-Bold.ttf'
-import ProfileIcon from '../src/linkedinlogo.png'
-import EmailIcon2 from '../src/emailicon.png'
-import GithubIcon2 from '../src/githubicon2.png'
+import Homesvg from './icons/homepng.png';
+import CallIcon from './icons/callicon.png'
+// import RobotoRegular from '../src/Roboto/Roboto-Light.ttf';
+// import RobotoBold from '../src/Roboto/Roboto-Bold.ttf';
+import CalibriRegular from './fonts/Calibri/Calibri-Regular.ttf'
+import CalibriBold from './fonts/Calibri/Calibri-Bold.ttf'
+import ProfileIcon from './icons/linkedinlogo.png'
+import EmailIcon2 from './icons/emailicon.png'
+import GithubIcon2 from './icons/githubicon2.png'
 
 
 // Create styles

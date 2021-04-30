@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './navbar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -8,7 +7,7 @@ import { MenuItem, Select, TextField, Typography } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import Fade from '@material-ui/core/Fade';
-import LogoSquare from './logosquare.png';
+import LogoSquare from './icons/logosquare.png';
 
 
 const useStyles = makeStyles((theme) => ({
